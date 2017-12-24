@@ -12,15 +12,15 @@ use Yii;
  * @property string $TRANS_DATE
  * @property string $ACCESS_GROUP
  * @property string $STORE_ID
- * @property string $DETAIL_ID
- * @property string $KODE
+ * @property string $DETAIL_ID ID MENU DETAIL
+ * @property string $KODE KODE B to B
  * @property string $NUMBER_ID
  * @property string $KETERANGAN
  * @property string $NOMINAL
  * @property string $HARGA_KG
  * @property string $HARGA_JUAL
- * @property integer $QTY
- * @property integer $STATUS
+ * @property int $QTY
+ * @property int $STATUS 0=(first transaksi); 1=(success B to B to A to C); 2=Panding; 3=Gagal
  * @property string $CREATE_BY
  * @property string $CREATE_AT
  * @property string $UPDATE_BY
@@ -34,14 +34,6 @@ class PpobTransaksi extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'ppob_transaksi';
-    }
-
-    /**
-     * @return \yii\db\Connection the database connection used by this AR class.
-     */
-    public static function getDb()
-    {
-        return Yii::$app->get('production_api');
     }
 
     /**

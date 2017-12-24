@@ -10,11 +10,11 @@ use Yii;
  * @property string $ID
  * @property string $DETAIL_ID
  * @property string $HEADER_ID
- * @property string $PROVIDER_ID
+ * @property int $PROVIDER_ID
  * @property string $DETAIL_NM
  * @property string $PROVIDER_NM
  * @property string $DETAIL_DCRP
- * @property integer $STATUS
+ * @property int $STATUS
  * @property string $CREATE_BY
  * @property string $CREATE_AT
  * @property string $UPDATE_BY
@@ -28,14 +28,6 @@ class PpobDetail extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'ppob_detail';
-    }
-
-    /**
-     * @return \yii\db\Connection the database connection used by this AR class.
-     */
-    public static function getDb()
-    {
-        return Yii::$app->get('production_api');
     }
 
     /**

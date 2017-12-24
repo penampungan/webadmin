@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use frontend\backend\ppob\models\PpobHeader;
 
 /**
- * PpobHeaderSearch represents the model behind the search form about `frontend\backend\ppob\models\PpobHeader`.
+ * PpobHeaderSearch represents the model behind the search form of `frontend\backend\ppob\models\PpobHeader`.
  */
 class PpobHeaderSearch extends PpobHeader
 {

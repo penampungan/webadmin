@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\ppob\models\PpobHeader */
 
-$this->title = 'Update Ppob Header: ' . $model->ID;
+$this->title = 'Update Ppob Header: {nameAttribute}';
 $this->params['breadcrumbs'][] = ['label' => 'Ppob Headers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
 $this->params['breadcrumbs'][] = 'Update';

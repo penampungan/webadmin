@@ -12,10 +12,10 @@ use Yii;
  * @property string $KODE
  * @property string $KETERANGAN
  * @property string $NOMINAL
- * @property string $HARGA1
- * @property string $HARGA2
- * @property string $HARGA3
- * @property integer $STATUS
+ * @property string $HARGA1 HARGA B TO B (HPP)
+ * @property string $HARGA2 HARGA B TO A (Margin KG)
+ * @property string $HARGA3 HARGA B TO C (HARGA PASAR)
+ * @property int $STATUS
  * @property string $DCRIP
  * @property string $CREATE_BY
  * @property string $CREATE_AT
@@ -30,14 +30,6 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'ppob_master_harga';
-    }
-
-    /**
-     * @return \yii\db\Connection the database connection used by this AR class.
-     */
-    public static function getDb()
-    {
-        return Yii::$app->get('production_api');
     }
 
     /**

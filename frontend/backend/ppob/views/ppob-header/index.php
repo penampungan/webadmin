@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Ppob Header', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'HEADER_NM',
             'HEADER_DCRP:ntext',
             'STATUS',
-            // 'CREATE_BY',
-            // 'CREATE_AT',
-            // 'UPDATE_BY',
-            // 'UPDATE_AT',
+            //'CREATE_BY',
+            //'CREATE_AT',
+            //'UPDATE_BY',
+            //'UPDATE_AT',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

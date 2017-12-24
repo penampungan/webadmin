@@ -49,8 +49,9 @@ class PpobDetailController extends Controller
      * @param string $ID
      * @param string $DETAIL_ID
      * @param string $HEADER_ID
-     * @param string $PROVIDER_ID
+     * @param integer $PROVIDER_ID
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)
     {
@@ -70,11 +71,11 @@ class PpobDetailController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -83,8 +84,9 @@ class PpobDetailController extends Controller
      * @param string $ID
      * @param string $DETAIL_ID
      * @param string $HEADER_ID
-     * @param string $PROVIDER_ID
+     * @param integer $PROVIDER_ID
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)
     {
@@ -92,11 +94,11 @@ class PpobDetailController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -105,8 +107,9 @@ class PpobDetailController extends Controller
      * @param string $ID
      * @param string $DETAIL_ID
      * @param string $HEADER_ID
-     * @param string $PROVIDER_ID
+     * @param integer $PROVIDER_ID
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)
     {
@@ -121,7 +124,7 @@ class PpobDetailController extends Controller
      * @param string $ID
      * @param string $DETAIL_ID
      * @param string $HEADER_ID
-     * @param string $PROVIDER_ID
+     * @param integer $PROVIDER_ID
      * @return PpobDetail the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -129,8 +132,8 @@ class PpobDetailController extends Controller
     {
         if (($model = PpobDetail::findOne(['ID' => $ID, 'DETAIL_ID' => $DETAIL_ID, 'HEADER_ID' => $HEADER_ID, 'PROVIDER_ID' => $PROVIDER_ID])) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
