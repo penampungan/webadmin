@@ -27,7 +27,7 @@ class User extends ActiveRecord implements IdentityInterface
 
 	public static function getDb()
     {
-        return Yii::$app->get('production_api');
+        return Yii::$app->get('db');
     }
 
     /**
@@ -35,7 +35,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%user_admin}}';
     }
 
     /**

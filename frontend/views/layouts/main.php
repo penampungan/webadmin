@@ -1,13 +1,29 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
+use kartik\nav\NavX;
 use yii\bootstrap\NavBar;
+use kartik\icons\Icon;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 AppAsset::register($this);
 
-	
+
+$callback = function($menu){
+				$data1=($menu['data']);
+				$data2=str_replace("'",'',$data1);
+				$data3=str_replace(";",'',$data2);	
+                $data1=$menu['data'];
+				$data = eval($menu['data']);
+                //echo $data;
+				return [
+					'label' => Icon::show($data3).$menu['name'],
+					'url' => [$menu['route']],
+					//'options' => $data1,
+					'items' => $menu['children']
+				];
+			};
+			
 ?>
 <?php $this->beginPage() ?>
 	<!DOCTYPE html>
@@ -25,7 +41,7 @@ AppAsset::register($this);
 			skin-blue sidebar-mini sidebar-collapse
 		!-->
 		<!--<body class="skin-blue sidebar-collapse" style="min-height:680px"> 	!-->	
-		<body class="skin-blue " style="min-height:80px"> 		
+		<body class="hold-transition skin-red " style="min-height:80px"> 		
 			<! - NOT LOGIN- Author : -ptr.nov- >
 			<?php if (Yii::$app->user->isGuest) { ?>
 				<?php $this->beginBody(['id'=>'page-top','class'=>'index']) ?>
@@ -46,7 +62,7 @@ AppAsset::register($this);
 				<?php $this->beginBody(['id'=>'page-top','class'=>'index']) ?>
 					<div class="wrap">
 						<!-- TOP NAV BAR !-->
-						<?=$this->render('main-navbar')?>
+						<?=$this->render('main-navbar',['callback'=>$callback])?>
 						<!-- LEFT MENU !-->
 						<aside class="main-sidebar " style="min-height:680px">						
 						<?=$this->render('mainLeft'); ?>

@@ -1,90 +1,67 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
+use kartik\nav\NavX;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use kartik\icons\Icon;
+use mdm\admin\components\MenuHelper;
 
 dmstr\web\AdminLteAsset::register($this);
 ?>
- <header class="main-header"> <header class="main-header">
-	<div  class="logo">
+ <header class="main-header"> <!-- navbar-fixed-top !-->
+	<a  class="logo" style="background-color:#02a3c1">
 		<?php
-	   // echo Html::img('http://lukisongroup.com/favicon.ico', ['width'=>'50']);
+			echo Html::img(Yii::$app->request->baseUrl.'/logo-dashboard3.png', ['width'=>'150px','height'=>'50px']);
 		?>
-		<!-- LOGO 
-		LukisonGroup-->
-		<b>Kontrol Gampang</b>
-	</div> 
-	<?php
-		NavBar::begin([
-			// 'brandLabel' => '		
-				// <img src="http://ptrnov.net/img/ptrnov-putih.png" class="navbar-header page-scroll" style="width:170px; height:40px; margin-left:50px; margin-top:0px"/>
-			// ',
-		   /*  'brandLabel' =>'
-				 <div class="logo bg-red">                
-					<a class="navbar-brand" href="#page-top">Kontrol Gampang</a>
-				</div>
-			', */
-			'brandLabel' => '<!-- Sidebar toggle button-->
-				<a id="kg" href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-					<span class="sr-only">Toggle Navigation</span>
-				</a>'
-			,
-			'brandUrl' => Yii::$app->homeUrl,
-			'options' => [
-				'id'=>'mainNav',
-				//'class' => 'navbar-inverse navbar-fixed-top',
-				'class' => 'navbar navbar-inverse navbar-static-top',
-			],
-		]);
 		
-		if (Yii::$app->user->isGuest) {
-			$menuItems[] = '<li class="hidden"> <a href="#page-top"></a></li>';
-			$menuItems[] = '<li class="page-scroll"> <a href="#home" id="home-controller">Home</a></li>';
-			$menuItems[] = '<li class="page-scroll"> <a href="#service" id="service-controller">Service</a></li>';
-			$menuItems[] = '<li class="page-scroll"> <a href="#help" id="help-controller">Help</a></li>';
-			$menuItems[] = '<li class="page-scroll"> <a href="#contact" id="contact-controller">Contact</a></li>';  
-		
-		   //$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-			$menuItems[] = '<li class="page-scroll">  <a href="#signup-select" id="signup-controller">Signup</a></li>';
-			$menuItems[] = '<li class="page-scroll">  <a href="#login-select" id="login-controller">Login</a></li>';
-		
-			//$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-		} else {
-			/* $menuItems[] = '<li>'
-				. Html::beginForm(['/site/logout'], 'post')
-				. Html::submitButton(
-					'Logout (' . Yii::$app->user->identity->username . ')',
-					['class' => 'btn btn-link logout']
-				)
-				. Html::endForm()
-				. '</li>'; */
-			$menuItems[] = [
-				'label' => Icon::show('power-off') ,//. 'Logout',// (' . Yii::$app->user->identity->username . ')',
-				//'label' => Icon::showStack('twitter', 'square-o', ['class'=>'fa-lg']) . 'Logout (' . Yii::$app->user->identity->username . ')',
-				'url' => ['/site/logout'],
-				'linkOptions' => ['data-method' => 'post']
-			];
-		}
-		?>
-		 <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">!-->
-		 <?php
-			echo Nav::widget([
-				'options' => ['class' => 'navbar-nav  navbar-left'],
-				'items' => $menuItems,
-				'encodeLabels' => false,
-			]);
-		
-		?>
-		<!--</div>!-->
+	</a>
+	   <!--  <div class="navbar-custom-menu">!-->
 		<?php
-		NavBar::end();
+			// echo  \yii\helpers\Json::encode($menuItems);
+			if (!Yii::$app->user->isGuest) {
+				// $menuItems  = MenuHelper::getAssignedMenu(Yii::$app->user->id);
+				$menuItems = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback);
+				$menuItems[] = [
+					'label' => Icon::show('power-off') ,//. 'Logout',// (' . Yii::$app->user->identity->username . ')',
+					//'label' => Icon::showStack('twitter', 'square-o', ['class'=>'fa-lg']) . 'Logout (' . Yii::$app->user->identity->username . ')',
+					'url' => ['/site/logout'],
+					'linkOptions' => ['data-method' => 'post']
+				];
+
+				NavBar::begin([
+					//'brandLabel' => 'LukisonGroup',
+					//'brandUrl' => Yii::$app->homeUrl,
+					//-ptr.nov-
+					'brandLabel' => '<!-- Sidebar toggle button-->
+									<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+										<span class="sr-only">Toggle Navigation</span>
+									</a>',
+					'options' => [
+						//'class' => 'navbar-inverse navbar-fixed-top',
+					   'class' => [
+						   'navbar navbar-inverse navbar-static-top',
+						   //'navbar navbar-inverse navbar-fixed-top',
+						   'style'=>'background-color:#313131'
+					   ],
+						//'class' => 'navbar-inverse navbar-static-top',
+					   // 'class' => 'navbar-inverse navbar',
+						// 'class' => 'navbar navbar-fixed-top',
+						'role'=>'button',
+						'style'=>'margin-bottom: 0',
+					],
+				]);
+
+				echo NavX::widget([
+					'options' => ['class' => 'navbar-nav  navbar-left'],
+					'items' => $menuItems,
+					'activateParents' => true,
+					'encodeLabels' => false,
+				]);
+
+				NavBar::end();
+			};
 		?>
+	   <!-- </div>!-->
+
 </header>
-	<?php
-	$this->registerJs("
-		//$('body').scrollspy({ target: '.navbar-fixed-top' })
-	",$this::POS_READY);
-	?>
