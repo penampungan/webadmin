@@ -92,6 +92,7 @@ class IndustriController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            //'test'=>'asd'
         ]);
     }
 
