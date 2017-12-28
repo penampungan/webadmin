@@ -4,9 +4,9 @@
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#productunit-button-create', function(ehead){ 			  
-	$('#productunit-button-create-modal').modal('show')
-	.find('#productunit-button-create-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#syncPooling-button-create', function(ehead){ 			  
+	$('#syncPooling-button-create-modal').modal('show')
+	.find('#syncPooling-button-create-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
@@ -16,9 +16,9 @@ $(document).on('click','#productunit-button-create', function(ehead){
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#productunit-button-view', function(ehead){ 			  
-	$('#productunit-button-view-modal').modal('show')
-	.find('#productunit-button-view-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#syncPooling-button-view', function(ehead){ 			  
+	$('#syncPooling-button-view-modal').modal('show')
+	.find('#syncPooling-button-view-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
@@ -28,9 +28,9 @@ $(document).on('click','#productunit-button-view', function(ehead){
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#productunit-button-update', function(ehead){ 			  
-	$('#productunit-button-update-modal').modal('show')
-	.find('#productunit-button-update-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#syncPooling-button-update', function(ehead){ 			  
+	$('#syncPooling-button-update-modal').modal('show')
+	.find('#syncPooling-button-update-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });

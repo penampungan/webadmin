@@ -28,12 +28,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'productunit-button-create-modal',
+		'id' => 'userkg-button-create-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH PRODUCT UNIT</b>
+			</span><b> TAMBAH USER</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -47,19 +47,19 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-create-content'></div>";
+		echo "<div id='userkg-button-create-content'></div>";
 	Modal::end();
 	
 	/*
 	 * BUTTON - VIEW
 	*/
 	Modal::begin([
-		'id' => 'productunit-button-view-modal',
+		'id' => 'userkg-button-view-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT PRODUCT UNIT</b>
+			</span><b> LIHAT USER</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -71,7 +71,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-view-content'></div>";
+		echo "<div id='userkg-button-view-content'></div>";
 	Modal::end();
 	
 	/*
@@ -79,12 +79,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'productunit-button-update-modal',
+		'id' => 'userkg-button-update-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH DATA PRODUCT UNIT</b>
+			</span><b> UBAH USER</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -98,7 +98,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-update-content'></div>";
+		echo "<div id='userkg-button-update-content'></div>";
 	Modal::end();
 	
 ?>

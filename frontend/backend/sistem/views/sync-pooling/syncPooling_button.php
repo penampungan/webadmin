@@ -13,7 +13,7 @@ use yii\base\DynamicModel;
 		$title= Yii::t('app','');
 		$url = Url::toRoute(['/sistem/sync-pooling/create']);
 		$options1 = ['value'=>$url,
-					'id'=>'productunit-button-create',
+					'id'=>'syncPooling-button-create',
 					'data-pjax' => false,
 					'class'=>"btn btn-success btn-xs",
 					'title'=>'Tambah'
@@ -35,8 +35,8 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/sistem/sync-pooling/view','id'=>$model['BANK_ID']]),
-			'id'=>'productunit-button-view',
+			'value'=>url::to(['/sistem/sync-pooling/view','id'=>$model['ID']]),
+			'id'=>'syncPooling-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
@@ -57,8 +57,8 @@ use yii\base\DynamicModel;
 	function tombolUpdate($url, $model){
 		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'value'=>url::to(['/sistem/sync-pooling/update','id'=>$model['BANK_ID']]),
-			'id'=>'productunit-button-update',
+			'value'=>url::to(['/sistem/sync-pooling/update','id'=>$model['ID']]),
+			'id'=>'syncPooling-button-update',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
@@ -79,7 +79,7 @@ use yii\base\DynamicModel;
 	function tombolDelete($url, $model){
 		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'href'=>url::to(['/sistem/sync-pooling/delete','id'=>$model['BANK_ID']]),
+			'href'=>url::to(['/sistem/sync-pooling/delete','id'=>$model['ID']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],

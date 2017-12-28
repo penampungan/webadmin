@@ -37,6 +37,8 @@ $this->registerJs($this->render('merchantBank_script.js'),View::POS_READY);
 echo $this->render('merchantBank_button'); //echo difinition
 echo $this->render('merchantBank_modal'); //echo difinition
 echo $this->render('merchantBank_colum'); //echo difinition
+$this->title = '';
+
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
