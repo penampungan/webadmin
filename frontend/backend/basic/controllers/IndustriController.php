@@ -52,7 +52,7 @@ class IndustriController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -70,7 +70,7 @@ class IndustriController extends Controller
             return $this->redirect(['view', 'id' => $model->INDUSTRY_ID]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -90,9 +90,8 @@ class IndustriController extends Controller
             return $this->redirect(['view', 'id' => $model->INDUSTRY_ID]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
-            //'test'=>'asd'
         ]);
     }
 

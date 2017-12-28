@@ -54,7 +54,7 @@ class EndUserController extends Controller
      */
     public function actionView($CUSTOMER_ID, $YEAR_AT, $MONTH_AT)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($CUSTOMER_ID, $YEAR_AT, $MONTH_AT),
         ]);
     }
@@ -72,7 +72,7 @@ class EndUserController extends Controller
             return $this->redirect(['view', 'CUSTOMER_ID' => $model->CUSTOMER_ID, 'YEAR_AT' => $model->YEAR_AT, 'MONTH_AT' => $model->MONTH_AT]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -94,7 +94,7 @@ class EndUserController extends Controller
             return $this->redirect(['view', 'CUSTOMER_ID' => $model->CUSTOMER_ID, 'YEAR_AT' => $model->YEAR_AT, 'MONTH_AT' => $model->MONTH_AT]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

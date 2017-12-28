@@ -1,21 +1,35 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\Industri */
-
-$this->title = 'Create Industri';
-$this->params['breadcrumbs'][] = ['label' => 'Industris', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="industri-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="industri-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'INDUSTRY_GRP_ID')->textInput() ?>
+
+    <?= $form->field($model, 'INDUSTRY_NM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'STATUS')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
 </div>

@@ -52,7 +52,7 @@ class PpobProviderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -70,7 +70,7 @@ class PpobProviderController extends Controller
             return $this->redirect(['view', 'id' => $model->PROVIDER_ID]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -90,7 +90,7 @@ class PpobProviderController extends Controller
             return $this->redirect(['view', 'id' => $model->PROVIDER_ID]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

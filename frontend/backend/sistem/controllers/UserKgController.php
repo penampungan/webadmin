@@ -55,7 +55,7 @@ class UserKgController extends Controller
      */
     public function actionView($id, $ACCESS_ID, $YEAR_AT, $MONTH_AT)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id, $ACCESS_ID, $YEAR_AT, $MONTH_AT),
         ]);
     }
@@ -73,7 +73,7 @@ class UserKgController extends Controller
             return $this->redirect(['view', 'id' => $model->id, 'ACCESS_ID' => $model->ACCESS_ID, 'YEAR_AT' => $model->YEAR_AT, 'MONTH_AT' => $model->MONTH_AT]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -96,7 +96,7 @@ class UserKgController extends Controller
             return $this->redirect(['view', 'id' => $model->id, 'ACCESS_ID' => $model->ACCESS_ID, 'YEAR_AT' => $model->YEAR_AT, 'MONTH_AT' => $model->MONTH_AT]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

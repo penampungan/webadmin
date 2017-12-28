@@ -52,7 +52,7 @@ class ModulPermissionController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -70,7 +70,7 @@ class ModulPermissionController extends Controller
             return $this->redirect(['view', 'id' => $model->ID]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,7 +87,7 @@ class ModulPermissionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->renderAjax(['view', 'id' => $model->ID]);
         }
 
         return $this->render('update', [

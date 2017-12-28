@@ -55,7 +55,7 @@ class PpobDetailController extends Controller
      */
     public function actionView($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID),
         ]);
     }
@@ -73,7 +73,7 @@ class PpobDetailController extends Controller
             return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -96,7 +96,7 @@ class PpobDetailController extends Controller
             return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
