@@ -32,8 +32,8 @@ $this->registerCss("
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
-				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH Sync Pooling</b>
+				<i class="fa fa-plus fa-stack-1x" style="color:#fbfbfb"></i>
+			</span><b> TAMBAH POOLING</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -59,7 +59,7 @@ $this->registerCss("
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT Sync Pooling</b>
+			</span><b> LIHAT POOLING</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -83,8 +83,8 @@ $this->registerCss("
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
-				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH Sync Pooling</b>
+				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
+			</span><b> UBAH POOLING</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],

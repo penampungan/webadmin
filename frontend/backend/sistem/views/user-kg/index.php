@@ -37,12 +37,12 @@ $this->registerJs($this->render('userKg_script.js'),View::POS_READY);
 echo $this->render('userKg_button'); //echo difinition
 echo $this->render('userKg_modal'); //echo difinition
 echo $this->render('userKg_colum'); //echo difinition
-$this->title = '';
+$this->title = 'Member User';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-user fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data User Kontrol Gampang</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Member User</b></div>';
 	
         $attDinamikField=[
             [

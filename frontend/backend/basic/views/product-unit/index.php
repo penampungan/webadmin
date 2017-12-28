@@ -37,7 +37,7 @@ $this->registerJs($this->render('productUnit_script.js'),View::POS_READY);
 echo $this->render('productUnit_button'); //echo difinition
 echo $this->render('productUnit_modal'); //echo difinition
 echo $this->render('productUnit_colum'); //echo difinition
-$this->title = '';
+$this->title = 'Produk Unit';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">

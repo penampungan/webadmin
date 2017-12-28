@@ -37,12 +37,12 @@ $this->registerJs($this->render('ppobMasterHarga_script.js'),View::POS_READY);
 echo $this->render('ppobMasterHarga_button'); //echo difinition
 echo $this->render('ppobMasterHarga_modal'); //echo difinition
 echo $this->render('ppobMasterHarga_colum'); //echo difinition
-$this->title = '';
+$this->title = 'PPOB-Master Harga';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
+        <b class="fa fa-money fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Master Harga</b></div>';
 	
         $attDinamikField=[
             [

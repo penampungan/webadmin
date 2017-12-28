@@ -1,21 +1,50 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\account\models\StoreMembershipPakage */
 
-$this->title = 'Create Store Membership Pakage';
-$this->params['breadcrumbs'][] = ['label' => 'Store Membership Pakages', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="store-membership-pakage-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="store-membership-pakage-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'STATUS')->textInput() ?>
+
+    <?= $form->field($model, 'PAKAGE')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PAKAGE_PARENT')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PAKAGE_NM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PAKAGE_DURATION')->textInput() ?>
+
+    <?= $form->field($model, 'PAKAGE_BONUS')->textInput() ?>
+
+    <?= $form->field($model, 'AFILIASI_KODE')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'AFILIASI_BONUS')->textInput() ?>
+
+    <?= $form->field($model, 'PAKAGE_PRICE')->textInput(['maxlength' => true]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

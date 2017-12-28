@@ -28,23 +28,19 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-data-industri .kv-grid-container{
+	#gv-group-industri .kv-grid-container{
 			height:400px
 		}
 ");
 
-$this->registerJs($this->render('storeMembership_script.js'),View::POS_READY);
-echo $this->render('storeMembership_button'); //echo difinition
-echo $this->render('storeMembership_modal'); //echo difinition
-echo $this->render('storeMembership_colum'); //echo difinition
-$this->title = 'Store Membership';
+
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-home fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership</b></div>';
+        <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
 	
-        $attDinamikField=[
+        $attDinamikGroupField=[
             [
                 'class'=>'kartik\grid\SerialColumn',
                 'contentOptions'=>['class'=>'kartik-sheet-style'],
@@ -55,8 +51,8 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(storeMembershipAryColumn() as $key =>$value[]){			
-            $attDinamikField[]=[
+        foreach(industriGroupAryColumn() as $key =>$value[]){			
+            $attDinamikGroupField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
                 'filter'=>$value[$key]['FILTER'],
@@ -96,7 +92,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ];
         };
         
-        $attDinamikField[]=[			
+        $attDinamikGroupField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{edit}{delete}',
@@ -111,33 +107,33 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'class'=>'btn btn-info btn-xs',
                 'style'=>'width:100%'		
             ],
-            'buttons' => [
-                'view' =>function ($url, $model){
-                    return  tombolView($url, $model);
-                },
-                'edit' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdate($url, $model);
-                    //}					
-                },
-                'delete' =>function($url, $model,$key){
-                    return  tombolDelete($url, $model);
-                }
-            ],
+            // 'buttons' => [
+            //     'view' =>function ($url, $model){
+            //         return  tombolView($url, $model);
+            //     },
+            //     'edit' =>function($url, $model,$key){
+            //         //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
+            //         return  tombolUpdate($url, $model);
+            //         //}					
+            //     },
+            //     'delete' =>function($url, $model,$key){
+            //         return  tombolDelete($url, $model);
+            //     }
+            // ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
         ]; 
     
-    $gvstoreMembership=GridView::widget([
-        'id'=>'gv-data-industri',
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
+    $gvIndustri=GridView::widget([
+        'id'=>'gv-group-industri',
+        'dataProvider' => $dataProviderGroup,
+        'filterModel' => $searchModelGroup,
+        'columns'=>$attDinamikGroupField,				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-group-industri',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -152,7 +148,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            //'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
@@ -162,11 +158,4 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'floatHeader'=>true,
     ]); 	
 ?>
-
-<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
-			<?=$gvstoreMembership?>
-		</div>
-	</div>
-</div>
+<?=$gvIndustri?>
