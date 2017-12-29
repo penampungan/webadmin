@@ -45,7 +45,7 @@ class IndustriGroup extends \yii\db\ActiveRecord
     {
         return [
             'INDUSTRY_GRP_ID' => 'Industry  Grp  ID',
-            'INDUSTRY_GRP_NM' => 'Industry  Grp  Nm',
+            'INDUSTRY_GRP_NM' => 'Industry  Group  Name',
             'CREATE_BY' => 'Create  By',
             'CREATE_AT' => 'Create  At',
             'UPDATE_BY' => 'Update  By',

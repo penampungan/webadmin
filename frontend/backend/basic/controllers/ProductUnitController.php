@@ -110,7 +110,7 @@ class ProductUnitController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->CREATE_AT=date('Y-m-d H:i:s');
-            if($model->save()){
+            if($model->save(false)){
                 return $this->redirect(['index']);
             }
         }else{
@@ -131,13 +131,16 @@ class ProductUnitController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->UNIT_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['index']);
+            }
+        }else{
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->renderAjax('update', [
-            'model' => $model,
-        ]);
     }
 
     /**

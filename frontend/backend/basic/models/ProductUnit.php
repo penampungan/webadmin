@@ -35,7 +35,11 @@ class ProductUnit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+<<<<<<< HEAD
             //[['UNIT_ID'], 'required'],
+=======
+            // [['UNIT_ID'], 'required'],
+>>>>>>> 248fa2e70665edc8caaa32cc672f517ae826591a
             [['UNIT_ID_GRP', 'STATUS'], 'integer'],
             [['DCRP_DETIL'], 'string'],
             [['CREATE_AT', 'UPDATE_AT'], 'safe'],
@@ -53,7 +57,7 @@ class ProductUnit extends \yii\db\ActiveRecord
     {
         return [
             'UNIT_ID' => 'Unit  ID',
-            'UNIT_NM' => 'Unit  Nm',
+            'UNIT_NM' => 'Unit  Name',
             'UNIT_ID_GRP' => 'Unit  Id  Grp',
             'STATUS' => 'Status',
             'DCRP_DETIL' => 'Dcrp  Detil',
