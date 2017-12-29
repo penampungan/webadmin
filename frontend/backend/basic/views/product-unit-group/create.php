@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
@@ -14,7 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'UNIT_NM_GRP')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'UNIT_NM_GRP',[
+                        'addon' => [
+                            'append' => [
+                                'content' => '<span class="fa fa-industry"></span>', 
+                            ],							
+                        ]
+                    ])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'DCRP_DETIL')->textarea(['rows' => 6]) ?>
 

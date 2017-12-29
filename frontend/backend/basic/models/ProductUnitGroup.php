@@ -46,7 +46,7 @@ class ProductUnitGroup extends \yii\db\ActiveRecord
     {
         return [
             'UNIT_ID_GRP' => 'Unit  Id  Grp',
-            'UNIT_NM_GRP' => 'Unit  Nm  Grp',
+            'UNIT_NM_GRP' => 'Unit  Name  Group',
             'STATUS' => 'Status',
             'DCRP_DETIL' => 'Dcrp  Detil',
             'CREATE_BY' => 'Create  By',
