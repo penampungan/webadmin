@@ -1,21 +1,59 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\account\models\StoreMembership */
-
-$this->title = 'Update Store Membership: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Store Memberships', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="store-membership-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
+<div class="store-membership-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<?php $form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'CREATE_AT')->textInput() ?>
+
+<?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+
+<?= $form->field($model, 'STATUS')->textInput() ?>
+
+<?= $form->field($model, 'ACCESS_GROUP')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'STORE_ID')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'STORE_NM')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'STORE_STATUS')->textInput() ?>
+
+<?= $form->field($model, 'FAKTURE')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'FAKTURE_DATE')->textInput() ?>
+
+<?= $form->field($model, 'FAKTURE_TEMPO')->textInput() ?>
+
+<?= $form->field($model, 'PAY_PAKAGE')->textInput() ?>
+
+<?= $form->field($model, 'PAY_DATE')->textInput() ?>
+
+<?= $form->field($model, 'PAY_DURATION_ACTIVE')->textInput() ?>
+
+<?= $form->field($model, 'PAY_DURATION_BONUS')->textInput() ?>
+
+<?= $form->field($model, 'PAY_TOTAL')->textInput(['maxlength' => true]) ?>
+
+<div class="form-group">
+    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+</div>
+
+<?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

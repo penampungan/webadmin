@@ -5,6 +5,8 @@ namespace frontend\backend\basic\controllers;
 use Yii;
 use frontend\backend\basic\models\ProductUnit;
 use frontend\backend\basic\models\ProductUnitSearch;
+use frontend\backend\basic\models\ProductUnitGroup;
+use frontend\backend\basic\models\ProductUnitGroupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,19 +30,59 @@ class ProductUnitController extends Controller
             ],
         ];
     }
-
+	public function beforeAction($action){
+        $modulIndentify=4; //OUTLET
+       // Check only when the user is logged in.
+       // Author piter Novian [ptr.nov@gmail.com].
+       if (!Yii::$app->user->isGuest){
+           if (Yii::$app->session['userSessionTimeout']< time() ) {
+               // timeout
+               Yii::$app->user->logout();
+               return $this->goHome(); 
+           } else {	
+               //add Session.
+               Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+               //check validation [access/url].
+               $checkAccess=Yii::$app->getUserOpt->UserMenuPermission($modulIndentify);
+               if($checkAccess['modulMenu']['MODUL_STS']==0 OR $checkAccess['ModulPermission']['STATUS']==0){				
+                   $this->redirect(array('/site/alert'));
+               }else{
+                   if($checkAccess['PageViewUrl']==true){						
+                       return true;
+                   }else{
+                       $this->redirect(array('/site/alert'));
+                   }					
+               }			 
+           }
+       }else{
+           Yii::$app->user->logout();
+           return $this->goHome(); 
+       }
+   }
     /**
      * Lists all ProductUnit models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductUnitSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelGroup = new ProductUnitGroupSearch();
+        $dataProviderGroup  = $searchModelGroup->search(Yii::$app->request->queryParams);
 
+        $paramCari=Yii::$app->getRequest()->getQueryParam('unit');
+        if ($paramCari==''){
+            $modelGrp =ProductUnitGroup::find()->orderBy(['UNIT_ID_GRP'=>SORT_ASC])->one();
+            $searchModel = new ProductUnitSearch(['UNIT_ID_GRP'=>$modelGrp->UNIT_ID_GRP]);
+        }else{
+            $searchModel = new ProductUnitSearch(['UNIT_ID_GRP'=>$paramCari]);
+        }
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelGroup' => $searchModelGroup,
+            'dataProviderGroup' => $dataProviderGroup,
         ]);
     }
 
@@ -52,7 +94,7 @@ class ProductUnitController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -66,13 +108,16 @@ class ProductUnitController extends Controller
     {
         $model = new ProductUnit();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->UNIT_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['index']);
+            }
+        }else{
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -90,7 +135,7 @@ class ProductUnitController extends Controller
             return $this->redirect(['view', 'id' => $model->UNIT_ID]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,8 +149,9 @@ class ProductUnitController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

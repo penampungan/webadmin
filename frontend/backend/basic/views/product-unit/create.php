@@ -1,21 +1,36 @@
 <?php
 
 use yii\helpers\Html;
-
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use kartik\widgets\ActiveForm;
+use frontend\backend\basic\models\ProductUnitGroup;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\ProductUnit */
-
-$this->title = 'Create Product Unit';
-$this->params['breadcrumbs'][] = ['label' => 'Product Units', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="product-unit-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="product-unit-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+    
+    <?= $form->field($model, 'UNIT_ID_GRP')->widget(Select2::classname(),[
+            'data'=>ArrayHelper::map(ProductUnitGroup::find()->all(),'UNIT_ID_GRP','UNIT_NM_GRP'),'language' => 'en',
+            'options' => ['placeholder'=>'Select Product Group....'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ], 
+        ])?>
+
+    <?= $form->field($model, 'UNIT_NM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'DCRP_DETIL')->textarea(['rows' => 6]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
 </div>

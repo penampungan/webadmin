@@ -1,21 +1,33 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\widgets\ActiveForm;
+use kartik\label\LabelInPlace;
 
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\IndustriGroup */
 
-$this->title = 'Create Industri Group';
-$this->params['breadcrumbs'][] = ['label' => 'Industri Groups', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="industri-group-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="industri-group-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'INDUSTRY_GRP_NM', [
+                        'addon' => [
+                            'append' => [
+                                'content' => '<span class="fa fa-industry"></span>', 
+                            ],							
+                        ]
+                    ])->textInput(['maxlength' => true]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 </div>
