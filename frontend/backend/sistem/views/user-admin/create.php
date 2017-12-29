@@ -1,21 +1,45 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\sistem\models\UserAdmin */
-
-$this->title = 'Create User Admin';
-$this->params['breadcrumbs'][] = ['label' => 'User Admins', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="user-admin-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="user-admin-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'status')->textInput() ?>
+
+    <?= $form->field($model, 'created_at')->textInput() ?>
+
+    <?= $form->field($model, 'updated_at')->textInput() ?>
+
+    <?= $form->field($model, 'EMP_ID')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'avatar')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'TEMPLATE')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'avatarImage')->textarea(['rows' => 6]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
 </div>

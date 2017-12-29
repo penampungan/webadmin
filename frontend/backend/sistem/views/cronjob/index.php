@@ -37,7 +37,7 @@ $this->registerJs($this->render('cronjob_script.js'),View::POS_READY);
 echo $this->render('cronjob_button'); //echo difinition
 echo $this->render('cronjob_modal'); //echo difinition
 echo $this->render('cronjob_colum'); //echo difinition
-$this->title = '';
+$this->title = 'Cronjoob';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">

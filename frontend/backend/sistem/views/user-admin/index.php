@@ -37,7 +37,7 @@ $this->registerJs($this->render('userAdmin_script.js'),View::POS_READY);
 echo $this->render('userAdmin_button'); //echo difinition
 echo $this->render('userAdmin_modal'); //echo difinition
 echo $this->render('userAdmin_colum'); //echo difinition
-$this->title = '';
+$this->title = 'User Admin';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">

@@ -37,12 +37,12 @@ $this->registerJs($this->render('syncPooling_script.js'),View::POS_READY);
 echo $this->render('syncPooling_button'); //echo difinition
 echo $this->render('syncPooling_modal'); //echo difinition
 echo $this->render('syncPooling_colum'); //echo difinition
-$this->title = '';
+$this->title = 'Pooling';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-retweet fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Sync Pooling</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Pooling</b></div>';
 	
         $attDinamikField=[
             [

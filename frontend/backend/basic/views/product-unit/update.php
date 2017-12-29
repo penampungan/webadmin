@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use kartik\widgets\ActiveForm;
+use frontend\backend\basic\models\ProductUnitGroup;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\ProductUnit */
@@ -11,28 +14,18 @@ use yii\widgets\ActiveForm;
 <div class="product-unit-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'UNIT_ID')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'UNIT_ID_GRP')->widget(Select2::classname(),[
+            'data'=>ArrayHelper::map(ProductUnitGroup::find()->all(),'UNIT_ID_GRP','UNIT_NM_GRP'),'language' => 'en',
+            'options' => ['placeholder'=>'Select Product Group....'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ], 
+        ])?>
 
     <?= $form->field($model, 'UNIT_NM')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'UNIT_ID_GRP')->textInput() ?>
-
-    <?= $form->field($model, 'STATUS')->textInput() ?>
-
     <?= $form->field($model, 'DCRP_DETIL')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
-
-    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
-
-    <?= $form->field($model, 'CREATE_UUID')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'UPDATE_UUID')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

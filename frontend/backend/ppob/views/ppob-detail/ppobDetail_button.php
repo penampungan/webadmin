@@ -35,7 +35,7 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/ppob/ppob-detail/view','id'=>$model['ID']]),
+			'value'=>url::to(['/ppob/ppob-detail/view', 'ID' => $model['ID'], 'DETAIL_ID' => $model['DETAIL_ID'], 'HEADER_ID' => $model['HEADER_ID'], 'PROVIDER_ID' => $model['PROVIDER_ID']]),
 			'id'=>'ppobdetail-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -57,7 +57,7 @@ use yii\base\DynamicModel;
 	function tombolUpdate($url, $model){
 		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'value'=>url::to(['/ppob/ppob-detail/update','id'=>$model['ID']]),
+			'value'=>url::to(['/ppob/ppob-detail/update', 'ID' => $model['ID'], 'DETAIL_ID' => $model['DETAIL_ID'], 'HEADER_ID' => $model['HEADER_ID'], 'PROVIDER_ID' => $model['PROVIDER_ID']]),
 			'id'=>'ppobdetail-button-update',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -79,7 +79,7 @@ use yii\base\DynamicModel;
 	function tombolDelete($url, $model){
 		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'href'=>url::to(['/ppob/ppob-detail/delete','id'=>$model['ID']]),
+			'href'=>url::to(['/ppob/ppob-detail/delete', 'ID' => $model['ID'], 'DETAIL_ID' => $model['DETAIL_ID'], 'HEADER_ID' => $model['HEADER_ID'], 'PROVIDER_ID' => $model['PROVIDER_ID']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],

@@ -35,7 +35,7 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/sistem/user-kg/view','id'=>$model['id']]),
+			'value'=>url::to(['/sistem/user-kg/view','id'=>$model['id'],'ACCESS_ID' => $model['ACCESS_ID'], 'YEAR_AT' => $model['YEAR_AT'], 'MONTH_AT' => $model['MONTH_AT']]),
 			'id'=>'userkg-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -57,7 +57,7 @@ use yii\base\DynamicModel;
 	function tombolUpdate($url, $model){
 		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'value'=>url::to(['/sistem/user-kg/update','id'=>$model['id']]),
+			'value'=>url::to(['/sistem/user-kg/update','id'=>$model['id'],'ACCESS_ID' => $model['ACCESS_ID'], 'YEAR_AT' => $model['YEAR_AT'], 'MONTH_AT' => $model['MONTH_AT']]),
 			'id'=>'userkg-button-update',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -79,7 +79,7 @@ use yii\base\DynamicModel;
 	function tombolDelete($url, $model){
 		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'href'=>url::to(['/sistem/user-kg/delete','id'=>$model['id']]),
+			'href'=>url::to(['/sistem/user-kg/delete','id'=>$model['id'],'ACCESS_ID' => $model['ACCESS_ID'], 'YEAR_AT' => $model['YEAR_AT'], 'MONTH_AT' => $model['MONTH_AT']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],

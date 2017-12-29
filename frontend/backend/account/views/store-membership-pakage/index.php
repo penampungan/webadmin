@@ -41,8 +41,8 @@ $this->title = 'Store Membership Pakage';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
+        <b class="fa fa-star fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership Pakage</b></div>';
 	
         $attDinamikField=[
             [

@@ -52,7 +52,7 @@ class IndustriGroupController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -66,13 +66,16 @@ class IndustriGroupController extends Controller
     {
         $model = new IndustriGroup();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->INDUSTRY_GRP_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['industri/index']);
+            }
+        }else{
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -87,10 +90,10 @@ class IndustriGroupController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->INDUSTRY_GRP_ID]);
+            return $this->redirect(['industri/index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,9 +107,10 @@ class IndustriGroupController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
+        return $this->redirect(['industri/index']);
     }
 
     /**
