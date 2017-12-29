@@ -28,20 +28,29 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-group-industri .kv-grid-container{
+	#gv-data-productunit .kv-grid-container{
 			height:400px
 		}
 ");
 
-
-
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
+        <b class="fa fa-product-hunt fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Product Unit Detail</b></div>';
 	
-        foreach(industriGroupAryColumn() as $key =>$value[]){			
-            $attDinamikGroupField[]=[
+        $attDinamikField=[
+            [
+                'class'=>'kartik\grid\SerialColumn',
+                'contentOptions'=>['class'=>'kartik-sheet-style'],
+                'width'=>'10px',
+                'header'=>'No.',
+                'headerOptions'=>Yii::$app->gv->gvContainHeader('center','5px',$bColor,'#ffffff'),
+                'contentOptions'=>Yii::$app->gv->gvContainBody('center','5px',''),
+            ],
+        ];
+        
+        foreach(productunitAryColumn() as $key =>$value[]){			
+            $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
                 'filter'=>$value[$key]['FILTER'],
@@ -53,8 +62,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'hAlign'=>$value[$key]['H_VALIGN'],
                 'vAlign'=>$value[$key]['V_VALIGN'],
                 //'hidden'=>false,
-                'noWrap'=>true,
-                'value'=>$value[$key]['VALUE'],
+                'noWrap'=>true,	
                 'format'=>$value[$key]['ATR_FORMAT'],
                 'headerOptions'=>[		
                     'style'=>[		
@@ -82,7 +90,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ];
         };
         
-        $attDinamikGroupField[]=[			
+        $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{edit}{delete}',
@@ -99,46 +107,31 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
             'buttons' => [
                 'view' =>function ($url, $model){
-                    return  tombolViewGroup($url, $model);
+                    return  tombolView($url, $model);
                 },
                 'edit' =>function($url, $model,$key){
                     //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdateGroup($url, $model);
+                    return  tombolUpdate($url, $model);
                     //}					
                 },
                 'delete' =>function($url, $model,$key){
-                    return  tombolDeleteGroup($url, $model);
+                    return  tombolDelete($url, $model);
                 }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
         ]; 
     
-    $gvIndustri=GridView::widget([
-        'id'=>'gv-group-industri',
-        'dataProvider' => $dataProviderGroup,
-        'filterModel' => $searchModelGroup,
-        'columns'=>$attDinamikGroupField,
-        'rowOptions'   => function ($model, $key, $index, $grid) {
-			
-			$btnclick= ['onclick' => '
-				document.cookie="INDUSTRY_GRP_ID" + "=" +'.$model->INDUSTRY_GRP_ID.';
-				document.cookie="INDUSTRY_GRP_NM" + "=" +"'.$model->INDUSTRY_GRP_NM.'";
-				$.pjax.reload({
-					url: "'.Url::to(["/basic/industri/"]).'?industri="+'.$model->INDUSTRY_GRP_ID.',
-					container: "#gv-data-industri",
-					timeout: 1000,
-				});
-				
-			
-			'];
-			return $btnclick;
-		},				
+    $gvProductunit=GridView::widget([
+        'id'=>'gv-data-productunit',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns'=>$attDinamikField,				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-group-industri',
+                'id'=>'gv-data-productunit',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -150,19 +143,18 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'export' => false,
         'panel'=>[''],
         'toolbar' => false,
-		'summary'=>false,
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreateGroup().'</div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
-			'after'=>false,
             'showFooter'=>false,
         ],
-        // 'floatOverflowContainer'=>true,
-        // 'floatHeader'=>true,
+        'floatOverflowContainer'=>true,
+        'floatHeader'=>true,
     ]); 	
 ?>
-<?=$gvIndustri?>
+
+<?=$gvProductunit?>

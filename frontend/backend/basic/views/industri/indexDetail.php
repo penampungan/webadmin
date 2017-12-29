@@ -38,7 +38,7 @@ $this->registerCss("
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Detail Industri</b></div>';
 	
         $attDinamikField=[
             [
@@ -152,6 +152,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
+            'after'=>false,
             'showFooter'=>false,
         ],
         'floatOverflowContainer'=>true,

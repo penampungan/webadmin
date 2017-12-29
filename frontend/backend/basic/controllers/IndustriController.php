@@ -65,13 +65,22 @@ class IndustriController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new IndustriSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $searchModelGroup = new IndustriGroupSearch();
         $dataProviderGroup  = $searchModelGroup->search(Yii::$app->request->queryParams);
 
+        $paramCari=Yii::$app->getRequest()->getQueryParam('industri');
+        if ($paramCari==''){
+            $modelGrp =IndustriGroup::find()->orderBy(['INDUSTRY_GRP_ID'=>SORT_ASC])->one();
+            $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$modelGrp->INDUSTRY_GRP_ID]);
+        }else{
+            $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$paramCari]);
+        }
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel' => $searchModel!=''?$searchModel:false,
             'dataProvider' => $dataProvider,
             'searchModelGroup' => $searchModelGroup,
             'dataProviderGroup' => $dataProviderGroup,
@@ -101,13 +110,16 @@ class IndustriController extends Controller
     {
         $model = new Industri();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->INDUSTRY_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['index']);
+            }
+        }else{
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -122,7 +134,7 @@ class IndustriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->INDUSTRY_ID]);
+            return $this->redirect(['index']);
         }
 
         return $this->renderAjax('update', [
@@ -139,8 +151,9 @@ class IndustriController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

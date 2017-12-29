@@ -28,20 +28,18 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-group-industri .kv-grid-container{
+	#gv-data-productunitgroup .kv-grid-container{
 			height:400px
 		}
 ");
 
-
-
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-industry fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Industri</b></div>';
-	
-        foreach(industriGroupAryColumn() as $key =>$value[]){			
-            $attDinamikGroupField[]=[
+        <b class="fa fa-product-hunt fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Product Unit</b></div>';
+	        
+        foreach(productunitGroupAryColumn() as $key =>$value[]){			
+            $attDinamikFieldGroup[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
                 'filter'=>$value[$key]['FILTER'],
@@ -54,7 +52,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'vAlign'=>$value[$key]['V_VALIGN'],
                 //'hidden'=>false,
                 'noWrap'=>true,
-                'value'=>$value[$key]['VALUE'],
+                'value'=>$value[$key]['VALUE'],	
                 'format'=>$value[$key]['ATR_FORMAT'],
                 'headerOptions'=>[		
                     'style'=>[		
@@ -82,7 +80,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ];
         };
         
-        $attDinamikGroupField[]=[			
+        $attDinamikFieldGroup[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{edit}{delete}',
@@ -114,31 +112,16 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
         ]; 
     
-    $gvIndustri=GridView::widget([
-        'id'=>'gv-group-industri',
+    $gvProductunitGroup=GridView::widget([
+        'id'=>'gv-data-productunitgroup',
         'dataProvider' => $dataProviderGroup,
         'filterModel' => $searchModelGroup,
-        'columns'=>$attDinamikGroupField,
-        'rowOptions'   => function ($model, $key, $index, $grid) {
-			
-			$btnclick= ['onclick' => '
-				document.cookie="INDUSTRY_GRP_ID" + "=" +'.$model->INDUSTRY_GRP_ID.';
-				document.cookie="INDUSTRY_GRP_NM" + "=" +"'.$model->INDUSTRY_GRP_NM.'";
-				$.pjax.reload({
-					url: "'.Url::to(["/basic/industri/"]).'?industri="+'.$model->INDUSTRY_GRP_ID.',
-					container: "#gv-data-industri",
-					timeout: 1000,
-				});
-				
-			
-			'];
-			return $btnclick;
-		},				
+        'columns'=>$attDinamikFieldGroup,				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-group-industri',
+                'id'=>'gv-data-productunitgroup',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -146,11 +129,24 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'responsiveWrap'=>true,
         'bordered'=>true,
         'striped'=>true,
+        'rowOptions'   => function ($model, $key, $index, $grid) {
+			
+			$btnclick= ['onclick' => '
+				$.pjax.reload({
+					url: "'.Url::to(["/basic/product-unit/"]).'?unit="+'.$model->UNIT_ID_GRP.',
+					container: "#gv-data-productunit",
+					timeout: 1000,
+				});
+				
+			
+			'];
+			return $btnclick;
+		},
         'autoXlFormat'=>true,
         'export' => false,
         'panel'=>[''],
         'toolbar' => false,
-		'summary'=>false,
+        'summary'=>false,
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
@@ -158,11 +154,10 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
-			'after'=>false,
             'showFooter'=>false,
         ],
         // 'floatOverflowContainer'=>true,
         // 'floatHeader'=>true,
     ]); 	
 ?>
-<?=$gvIndustri?>
+<?=$gvProductunitGroup?>

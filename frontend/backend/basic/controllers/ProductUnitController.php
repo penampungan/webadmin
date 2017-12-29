@@ -5,6 +5,8 @@ namespace frontend\backend\basic\controllers;
 use Yii;
 use frontend\backend\basic\models\ProductUnit;
 use frontend\backend\basic\models\ProductUnitSearch;
+use frontend\backend\basic\models\ProductUnitGroup;
+use frontend\backend\basic\models\ProductUnitGroupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -63,12 +65,24 @@ class ProductUnitController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductUnitSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelGroup = new ProductUnitGroupSearch();
+        $dataProviderGroup  = $searchModelGroup->search(Yii::$app->request->queryParams);
 
+        $paramCari=Yii::$app->getRequest()->getQueryParam('unit');
+        if ($paramCari==''){
+            $modelGrp =ProductUnitGroup::find()->orderBy(['UNIT_ID_GRP'=>SORT_ASC])->one();
+            $searchModel = new ProductUnitSearch(['UNIT_ID_GRP'=>$modelGrp->UNIT_ID_GRP]);
+        }else{
+            $searchModel = new ProductUnitSearch(['UNIT_ID_GRP'=>$paramCari]);
+        }
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelGroup' => $searchModelGroup,
+            'dataProviderGroup' => $dataProviderGroup,
         ]);
     }
 
@@ -94,13 +108,16 @@ class ProductUnitController extends Controller
     {
         $model = new ProductUnit();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->UNIT_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['index']);
+            }
+        }else{
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -132,8 +149,9 @@ class ProductUnitController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

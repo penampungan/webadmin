@@ -26,35 +26,35 @@ function industriAryColumn(){
 	$C_FONT_COLOR2='red';
 	$C_BG_COLOR1=false;
 	
-	$aryFieldColomn[]=[
-	'ID' =>0, 'ATTR' =>[
-		'ATR_FIELD'=>'INDUSTRY_ID','ATR_LABEL'=>'Kode Industri','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
-		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
-		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
-		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
-		// PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-']	
-		// 'FILTER_OPTION'=>[],
-		]
-	];	  
-	$aryFieldColomn[]=[
-	'ID' =>1, 'ATTR' =>[
-		'ATR_FIELD'=>'INDUSTRY_GRP_ID','ATR_LABEL'=>'Industri Group','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
-		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
-		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
-		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
-		//PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
-		// 'FILTER_OPTION'=>[],		
-		]
-	];	
+	// $aryFieldColomn[]=[
+	// 'ID' =>0, 'ATTR' =>[
+	// 	'ATR_FIELD'=>'INDUSTRY_ID','ATR_LABEL'=>'Kode Industri','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+	// 	'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+	// 	'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+	// 	'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+	// 	// PENGUNAAN FILTER 
+	// 	// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+	// 	// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+	// 	// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-']	
+	// 	// 'FILTER_OPTION'=>[],
+	// 	]
+	// ];	  
+	// $aryFieldColomn[]=[
+	// 'ID' =>1, 'ATTR' =>[
+	// 	'ATR_FIELD'=>'INDUSTRY_GRP_ID','ATR_LABEL'=>'Industri Group','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+	// 	'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+	// 	'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+	// 	'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+	// 	//PENGUNAAN FILTER 
+	// 	// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+	// 	// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+	// 	// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+	// 	// 'FILTER_OPTION'=>[],		
+	// 	]
+	// ];	
 	//--NAMA---
 	$aryFieldColomn[]=[
-	'ID' =>2, 'ATTR' =>[
+	'ID' =>0, 'ATTR' =>[
 		'ATR_FIELD'=>'INDUSTRY_NM','ATR_LABEL'=>'Nama Industri','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -70,7 +70,7 @@ function industriAryColumn(){
 	];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-	'ID' =>3, 'ATTR' =>[
+	'ID' =>1, 'ATTR' =>[
 		'ATR_FIELD'=>'CREATE_AT','ATR_LABEL'=>'Tanggal Buat','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -140,9 +140,9 @@ function industriGroupAryColumn(){
 	//--NAMA---	
 	$aryFieldColomn[]=[
 	'ID' =>0, 'ATTR' =>[
-		'ATR_FIELD'=>'INDUSTRY_GRP_NM','ATR_LABEL'=>'GROUP_NM','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+		'ATR_FIELD'=>'INDUSTRY_GRP_NM','ATR_LABEL'=>'Nama Industri Group','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
-		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,'VALUE'=>function($data){return Html::tag('div', $data->INDUSTRY_GRP_NM, ['data-toggle'=>'tooltip','data-placement'=>'left','title'=>'Double click to Outlet Items ','style'=>'cursor:default;']);},
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
 		//PENGUNAAN FILTER 
 		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,

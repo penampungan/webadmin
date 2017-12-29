@@ -33,6 +33,7 @@ use frontend\backend\laporan\models\RptDailyChartSearch;
 //global $xaxis;
 //global $canvasEndY;
 
+// print_r(isset($model)?0:$model[6]->Val_Cnt);die();
 
 	$hourly3DaysTafik= Chart::Widget([
 		'urlSource'=>'/dashboard/data/daily-transaksi',
@@ -173,7 +174,7 @@ $this->registerJs("
 				$(this).text(Math.ceil(now));
 			},
 			complete: function() {
-				$(this).text('".number_format($model[6]->Val_Cnt)."');	//JUMLAH_KARYAWAN
+				$(this).text('".number_format((empty($model))?0:$model[6]->Val_Cnt)."');	//JUMLAH_KARYAWAN
 			}
 		});
 	});
@@ -187,7 +188,7 @@ $this->registerJs("
 				$(this).text(Math.ceil(now));
 			},
 			complete: function() {
-				$(this).text('".number_format($model[4]->Val_Cnt)."');	//JUMLAH_TOKO_AKTIF
+				$(this).text('".number_format((empty($model))?0:$model[4]->Val_Cnt)."');	//JUMLAH_TOKO_AKTIF
 			}
 		});
 	});
@@ -210,7 +211,7 @@ $this->registerJs("
 						<div class="col-lg-9 text-left .small">
 							<dl>
 								
-								<dt class="count-grand-total-hari" style="font-size:20px;color:#7e7e7e"><?=$model[0]->Val_Cnt?></dt>
+								<dt class="count-grand-total-hari" style="font-size:20px;color:#7e7e7e"><?=(empty($model))?0:$model[0]->Val_Cnt?></dt>
 								<dd style="font-size:11px;color:#7e7e7e">PENJUALAN HARIAN (IDR)</dd>
 								
 							</dl>							
@@ -230,7 +231,7 @@ $this->registerJs("
 						</div>						
 						<div class="col-lg-9 text-left .small">
 							<dl>
-								<dt class="count-trans-total-hari" style="font-size:20px;color:#7e7e7e"><?=$model[1]->Val_Cnt?></dt>
+								<dt class="count-trans-total-hari" style="font-size:20px;color:#7e7e7e"><?=(empty($model))?0:$model[1]->Val_Cnt?></dt>
 								<dd style="font-size:11px;color:#7e7e7e">JUMLAH TRANSAKSI</dd>
 							</dl>
 							
@@ -250,7 +251,7 @@ $this->registerJs("
 						</div>						
 						<div class="col-lg-9 text-left .small">
 							<dl>
-								<dt class="rata-rata-penjualan" style="font-size:20px;color:#7e7e7e"><?=$model[2]->Val_Cnt?></dt>
+								<dt class="rata-rata-penjualan" style="font-size:20px;color:#7e7e7e"><?=(empty($model))?0:$model[2]->Val_Cnt?></dt>
 								<dd style="font-size:11px;color:#7e7e7e">RATA-RATA PENJUALAN (IDR)</dd>
 							</dl>
 							
@@ -287,8 +288,8 @@ $this->registerJs("
 						</div>						
 						<div class="col-lg-9 text-left .small">
 							<dl>
-								<dt class="jumlah-toko-aktif" style="font-size:18px;color:#7e7e7e;float:left;padding-right:10px"><?=$model[4]->Val_Cnt?></dt> 
-								<div style="font-size:18px;color:#7e7e7e;font-weight: bold;"> of <?=(int)$model[3]->Val_Cnt?></div>
+								<dt class="jumlah-toko-aktif" style="font-size:18px;color:#7e7e7e;float:left;padding-right:10px"><?=(empty($model))?0:$model[4]->Val_Cnt?></dt> 
+								<div style="font-size:18px;color:#7e7e7e;font-weight: bold;"> of <?=(empty($model))?0:(int)$model[3]->Val_Cnt?></div>
 								<dd style="font-size:10px;color:#7e7e7e">JUMLAH TOKO</dd>
 							</dl>
 							
@@ -308,7 +309,7 @@ $this->registerJs("
 						</div>						
 						<div class="col-lg-9 text-left .small">
 							<dl>
-								<dt class="jumlah-produk" style="font-size:18px;color:#7e7e7e"><?=$model[5]->Val_Cnt?></dt>
+								<dt class="jumlah-produk" style="font-size:18px;color:#7e7e7e"><?=(empty($model))?0:$model[5]->Val_Cnt?></dt>
 								<dd style="font-size:10px;color:#7e7e7e">   JUMLAH PRODUK</dd>
 							</dl>
 							
@@ -328,7 +329,7 @@ $this->registerJs("
 						</div>						
 						<div class="col-lg-9 text-left .small">
 							<dl>
-								<dt class="jumlah-karyawan" style="font-size:18px;color:#7e7e7e"><?=$model[6]->Val_Cnt?></dt>
+								<dt class="jumlah-karyawan" style="font-size:18px;color:#7e7e7e"><?=(empty($model))?0:$model[6]->Val_Cnt?></dt>
 								<dd style="font-size:10px;color:#7e7e7e">JUMLAH KARYAWAN</dd>
 							</dl>
 							
