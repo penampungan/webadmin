@@ -133,7 +133,7 @@ class ProductUnitController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->CREATE_AT=date('Y-m-d H:i:s');
-            if($model->save(false)){
+            if($model->save()){
                 return $this->redirect(['index']);
             }
         }else{
