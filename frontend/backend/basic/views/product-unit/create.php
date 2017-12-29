@@ -13,7 +13,9 @@ use frontend\backend\basic\models\ProductUnitGroup;
 
 <div class="product-unit-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+		'action'=>'/basic/product-unit/create'
+	]); ?>
     
     <?= $form->field($model, 'UNIT_ID_GRP')->widget(Select2::classname(),[
             'data'=>ArrayHelper::map(ProductUnitGroup::find()->all(),'UNIT_ID_GRP','UNIT_NM_GRP'),'language' => 'en',
