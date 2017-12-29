@@ -52,7 +52,7 @@ class ProductUnitGroupController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -65,14 +65,16 @@ class ProductUnitGroupController extends Controller
     public function actionCreate()
     {
         $model = new ProductUnitGroup();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->UNIT_ID_GRP]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->CREATE_AT=date('Y-m-d H:i:s');
+            if($model->save()){
+                return $this->redirect(['product-unit/index']);
+            }
+        }else{
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -87,10 +89,10 @@ class ProductUnitGroupController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->UNIT_ID_GRP]);
+            return $this->redirect(['product-unit/index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,9 +106,11 @@ class ProductUnitGroupController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['product-unit/index']);
     }
 
     /**

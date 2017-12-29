@@ -1,21 +1,34 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\sistem\models\Cronjob */
-
-$this->title = 'Update Cronjob: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Cronjobs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="cronjob-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="cronjob-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'TABEL')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'ACCESS_GROUP')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'STORE_ID')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'UPDATE_TABEL')->textInput() ?>
+
+    <?= $form->field($model, 'UPDATE_CRONJOB')->textInput() ?>
+
+    <?= $form->field($model, 'STT')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 </div>

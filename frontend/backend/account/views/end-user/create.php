@@ -2,20 +2,50 @@
 
 use yii\helpers\Html;
 
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\account\models\EndUser */
 
-$this->title = 'Create End User';
-$this->params['breadcrumbs'][] = ['label' => 'End Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="end-user-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="end-user-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'ACCESS_GROUP')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'STORE_ID')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'NAME')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'EMAIL')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PHONE')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'STATUS')->textInput() ?>
+
+    <?= $form->field($model, 'DCRP_DETIL')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'YEAR_AT')->textInput() ?>
+
+    <?= $form->field($model, 'MONTH_AT')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

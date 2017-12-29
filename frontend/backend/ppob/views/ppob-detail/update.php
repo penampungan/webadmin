@@ -1,21 +1,46 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\ppob\models\PpobDetail */
 
-$this->title = 'Update Ppob Detail: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Ppob Details', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="ppob-detail-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="ppob-detail-form">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'DETAIL_ID')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'HEADER_ID')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PROVIDER_ID')->textInput() ?>
+
+    <?= $form->field($model, 'DETAIL_NM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PROVIDER_NM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'DETAIL_DCRP')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'STATUS')->textInput() ?>
+
+    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
+
+    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

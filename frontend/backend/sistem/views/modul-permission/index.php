@@ -37,7 +37,7 @@ $this->registerJs($this->render('modulPermission_script.js'),View::POS_READY);
 echo $this->render('modulPermission_button'); //echo difinition
 echo $this->render('modulPermission_modal'); //echo difinition
 echo $this->render('modulPermission_colum'); //echo difinition
-$this->title = '';
+$this->title = 'Permission';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">

@@ -28,21 +28,15 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-data-industri .kv-grid-container{
+	#gv-data-productunit .kv-grid-container{
 			height:400px
 		}
 ");
 
-$this->registerJs($this->render('storeMembership_script.js'),View::POS_READY);
-echo $this->render('storeMembership_button'); //echo difinition
-echo $this->render('storeMembership_modal'); //echo difinition
-echo $this->render('storeMembership_colum'); //echo difinition
-$this->title = 'Store Membership';
-
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-home fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership</b></div>';
+        <b class="fa fa-product-hunt fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Product Unit Detail</b></div>';
 	
         $attDinamikField=[
             [
@@ -55,7 +49,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(storeMembershipAryColumn() as $key =>$value[]){			
+        foreach(productunitAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -128,8 +122,8 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
         ]; 
     
-    $gvstoreMembership=GridView::widget([
-        'id'=>'gv-data-industri',
+    $gvProductunit=GridView::widget([
+        'id'=>'gv-data-productunit',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,				
@@ -137,7 +131,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-productunit',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -163,10 +157,4 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
     ]); 	
 ?>
 
-<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
-			<?=$gvstoreMembership?>
-		</div>
-	</div>
-</div>
+<?=$gvProductunit?>
