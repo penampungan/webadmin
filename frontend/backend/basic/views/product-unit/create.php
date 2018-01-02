@@ -10,6 +10,7 @@ use frontend\backend\basic\models\ProductUnitGroup;
 /* @var $model frontend\backend\basic\models\ProductUnit */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<div class="product-unit-create">
 
 <div class="product-unit-form">
 
@@ -23,7 +24,13 @@ use frontend\backend\basic\models\ProductUnitGroup;
             ], 
         ])?>
 
-    <?= $form->field($model, 'UNIT_NM')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'UNIT_NM',[
+                        'addon' => [
+                            'append' => [
+                                'content' => '<span class="fa fa-industry"></span>', 
+                            ],							
+                        ]
+                    ])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'DCRP_DETIL')->textarea(['rows' => 6]) ?>
 
@@ -32,5 +39,7 @@ use frontend\backend\basic\models\ProductUnitGroup;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>
