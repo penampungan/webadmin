@@ -102,7 +102,7 @@ use yii\base\DynamicModel;
 		$title= Yii::t('app','');
 		$url = Url::toRoute(['/basic/product-unit-group/create']);
 		$options1 = ['value'=>$url,
-					'id'=>'productunit-button-create',
+					'id'=>'productunit-group-button-create',
 					'data-pjax' => false,
 					'class'=>"btn btn-success btn-xs",
 					'title'=>'Tambah'
