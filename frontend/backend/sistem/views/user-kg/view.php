@@ -1,21 +1,20 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\sistem\models\UserKg */
 ?>
 <div class="user-kg-view">
     <?= DetailView::widget([
+        'id'=>'dv-user-kg-view',
         'model' => $model,
         'attributes' => [
             'id',
             'username',
             'auth_key:ntext',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
+            'email',
             'status',
             'create_at',
             'updated_at',
@@ -29,16 +28,14 @@ use yii\widgets\DetailView;
             'ID_FB',
             'ID_TWITTER',
             'ID_LINKEDIN',
-            'ID_YAHOO',
-            'TEMPLATE',
-            'lft',
-            'rgt',
-            'lvl',
-            'icon',
-            'icon_type',
-            'YEAR_AT',
-            'MONTH_AT',
+            'ID_YAHOO'
         ],
+        'hover'=>true,
+        'panel'=>[
+			'heading'=>'<span class="fa fa-user"><span><b> User Detail</b>',
+			'type'=>DetailView::TYPE_INFO,
+		],
+		'mode'=>DetailView::MODE_VIEW,
     ]) ?>
 
 </div>

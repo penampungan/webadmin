@@ -132,8 +132,9 @@ class UserAdminController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

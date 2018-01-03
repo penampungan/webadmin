@@ -99,7 +99,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}',
+            'template' => '{view}{edit}{delete}{change}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[
@@ -122,6 +122,11 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 },
                 'delete' =>function($url, $model,$key){
                     return  tombolDelete($url, $model);
+                },
+                'change' =>function($url, $model,$key){
+                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
+                    return  tombolChangePassword($url, $model);
+                    //}					
                 }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
@@ -152,7 +157,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'./*tombolCreate().*/'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
