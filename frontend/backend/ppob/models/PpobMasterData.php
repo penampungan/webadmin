@@ -5,7 +5,7 @@ namespace frontend\backend\ppob\models;
 use Yii;
 
 /**
- * This is the model class for table "ppob_master_harga".
+ * This is the model class for table "ppob_master_data".
  *
  * @property string $ID_PRODUK
  * @property string $TYPE_NM
@@ -16,29 +16,24 @@ use Yii;
  * @property string $CODE
  * @property string $NAME
  * @property string $DENOM
- * @property string $HARGA_BARU
- * @property string $TGL_AKTIF
- * @property string $HARGA_DASAR
- * @property string $MARGIN_FEE_KG
- * @property string $MARGIN_FEE_MEMBER
- * @property string $HARGA_JUAL
- * @property int $PERMIT
+ * @property string $HARGA
  * @property string $FUNGSI
- * @property int $STATUS 0=deactife; 1=Active; 2=NewPrice
+ * @property int $PERMIT
+ * @property int $STATUS
  * @property string $KETERANGAN
  * @property string $CREATE_BY
  * @property string $CREATE_AT
  * @property string $UPDATE_BY
  * @property string $UPDATE_AT
  */
-class PpobMasterHarga extends \yii\db\ActiveRecord
+class PpobMasterData extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'ppob_master_harga';
+        return 'ppob_master_data';
     }
 
     /**
@@ -47,11 +42,11 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['ID_PRODUK'], 'required'],
+            [['ID_PRODUK', 'TYPE_NM', 'ID_CODE'], 'required'],
             [['NAME', 'KETERANGAN'], 'string'],
-            [['DENOM', 'HARGA_BARU', 'HARGA_DASAR', 'MARGIN_FEE_KG', 'MARGIN_FEE_MEMBER', 'HARGA_JUAL'], 'number'],
-            [['TGL_AKTIF', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
-            [['PERMIT', 'STATUS'], 'integer'],
+            [['DENOM', 'HARGA'], 'number'],
+            [['PERMIT', 'STATUS','HARGA_BARU','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL'], 'integer'],
+            [['CREATE_AT', 'UPDATE_AT'], 'safe'],
             [['ID_PRODUK', 'FUNGSI'], 'string', 'max' => 100],
             [['TYPE_NM', 'KELOMPOK', 'KTG_NM'], 'string', 'max' => 255],
             [['KTG_ID', 'ID_CODE', 'CODE', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
@@ -74,14 +69,9 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
             'CODE' => 'Code',
             'NAME' => 'Name',
             'DENOM' => 'Denom',
-            'HARGA_BARU' => 'Harga  Baru',
-            'TGL_AKTIF' => 'Tgl  Aktif',
-            'HARGA_DASAR' => 'Harga  Dasar',
-            'MARGIN_FEE_KG' => 'Margin  Fee  Kg',
-            'MARGIN_FEE_MEMBER' => 'Margin  Fee  Member',
-            'HARGA_JUAL' => 'Harga  Jual',
-            'PERMIT' => 'Permit',
+            'HARGA' => 'Harga',
             'FUNGSI' => 'Fungsi',
+            'PERMIT' => 'Permit',
             'STATUS' => 'Status',
             'KETERANGAN' => 'Keterangan',
             'CREATE_BY' => 'Create  By',

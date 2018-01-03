@@ -3,14 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
 /* @var $this yii\web\View */
-/* @var $model frontend\backend\ppob\models\PpobMasterHarga */
-
+/* @var $model frontend\backend\ppob\models\PpobMasterData */
 ?>
-<div class="ppob-master-harga-create">
+<div class="ppob-master-data-update">
 
-<div class="ppob-master-harga-form">
+<div class="ppob-master-data-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -32,21 +30,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'DENOM')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'HARGA_BARU')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'TGL_AKTIF')->textInput() ?>
-
-    <?= $form->field($model, 'HARGA_DASAR')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'MARGIN_FEE_KG')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'MARGIN_FEE_MEMBER')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'HARGA_JUAL')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'PERMIT')->textInput() ?>
+    <?= $form->field($model, 'HARGA')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'FUNGSI')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PERMIT')->textInput() ?>
 
     <?= $form->field($model, 'STATUS')->textInput() ?>
 
@@ -67,4 +55,5 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
 </div>

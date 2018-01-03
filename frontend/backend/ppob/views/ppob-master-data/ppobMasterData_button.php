@@ -11,9 +11,9 @@ use yii\base\DynamicModel;
 	*/
 	function tombolCreate(){
 		$title= Yii::t('app','');
-		$url = Url::toRoute(['/ppob/ppob-master-harga/create']);
+		$url = Url::toRoute(['/ppob/ppob-master-data/create']);
 		$options1 = ['value'=>$url,
-					'id'=>'ppobMasterHarga-button-create',
+					'id'=>'ppobmasterdata-button-create',
 					'data-pjax' => false,
 					'class'=>"btn btn-success btn-xs",
 					'title'=>'Tambah'
@@ -35,8 +35,8 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/ppob/ppob-master-harga/view','id'=>$model['ID_PRODUK']]),
-			'id'=>'ppobMasterHarga-button-view',
+			'value'=>url::to(['/ppob/ppob-master-data/view','id'=>$model['ID_PRODUK']]),
+			'id'=>'ppobmasterdata-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
@@ -55,11 +55,11 @@ use yii\base\DynamicModel;
 	 * BUTTON UPDATE
 	*/
 	function tombolUpdate($url, $model){
-		$title1 = Yii::t('app',' Update');
+		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'href'=>url::to(['/ppob/ppob-master-harga/update','id'=>$model['ID_PRODUK']]),
-			'data'=>['confirm'=>'Aksi Update','method'=>'post'],  
-			'class'=>"btn btn-info btn-xs",    
+			'value'=>url::to(['/ppob/ppob-master-data/update','id'=>$model['ID_PRODUK']]),
+			'id'=>'ppobmasterdata-button-update',
+			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
 		$icon1 = '
@@ -70,30 +70,29 @@ use yii\base\DynamicModel;
 		';      
 		$label1 = $icon1 . '  ' . $title1;
 		$content = Html::button($label1,$options1);		
-		// $content = Html::a($label1,$options1);		
-		return $content;
+		return '<li>'.$content.'</li>';
 	}
     
     /*
 	 * BUTTON Hapus
 	*/
-	function tombolUpdateharga($url, $model){
-		$title1 = Yii::t('app',' Update Harga');
+	function tombolDelete($url, $model){
+		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'value'=>url::to(['/ppob/ppob-master-harga/harga','id'=>$model['ID_PRODUK']]),
-			'id'=>'ppobMasterHarga-button-update',
-			'class'=>"btn btn-info btn-xs",    
+			'href'=>url::to(['/ppob/ppob-master-data/delete','id'=>$model['ID_PRODUK']]),
+			'class'=>"btn btn-default btn-xs",
+			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
 		$icon1 = '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle-thin fa-stack-2x " style="color:#FF5F00"></i>
-				<i class="fa fa-edit fa-stack-1x" style="color:black"></i>
+				<i class="fa fa-trash fa-stack-1x" style="color:black"></i>
 			</span>
 		';      
 		$label1 = $icon1 . '  ' . $title1;
 		$content = Html::button($label1,$options1);		
-		return $content;
+		return '<li>'.$content.'</li>';
 	}
 	
 ?>

@@ -3,16 +3,16 @@
 namespace frontend\backend\ppob\controllers;
 
 use Yii;
-use frontend\backend\ppob\models\PpobSaldoStore;
-use frontend\backend\ppob\models\PpobSaldoStoreSearch;
+use frontend\backend\ppob\models\PpobMasterKelompok;
+use frontend\backend\ppob\models\PpobMasterKelompokSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PpobSaldoStoreController implements the CRUD actions for PpobSaldoStore model.
+ * PpobMasterKelompokController implements the CRUD actions for PpobMasterKelompok model.
  */
-class PpobSaldoStoreController extends Controller
+class PpobMasterKelompokController extends Controller
 {
     /**
      * @inheritdoc
@@ -59,12 +59,12 @@ class PpobSaldoStoreController extends Controller
        }
    }
     /**
-     * Lists all PpobSaldoStore models.
+     * Lists all PpobMasterKelompok models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PpobSaldoStoreSearch();
+        $searchModel = new PpobMasterKelompokSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -74,7 +74,7 @@ class PpobSaldoStoreController extends Controller
     }
 
     /**
-     * Displays a single PpobSaldoStore model.
+     * Displays a single PpobMasterKelompok model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -87,13 +87,13 @@ class PpobSaldoStoreController extends Controller
     }
 
     /**
-     * Creates a new PpobSaldoStore model.
+     * Creates a new PpobMasterKelompok model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new PpobSaldoStore();
+        $model = new PpobMasterKelompok();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -105,7 +105,7 @@ class PpobSaldoStoreController extends Controller
     }
 
     /**
-     * Updates an existing PpobSaldoStore model.
+     * Updates an existing PpobMasterKelompok model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -125,7 +125,7 @@ class PpobSaldoStoreController extends Controller
     }
 
     /**
-     * Deletes an existing PpobSaldoStore model.
+     * Deletes an existing PpobMasterKelompok model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -139,15 +139,15 @@ class PpobSaldoStoreController extends Controller
     }
 
     /**
-     * Finds the PpobSaldoStore model based on its primary key value.
+     * Finds the PpobMasterKelompok model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return PpobSaldoStore the loaded model
+     * @return PpobMasterKelompok the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PpobSaldoStore::findOne($id)) !== null) {
+        if (($model = PpobMasterKelompok::findOne($id)) !== null) {
             return $model;
         }
 
