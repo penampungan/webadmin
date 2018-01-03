@@ -141,8 +141,9 @@ class UserKgProfileController extends Controller
      */
     public function actionDelete($ID, $ACCESS_ID, $YEAR_AT, $MONTH_AT)
     {
-        $this->findModel($ID, $ACCESS_ID, $YEAR_AT, $MONTH_AT)->delete();
-
+        $this->findModel($ID, $ACCESS_ID, $YEAR_AT, $MONTH_AT);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

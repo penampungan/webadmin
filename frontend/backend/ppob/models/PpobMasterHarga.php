@@ -7,16 +7,25 @@ use Yii;
 /**
  * This is the model class for table "ppob_master_harga".
  *
- * @property string $ID
- * @property string $DETAIL_ID
- * @property string $KODE
+ * @property string $ID_PRODUK
+ * @property string $TYPE_NM
+ * @property string $KELOMPOK
+ * @property string $KTG_ID
+ * @property string $KTG_NM
+ * @property string $ID_CODE
+ * @property string $CODE
+ * @property string $NAME
+ * @property string $DENOM
+ * @property string $HARGA_BARU
+ * @property string $TGL_AKTIF
+ * @property string $HARGA_DASAR
+ * @property string $MARGIN_FEE_KG
+ * @property string $MARGIN_FEE_MEMBER
+ * @property string $HARGA_JUAL
+ * @property int $PERMIT
+ * @property string $FUNGSI
+ * @property int $STATUS 0=deactife; 1=Active; 2=NewPrice
  * @property string $KETERANGAN
- * @property string $NOMINAL
- * @property string $HARGA1 HARGA B TO B (HPP)
- * @property string $HARGA2 HARGA B TO A (Margin KG)
- * @property string $HARGA3 HARGA B TO C (HARGA PASAR)
- * @property int $STATUS
- * @property string $DCRIP
  * @property string $CREATE_BY
  * @property string $CREATE_AT
  * @property string $UPDATE_BY
@@ -38,14 +47,15 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['DETAIL_ID'], 'required'],
-            [['HARGA1', 'HARGA2', 'HARGA3'], 'number'],
-            [['STATUS'], 'integer'],
-            [['DCRIP'], 'string'],
-            [['CREATE_AT', 'UPDATE_AT'], 'safe'],
-            [['DETAIL_ID'], 'string', 'max' => 8],
-            [['KODE', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
-            [['KETERANGAN', 'NOMINAL'], 'string', 'max' => 100],
+            //[['ID_PRODUK'], 'required'],
+            [['NAME', 'KETERANGAN'], 'string'],
+            [['DENOM', 'HARGA_BARU', 'HARGA_DASAR', 'MARGIN_FEE_KG', 'MARGIN_FEE_MEMBER', 'HARGA_JUAL'], 'number'],
+            [['TGL_AKTIF', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
+            [['PERMIT', 'STATUS'], 'integer'],
+            [['ID_PRODUK', 'FUNGSI'], 'string', 'max' => 100],
+            [['TYPE_NM', 'KELOMPOK', 'KTG_NM'], 'string', 'max' => 255],
+            [['KTG_ID', 'ID_CODE', 'CODE', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
+            [['ID_PRODUK'], 'unique'],
         ];
     }
 
@@ -55,16 +65,25 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID' => 'ID',
-            'DETAIL_ID' => 'Detail  ID',
-            'KODE' => 'Kode',
-            'KETERANGAN' => 'Keterangan',
-            'NOMINAL' => 'Nominal',
-            'HARGA1' => 'Harga1',
-            'HARGA2' => 'Harga2',
-            'HARGA3' => 'Harga3',
+            'ID_PRODUK' => 'Id  Produk',
+            'TYPE_NM' => 'Type  Nm',
+            'KELOMPOK' => 'Kelompok',
+            'KTG_ID' => 'Ktg  ID',
+            'KTG_NM' => 'Ktg  Nm',
+            'ID_CODE' => 'Id  Code',
+            'CODE' => 'Code',
+            'NAME' => 'Name',
+            'DENOM' => 'Denom',
+            'HARGA_BARU' => 'Harga  Baru',
+            'TGL_AKTIF' => 'Tgl  Aktif',
+            'HARGA_DASAR' => 'Harga  Dasar',
+            'MARGIN_FEE_KG' => 'Margin  Fee  Kg',
+            'MARGIN_FEE_MEMBER' => 'Margin  Fee  Member',
+            'HARGA_JUAL' => 'Harga  Jual',
+            'PERMIT' => 'Permit',
+            'FUNGSI' => 'Fungsi',
             'STATUS' => 'Status',
-            'DCRIP' => 'Dcrip',
+            'KETERANGAN' => 'Keterangan',
             'CREATE_BY' => 'Create  By',
             'CREATE_AT' => 'Create  At',
             'UPDATE_BY' => 'Update  By',

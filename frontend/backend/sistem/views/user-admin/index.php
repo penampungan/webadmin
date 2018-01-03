@@ -99,7 +99,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}',
+            'template' => '{view}{edit}{delete}{change}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[
@@ -122,6 +122,9 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 },
                 'delete' =>function($url, $model,$key){
                     return  tombolDelete($url, $model);
+                },
+                'change' =>function($url, $model,$key){
+                    return  tombolChangePassword($url, $model);
                 }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),

@@ -14,23 +14,43 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'DETAIL_ID')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ID_PRODUK')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'KODE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'TYPE_NM')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'KETERANGAN')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'KELOMPOK')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'NOMINAL')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'KTG_ID')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'HARGA1')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'KTG_NM')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'HARGA2')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ID_CODE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'HARGA3')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'CODE')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'NAME')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'DENOM')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'HARGA_BARU')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'TGL_AKTIF')->textInput() ?>
+
+    <?= $form->field($model, 'HARGA_DASAR')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'MARGIN_FEE_KG')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'MARGIN_FEE_MEMBER')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'HARGA_JUAL')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'PERMIT')->textInput() ?>
+
+    <?= $form->field($model, 'FUNGSI')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'STATUS')->textInput() ?>
 
-    <?= $form->field($model, 'DCRIP')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'KETERANGAN')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
 

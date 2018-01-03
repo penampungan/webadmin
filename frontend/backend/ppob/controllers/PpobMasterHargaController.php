@@ -65,10 +65,12 @@ class PpobMasterHargaController extends Controller
     {
         $searchModel = new PpobMasterHargaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProviderUpdate = $searchModel->searchUpdate(Yii::$app->request->queryParams);
+        PpobMasterHargaSearch::updateHargaProduk();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProviderUpdate' => $dataProviderUpdate,
         ]);
     }
 
@@ -95,7 +97,7 @@ class PpobMasterHargaController extends Controller
         $model = new PpobMasterHarga();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect(['view', 'id' => $model->ID_PRODUK]);
         }
 
         return $this->renderAjax('create', [
@@ -112,16 +114,14 @@ class PpobMasterHargaController extends Controller
      */
     public function actionUpdate($id)
     {
+        // $paramCari=Yii::$app->getRequest()->getQueryParam('w2');
+        // print_r($paramCari);die();
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
-        }
-
-        return $this->renderAjax('update', [
-            'model' => $model,
-        ]);
+        $model->HARGA_DASAR=$model->HARGA_BARU;
+        $model->update();
+        return $this->redirect(['index#w2-tab1']);
     }
+
 
     /**
      * Deletes an existing PpobMasterHarga model.
@@ -137,6 +137,27 @@ class PpobMasterHargaController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Deletes an existing PpobMasterHarga model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionHarga($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                return $this->redirect(['index#w2-tab0']);
+            }
+        }else{
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
+    }
     /**
      * Finds the PpobMasterHarga model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
