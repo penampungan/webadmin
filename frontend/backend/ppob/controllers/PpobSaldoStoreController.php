@@ -95,13 +95,15 @@ class PpobSaldoStoreController extends Controller
     {
         $model = new PpobSaldoStore();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
+        }else {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);        
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -115,13 +117,15 @@ class PpobSaldoStoreController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
+        }else {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);        
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -133,8 +137,9 @@ class PpobSaldoStoreController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model=$this->findModel($id);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 

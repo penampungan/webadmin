@@ -12,12 +12,6 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'ID',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
-            'STATUS',
             'PAKAGE',
             'PAKAGE_PARENT',
             'PAKAGE_NM',
@@ -26,6 +20,7 @@ use yii\widgets\DetailView;
             'AFILIASI_KODE',
             'AFILIASI_BONUS',
             'PAKAGE_PRICE',
+            'STATUS',
         ],
     ]) ?>
 

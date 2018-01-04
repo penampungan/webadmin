@@ -12,13 +12,17 @@ use frontend\backend\ppob\models\PpobMasterHarga;
  */
 class PpobMasterHargaSearch extends PpobMasterHarga
 {
+    public $typeNm;
+    public $klp;
+    public $ktgNm;
+    public $cde;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['ID_PRODUK', 'TYPE_NM', 'KELOMPOK', 'KTG_ID', 'KTG_NM', 'ID_CODE', 'CODE', 'NAME', 'TGL_AKTIF', 'FUNGSI', 'KETERANGAN', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT'], 'safe'],
+            [['ID_PRODUK', 'TYPE_NM','klp', 'KELOMPOK', 'KTG_ID', 'ktgNm','KTG_NM','typeNm','ID_CODE','cde', 'CODE', 'NAME', 'TGL_AKTIF', 'FUNGSI', 'KETERANGAN', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT'], 'safe'],
             [['DENOM', 'HARGA_BARU', 'HARGA_DASAR', 'MARGIN_FEE_KG', 'MARGIN_FEE_MEMBER', 'HARGA_JUAL'], 'number'],
             [['PERMIT', 'STATUS'], 'integer'],
         ];
@@ -75,7 +79,7 @@ class PpobMasterHargaSearch extends PpobMasterHarga
 
         $query->andFilterWhere(['like', 'ID_PRODUK', $this->ID_PRODUK])
             ->andFilterWhere(['like', 'TYPE_NM', $this->TYPE_NM])
-            ->andFilterWhere(['like', 'KELOMPOK', $this->KELOMPOK])
+            ->andFilterWhere(['like', 'KELOMPOK', $this->klp])
             ->andFilterWhere(['like', 'KTG_ID', $this->KTG_ID])
             ->andFilterWhere(['like', 'KTG_NM', $this->KTG_NM])
             ->andFilterWhere(['like', 'ID_CODE', $this->ID_CODE])
@@ -130,12 +134,12 @@ class PpobMasterHargaSearch extends PpobMasterHarga
         ]);
 
         $query->andFilterWhere(['like', 'ID_PRODUK', $this->ID_PRODUK])
-            ->andFilterWhere(['like', 'TYPE_NM', $this->TYPE_NM])
+            ->andFilterWhere(['like', 'TYPE_NM', $this->typeNm])
             ->andFilterWhere(['like', 'KELOMPOK', $this->KELOMPOK])
             ->andFilterWhere(['like', 'KTG_ID', $this->KTG_ID])
-            ->andFilterWhere(['like', 'KTG_NM', $this->KTG_NM])
+            ->andFilterWhere(['like', 'KTG_NM', $this->ktgNm])
             ->andFilterWhere(['like', 'ID_CODE', $this->ID_CODE])
-            ->andFilterWhere(['like', 'CODE', $this->CODE])
+            ->andFilterWhere(['like', 'CODE', $this->cde])
             ->andFilterWhere(['like', 'NAME', $this->NAME])
             ->andFilterWhere(['like', 'FUNGSI', $this->FUNGSI])
             ->andFilterWhere(['like', 'KETERANGAN', $this->KETERANGAN])

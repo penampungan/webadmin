@@ -25,10 +25,6 @@ use yii\widgets\DetailView;
             'BTN_SIGN3',
             'BTN_SIGN4',
             'BTN_SIGN5',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
         ],
     ]) ?>
 

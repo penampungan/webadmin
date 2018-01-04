@@ -33,6 +33,7 @@ use Yii;
  */
 class PpobMasterHarga extends \yii\db\ActiveRecord
 {
+    //public $TYPE_NM1;
     /**
      * @inheritdoc
      */
@@ -53,8 +54,8 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
             [['TGL_AKTIF', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
             [['PERMIT', 'STATUS'], 'integer'],
             [['ID_PRODUK', 'FUNGSI'], 'string', 'max' => 100],
-            [['TYPE_NM', 'KELOMPOK', 'KTG_NM'], 'string', 'max' => 255],
-            [['KTG_ID', 'ID_CODE', 'CODE', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
+            [['TYPE_NM', 'KELOMPOK','klp', 'KTG_NM','ktgNm'], 'string', 'max' => 255],
+            [['KTG_ID','typeNm', 'ID_CODE','cde', 'CODE', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
             [['ID_PRODUK'], 'unique'],
         ];
     }
@@ -89,5 +90,18 @@ class PpobMasterHarga extends \yii\db\ActiveRecord
             'UPDATE_BY' => 'Update  By',
             'UPDATE_AT' => 'Update  At',
         ];
+    }
+
+    public function getTypeNm(){
+        return $this->TYPE_NM;
+    }
+    public function getKlp(){
+        return $this->KELOMPOK;
+    }
+    public function getKtgNm(){
+        return $this->KTG_NM;
+    }
+    public function getCde(){
+        return $this->CODE;
     }
 }

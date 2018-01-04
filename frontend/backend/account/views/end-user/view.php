@@ -15,16 +15,10 @@ use yii\widgets\DetailView;
             'ACCESS_GROUP',
             'STORE_ID',
             'NAME',
-            'EMAIL:email',
+            'EMAIL',
             'PHONE',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
             'STATUS',
             'DCRP_DETIL:ntext',
-            'YEAR_AT',
-            'MONTH_AT',
         ],
     ]) ?>
 

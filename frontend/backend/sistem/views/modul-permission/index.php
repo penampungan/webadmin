@@ -70,6 +70,50 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 //'hidden'=>false,
                 'noWrap'=>true,	
                 'format'=>$value[$key]['ATR_FORMAT'],
+                'value'=>function($data)use($value,$key){
+                    $val=$value[$key]['ATR_FIELD'];	
+                    $splt=explode('_',$val);
+                    if($splt[0]=='SISA'){					
+                        return 'Kode USer Unix :  '.$data[$val];		 	 //USE ArrayData
+                    }elseif($val=='USER_UNIX'){
+                        return 'Kode USer Unix :  '.$data->{'USER_UNIX'};		 //USE ActiveData	
+                    }elseif($val=='STATUS'){
+                        if ($data->STATUS == 0) {
+                          return Html::a('
+                            <span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'KELUAR']);
+                        }else if ($data->STATUS == 1) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                            </span>','',['title'=>'AKTIF']);
+                        }
+                    }elseif($val=='BTN_VIEW'){
+                        if ($data->STATUS == 0) {
+                          return Html::a('
+                            <span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'KELUAR']);
+                        }else if ($data->STATUS == 1) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                            </span>','',['title'=>'AKTIF']);
+                        }
+                    }else{						
+                        if($data->{$val}){					
+                            //return $data->{$val};			//USE ActiveData					
+                            //return $data->NAMA_DPN;		//USE ActiveData					
+                            //return $data['NAMA_DPN'];		//USE ArrayData
+                            return  $data->{$val};			//USE ArrayData
+                        }else{
+                            return '';
+                        }						
+                    }		
+                },
                 'headerOptions'=>[		
                     'style'=>[		
                         'width'=>$value[$key]['H_WIDTH'],

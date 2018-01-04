@@ -68,6 +68,37 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'hAlign'=>$value[$key]['H_VALIGN'],
                 'vAlign'=>$value[$key]['V_VALIGN'],
                 //'hidden'=>false,
+                'value'=>function($data)use($value,$key){
+                    $val=$value[$key]['ATR_FIELD'];	
+                    if($val=='STATUS'){
+                        if ($data->STATUS == 0) {
+                          return Html::a('
+                            <span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'KELUAR']);
+                        }else if ($data->STATUS == 1) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                            </span>','',['title'=>'AKTIF']);
+                        }else if ($data->STATUS == 2) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x" style="color:#0f39ab"></i>
+                                <i class="fa fa-usd fa-stack-1x" style="color:#25ca4f"></i>
+                              </span>','',['title'=>'New Price']);
+                          }
+                    }else{						
+                        if($data->{$val}){					
+                            //return $data->{$val};			//USE ActiveData					
+                            //return $data->NAMA_DPN;		//USE ActiveData					
+                            //return $data['NAMA_DPN'];		//USE ArrayData
+                            return  $data->{$val};			//USE ArrayData
+                        }else{
+                            return  $data->{$val};
+                        }						
+                    }		
+                },
                 'noWrap'=>true,	
                 'format'=>$value[$key]['ATR_FORMAT'],
                 'headerOptions'=>[		

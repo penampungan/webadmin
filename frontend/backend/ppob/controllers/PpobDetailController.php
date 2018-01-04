@@ -97,13 +97,16 @@ class PpobDetailController extends Controller
     {
         $model = new PpobDetail();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
+        }else {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);        
         }
 
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -120,13 +123,15 @@ class PpobDetailController extends Controller
     {
         $model = $this->findModel($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'ID' => $model->ID, 'DETAIL_ID' => $model->DETAIL_ID, 'HEADER_ID' => $model->HEADER_ID, 'PROVIDER_ID' => $model->PROVIDER_ID]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
+        }else {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);   
         }
-
-        return $this->renderAjax('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -141,8 +146,9 @@ class PpobDetailController extends Controller
      */
     public function actionDelete($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)
     {
-        $this->findModel($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID)->delete();
-
+        $model=$this->findModel($ID, $DETAIL_ID, $HEADER_ID, $PROVIDER_ID);
+        $model->STATUS ="3";
+        $model->update();
         return $this->redirect(['index']);
     }
 
