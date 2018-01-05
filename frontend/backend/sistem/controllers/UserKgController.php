@@ -63,12 +63,15 @@ class UserKgController extends Controller
      */
     public function actionIndex()
     {
+        $model = new UserKg();
         $searchModel = new UserKgSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $dataProvider = $searchModel->searchOwner(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,            
+            'model'=>$model
         ]);
     }
 
