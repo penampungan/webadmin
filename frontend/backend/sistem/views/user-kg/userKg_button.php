@@ -115,4 +115,17 @@ use yii\base\DynamicModel;
 		$content = Html::button($label1,$options1);		
 		return '<li>'.$content.'</li>';
 	}
+	
+	function tombolExpadDetail($url){
+		$title = Yii::t('app', 'Detail');
+		$url =  Url::toRoute([$url]);
+		$options = ['id'=>'store-id-expand',
+				  'data-pjax' => 0,
+				  'class'=>"btn btn-default btn-xs",
+				];
+		$icon = '<span class="fa fa-eye fa-lg"></span>';
+		$label = $icon . ' ' . $title;
+
+		return $content = Html::a($label,$url,$options);
+	}
 ?>

@@ -92,4 +92,27 @@ class UserKgSearch extends UserKg
 
         return $dataProvider;
     }
+    public function searchOwner($params)
+    {
+        $query = UserKg::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'ACCESS_LEVEL', 'OWNER']);
+
+        return $dataProvider;
+    }
 }
