@@ -11,15 +11,10 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'username',
-            'auth_key',
             'password_hash',
-            'password_reset_token',
-            'email:email',
+            'email',
             'status',
-            'created_at',
-            'updated_at',
             'EMP_ID',
             'avatar:ntext',
             'TEMPLATE',

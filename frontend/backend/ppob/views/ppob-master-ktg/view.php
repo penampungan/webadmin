@@ -20,10 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'KELOMPOK',
             'STATUS',
             'KETERANGAN:ntext',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
         ],
     ]) ?>
 

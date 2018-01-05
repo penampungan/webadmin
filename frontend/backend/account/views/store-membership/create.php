@@ -14,16 +14,6 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'CREATE_AT')->textInput() ?>
-
-<?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'UPDATE_AT')->textInput() ?>
-
-<?= $form->field($model, 'STATUS')->textInput() ?>
-
 <?= $form->field($model, 'ACCESS_GROUP')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'STORE_ID')->textInput(['maxlength' => true]) ?>

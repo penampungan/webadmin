@@ -10,7 +10,6 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'ID',
             'ACCESS_ID',
             'NM_DEPAN',
             'NM_TENGAH',
@@ -21,15 +20,8 @@ use yii\widgets\DetailView;
             'LAHIR_TGL',
             'LAHIR_GENDER',
             'HP',
-            'EMAIL:email',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
-            'STATUS',
+            'EMAIL',
             'DCRP_DETIL:ntext',
-            'YEAR_AT',
-            'MONTH_AT',
         ],
     ]) ?>
 

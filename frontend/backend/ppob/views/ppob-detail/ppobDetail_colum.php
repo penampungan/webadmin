@@ -25,23 +25,13 @@ function ppobDetailAryColumn(){
 	$C_FONT_COLOR1='black';
 	$C_FONT_COLOR2='red';
 	$C_BG_COLOR1=false;
-	
+	$aryStt= [
+		['STATUS' => 0, 'STT_NM' => 'Deactife'],		  
+		['STATUS' => 1, 'STT_NM' => 'Active'],
+	  ];	
 	$aryFieldColomn[]=[
 	'ID' =>0, 'ATTR' =>[
-		'ATR_FIELD'=>'ID','ATR_LABEL'=>'Kode Unit','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
-		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
-		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
-		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
-		// PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-']	
-		// 'FILTER_OPTION'=>[],
-		]
-	];	  
-	$aryFieldColomn[]=[
-	'ID' =>1, 'ATTR' =>[
-		'ATR_FIELD'=>'DETAIL_ID','ATR_LABEL'=>'Unit Group','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+		'ATR_FIELD'=>'DETAIL_ID','ATR_LABEL'=>'Detail ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
@@ -54,8 +44,8 @@ function ppobDetailAryColumn(){
 	];	
 	//--NAMA---
 	$aryFieldColomn[]=[
-	'ID' =>2, 'ATTR' =>[
-		'ATR_FIELD'=>'HEADER_ID','ATR_LABEL'=>'Nama Unit','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+	'ID' =>1, 'ATTR' =>[
+		'ATR_FIELD'=>'HEADER_ID','ATR_LABEL'=>'Header ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
@@ -70,8 +60,8 @@ function ppobDetailAryColumn(){
 	];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-	'ID' =>3, 'ATTR' =>[
-		'ATR_FIELD'=>'PROVIDER_ID','ATR_LABEL'=>'Status','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+	'ID' =>2, 'ATTR' =>[
+		'ATR_FIELD'=>'PROVIDER_ID','ATR_LABEL'=>'Provider ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
@@ -85,7 +75,7 @@ function ppobDetailAryColumn(){
 	//--NAMA---	
 	$aryFieldColomn[]=[
 		'ID' =>3, 'ATTR' =>[
-			'ATR_FIELD'=>'DETAIL_NM','ATR_LABEL'=>'Detail DCRP','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+			'ATR_FIELD'=>'DETAIL_NM','ATR_LABEL'=>'Detail Nama','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 			'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
@@ -96,6 +86,33 @@ function ppobDetailAryColumn(){
 			// 'FILTER_OPTION'=>[],
 			]
 		];
+		
+	$aryFieldColomn[]=[
+		'ID' =>4, 'ATTR' =>[
+			'ATR_FIELD'=>'DETAIL_DCRP','ATR_LABEL'=>'Detail Nama','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+			'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+			//PENGUNAAN FILTER 
+			// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+			// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+			// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+			// 'FILTER_OPTION'=>[],
+			]
+		];
+		$aryFieldColomn[]=[
+			'ID' =>5, 'ATTR' =>[
+				'ATR_FIELD'=>'STATUS','ATR_LABEL'=>'STATUS','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+				'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+				'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+				'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+				//PENGUNAAN FILTER 
+				'FILTER'=>ArrayHelper::map($aryStt, 'STATUS', 'STT_NM'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+				'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+				'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+				'FILTER_OPTION'=>[],
+				]
+			];
 	$valFields = ArrayHelper::map($aryFieldColomn, 'ID', 'ATTR');	
 	return $valFields;
 };

@@ -13,16 +13,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
-
-    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
-
-    <?= $form->field($model, 'STATUS')->textInput() ?>
-
     <?= $form->field($model, 'PAKAGE')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'PAKAGE_PARENT')->textInput(['maxlength' => true]) ?>

@@ -100,7 +100,7 @@ use yii\base\DynamicModel;
 	function tombolChangePassword($url, $model){
 		$title1 = Yii::t('app',' Change Password');
 		$options1 = [
-			'href'=>url::to(['/sistem/user-kg/delete','id'=>$model['id']]),
+			'href'=>url::to(['/sistem/user-kg/password','id'=>$model['id']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],

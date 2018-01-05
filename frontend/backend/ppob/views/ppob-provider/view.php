@@ -18,10 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'PROVIDER_NM',
             'PROVIDER_DCRP:ntext',
             'STATUS',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
         ],
     ]) ?>
 
