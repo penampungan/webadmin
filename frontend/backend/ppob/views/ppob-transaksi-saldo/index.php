@@ -31,15 +31,15 @@ $this->registerCss("
 	#gv-data-transaksi-saldo .kv-grid-container{
 			height:400px
         }
-    #w9 :link {
+    #w7 :link {
         color: black;
     }
     /* mouse over link */
-    #w9-container a:hover {
+    #w7-container a:hover {
         color: #5a96e7;
     }
     /* selected link */
-    #w9-container a:active {
+    #w7-container a:active {
         color: blue;
     }
 ");

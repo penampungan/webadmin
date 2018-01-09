@@ -250,10 +250,10 @@ function ppobtransaksisaldoAryColumn(){
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 			'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
 			//PENGUNAAN FILTER 
-			'FILTER'=>ArrayHelper::map($aryStt, 'STATUS_NM', 'STT_NM'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-			'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-			'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
-			'FILTER_OPTION'=>[],
+			// 'FILTER'=>ArrayHelper::map($aryStt, 'STATUS_NM', 'STT_NM'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+			// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+			// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+			// 'FILTER_OPTION'=>[],
 			]
 		];
 	$valFields = ArrayHelper::map($aryFieldColomn, 'ID', 'ATTR');	

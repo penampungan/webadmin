@@ -8,6 +8,7 @@ use frontend\backend\ppob\models\PpobTransaksiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use ptrnov\postman4excel\Postman4ExcelBehavior;
 
 /**
  * PpobTransaksiController implements the CRUD actions for PpobTransaksi model.
@@ -20,6 +21,12 @@ class PpobTransaksiController extends Controller
     public function behaviors()
     {
         return [
+            'export4excel' => [
+				'class' => Postman4ExcelBehavior::className(),
+				//'downloadPath'=>Yii::getAlias('@lukisongroup').'/cronjob/',
+				//'downloadPath'=>'/var/www/backup/ExternalData/',
+				'widgetType'=>'download',
+			], 
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -64,11 +71,19 @@ class PpobTransaksiController extends Controller
     public function actionIndex()
     {
         $searchModel = new PpobTransaksiSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderAll = $searchModel->searchAll(Yii::$app->request->queryParams);
+        $dataProviderFirst = $searchModel->searchFirst(Yii::$app->request->queryParams);
+        $dataProviderPending = $searchModel->searchPending(Yii::$app->request->queryParams);
+        $dataProviderSuccess = $searchModel->searchSuccess(Yii::$app->request->queryParams);
+        $dataProviderGagal = $searchModel->searchGagal(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProviderAll' => $dataProviderAll,
+            'dataProviderFirst' => $dataProviderFirst,
+            'dataProviderPending' => $dataProviderPending,
+            'dataProviderSuccess' => $dataProviderSuccess,
+            'dataProviderGagal' => $dataProviderGagal,
         ]);
     }
 
@@ -142,6 +157,21 @@ class PpobTransaksiController extends Controller
         return $this->redirect(['index']);
     }
 
+  
+    public function actionUploadFile(){
+		$model = new \yii\base\DynamicModel([
+			'uploadExport'
+		]);		
+		$model->addRule(['uploadExport'], 'required')
+         ->addRule(['uploadExport'], 'safe');
+		 
+		if (!$model->load(Yii::$app->request->post())) {
+			return $this->renderAjax('form_upload',[
+				'model' => $model
+			]);
+		}
+	}
+	
     /**
      * Finds the PpobTransaksi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -156,5 +186,64 @@ class PpobTransaksiController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionExportFile(){
+        // $aryPaid=[
+		// 	['TERMINAL_ID'=>'01234567890','FINGER_ID'=>'321','KARYAWAN'=>'Piter','TGL_IN'=>'2017-09-05','TGL_OUT'=>'2017-09-05','JAM_IN'=>'08:00:00','JAM_OUT'=>'17:00:00'],
+		// 	['TERMINAL_ID'=>'112312312312','FINGER_ID'=>'321','KARYAWAN'=>'Piter','TGL_IN'=>'2017-09-05','TGL_OUT'=>'2017-09-06','JAM_IN'=>'08:00:00','JAM_OUT'=>'02:00:00'],
+		// ];
+		// $modelPrd=AbsenImportPeriode::find()->where(['TIPE'=>'1','AKTIF'=>'1'])->one();
+		// $closingParam=['tglStart'=>$modelPrd->TGL_START,'tglEnd'=>$modelPrd->TGL_END];
+		// $searchModelDetail = new AbsenPayrollPaidSearch();
+		// $dataProviderDetail=$searchModelDetail->searchExcelExportPaid(Yii::$app->request->queryParams);
+        // $aryPaid=$dataProviderDetail->getModels();	
+    
+		$searchModel = new PpobTransaksiSearch();
+		$dataProvider=$searchModel->searchExcelExport(Yii::$app->request->queryParams);
+		$aryPaid=$dataProvider->allModels;	
+		//  print_r($aryPaid);die();
+		$excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid);
+        $excel_titlePaid = $excel_dataPaid['excel_title'];
+        $excel_ceilsPaid = $excel_dataPaid['excel_ceils'];
+		$excel_content = [
+			 [
+				'sheet_name' => 'Payroll-Paid-Data',
+                'sheet_title' => [
+					['TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK']
+				],
+			    'ceils' => $excel_ceilsPaid,
+                'freezePane' => 'A2',
+                'columnGroup'=>false,
+                'autoSize'=>false,
+                'headerColor' => Postman4ExcelBehavior::getCssClass("header"),
+                'headerStyle'=>[					
+					[
+						'TRANS_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'TRANS_DATE' =>['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'TGL' => ['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'JAM' => ['font-size'=>'8','width'=>'15','valign'=>'center','align'=>'center'],
+						'ACCESS_GROUP' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','width'=>'10','valign'=>'center','align'=>'center']
+					]						
+				],
+				'contentStyle'=>[
+					[						
+						'TRANS_ID' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TRANS_DATE' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TGL' => ['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'JAM' => ['font-size'=>'8','valign'=>'center','align'=>'right'],
+						'ACCESS_GROUP' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','valign'=>'center','align'=>'center']
+					]
+				],
+               'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
+               'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
+			]
+		];
+		$excel_file = "Payroll-Paid-Data";
+		$this->export4excel($excel_content, $excel_file,0);
     }
 }
