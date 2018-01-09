@@ -69,6 +69,7 @@ class IndustriController extends Controller
         $dataProviderGroup  = $searchModelGroup->search(Yii::$app->request->queryParams);
 
         $paramCari=Yii::$app->getRequest()->getQueryParam('industri');
+        // print_r($paramCari);die();
         if ($paramCari==''){
             $modelGrp =IndustriGroup::find()->orderBy(['INDUSTRY_GRP_ID'=>SORT_ASC])->one();
             $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$modelGrp->INDUSTRY_GRP_ID]);

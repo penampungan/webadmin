@@ -114,13 +114,15 @@ class UserAdminController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save(false)) {
+            return $this->redirect(['index']);
+            }
+        }else {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);   
         }
-
-        return $this->renderAjax('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -137,7 +139,27 @@ class UserAdminController extends Controller
         $model->update();
         return $this->redirect(['index']);
     }
+    /**
+     * ChangePassword an existing UserAdmin model.
+     * If changePassword is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionChange($id)
+    {
+        $model = $this->findModel($id);
+// print_r($model);die();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->Password = $model->newPassword;
+            $model->save(false);
+        return $this->redirect(['index']);
+        }
 
+        return $this->renderAjax('change', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Finds the UserAdmin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

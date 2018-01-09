@@ -1,177 +1,176 @@
 <?php
-use yii\helpers\Html;
-use kartik\widgets\Select2;
-use kartik\grid\GridView;
-use yii\helpers\ArrayHelper;
-use yii\widgets\Breadcrumbs;
-use kartik\widgets\Spinner;
-use yii\bootstrap\Modal;
+use kartik\helpers\Html;
+use kartik\detail\DetailView;
+use kartik\widgets\DepDrop;
 use yii\helpers\Url;
+use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
 use kartik\widgets\FileInput;
-use yii\helpers\Json;
-use yii\web\Response;
-use yii\widgets\Pjax;
+use kartik\widgets\ActiveField;
 use kartik\widgets\ActiveForm;
-use kartik\tabs\TabsX;
-use kartik\date\DatePicker;
-use yii\web\View;
-
-$this->registerCss("
-	:link {
-		color: #fdfdfd;
-	}
-	/* mouse over link */
-	a:hover {
-		color: #5a96e7;
-	}
-	/* selected link */
-	a:active {
-		color: blue;
-	}
-	#gv-data-industri .kv-grid-container{
-			height:400px
+// print_r($modelUser);
+// die();
+	//Difinition Status.
+	/* $aryStt= [
+	  ['STATUS' => 0, 'STT_NM' => 'Trial'],		  
+	  ['STATUS' => 1, 'STT_NM' => 'Active'],
+	  ['STATUS' => 2, 'STT_NM' => 'Deactive'],
+	  ['STATUS' => 3, 'STT_NM' => 'Deleted'],
+	];
+	$valStt = ArrayHelper::map($aryStt, 'STATUS', 'STT_NM');
+	 */
+	//Result Status value.
+	/* function sttMsg($stt){
+		if($stt==0){ //TRIAL
+			 return Html::decode('<span class="fa-stack fa-xl">
+					  <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+					  <i class="fa fa-check fa-stack-1x" style="color:#ee0b0b"></i>
+					</span> Trial','',['title'=>'Trial']);
+		}elseif($stt==1){
+			 return Html::decode('<span class="fa-stack fa-xl">
+					  <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+					  <i class="fa fa-check fa-stack-1x" style="color:#05944d"></i>
+					</span> Active','',['title'=>'Active']);
+		}elseif($stt==2){
+			return Html::decode('<span class="fa-stack fa-xl">
+					  <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+					  <i class="fa fa-remove fa-stack-1x" style="color:#01190d"></i>
+					</span> Deactive','',['title'=>'Deactive']);
+		}elseif($stt==3){
+			return Html::decode('<span class="fa-stack fa-xl">
+					  <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+					  <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+					</span> Delete','',['title'=>'Delete']);
 		}
-");
-
-$this->registerJs($this->render('userKg_script.js'),View::POS_READY);
-echo $this->render('userKg_button'); //echo difinition
-echo $this->render('userKg_modal'); //echo difinition
-echo $this->render('userKg_colum'); //echo difinition
-$this->title = 'Member User';
-
-$bColor='rgb(51, 102, 153)';
-$pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-user fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Member User</b></div>';
+	};	 */
 	
-        $attDinamikField=[
-            [
-                'class'=>'kartik\grid\SerialColumn',
-                'contentOptions'=>['class'=>'kartik-sheet-style'],
-                'width'=>'10px',
-                'header'=>'No.',
-                'headerOptions'=>Yii::$app->gv->gvContainHeader('center','5px',$bColor,'#ffffff'),
-                'contentOptions'=>Yii::$app->gv->gvContainBody('center','5px',''),
-            ],
-        ];
-        
-        foreach(userKgAryColumn() as $key =>$value[]){			
-            $attDinamikField[]=[
-                'attribute'=>$value[$key]['ATR_FIELD'],
-                'label'=>$value[$key]['ATR_LABEL'],
-                'filter'=>$value[$key]['FILTER'],
-                'filterType'=>$value[$key]['FILTER_TYPE'],
-                'filterWidgetOptions'=>$value[$key]['FILTER_WIDGET_OPTION'],	
-                'filterInputOptions'=>$value[$key]['FILTER_INPUT_OPTION'],
-                'filterOptions'=>$value[$key]['FILTER_OPTION'],
-                'mergeHeader'=>$value[$key]['ATR_HEADER_MERGE'],
-                'hAlign'=>$value[$key]['H_VALIGN'],
-                'vAlign'=>$value[$key]['V_VALIGN'],
-                //'hidden'=>false,
-                'noWrap'=>true,	
-                'format'=>$value[$key]['ATR_FORMAT'],
-                'headerOptions'=>[		
-                    'style'=>[		
-                        'width'=>$value[$key]['H_WIDTH'],
-                        'text-align'=>$value[$key]['H_ALIGN'],				
-                        'font-size'=>$value[$key]['H_FONT_SIZE'],				
-                        'color'=>$value[$key]['H_FONT_COLOR'],
-                        'background-color'=>$value[$key]['H_BG_COLOR'],
-                        'font-family'=>'tahoma, arial, sans-serif',	
-                        'font-weight'=>'bold',	
-                    ]
-                ],
-                'contentOptions'=>[
-                    'style'=>[
-                        'font-size'=>$value[$key]['C_FONT_SIZE'],
-                        'text-align'=>$value[$key]['C_ALIGN'],
-                        'color'=>$value[$key]['C_FONT_COLOR'],
-                        'background-color'=>$value[$key]['C_BG_COLOR'],
-                        'font-family'=>'tahoma, arial, sans-serif',						
-                        'font-weight'=>$value[$key]['C_FONT_BOLD'],
-                    ]
-                ],				
-                'group'=>$value[$key]['ATR_GROUP'],
-                'groupedRow'=>$value[$key]['ATR_GROUPROW'],	
-            ];
-        };
-        
-        $attDinamikField[]=[			
-            //ACTION
-            'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}{change}',
-            'header'=>'ACTION',
-            'dropdown' => true,
-            'dropdownOptions'=>[
-                'class'=>'pull-right dropdown',
-                'style'=>'width:100%;background-color:#E6E6FA'				
-            ],
-            'dropdownButton'=>[
-                'label'=>'ACTION',
-                'class'=>'btn btn-info btn-xs',
-                'style'=>'width:100%'		
-            ],
-            'buttons' => [
-                'view' =>function ($url, $model){
-                    return  tombolView($url, $model);
-                },
-                'edit' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdate($url, $model);
-                    //}					
-                },
-                'delete' =>function($url, $model,$key){
-                    return  tombolDelete($url, $model);
-                },
-                'change' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolChangePassword($url, $model);
-                    //}					
-                }
-            ],
-            'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
-            'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
-        ]; 
-    
-    $gvuserKg=GridView::widget([
-        'id'=>'gv-data-industri',
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
-        'pjax'=>true,
-        'pjaxSettings'=>[
-            'options'=>[
-                'enablePushState'=>false,
-                'id'=>'gv-data-industri',
-            ],						  
+	$attSroreData=[	
+		[
+			'attribute' =>'username',
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+    	],
+		[
+			'attribute' =>'email',
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+    	],
+		
+		[		
+			'attribute' =>'ACCESS_ID',			
+    		'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
         ],
-        'hover'=>true, //cursor select
-        'responsive'=>true,
-        'responsiveWrap'=>true,
-        'bordered'=>true,
-        'striped'=>true,
-        'autoXlFormat'=>true,
-        'export' => false,
-        'panel'=>[''],
-        'toolbar' => false,
-        'panel' => [
-            //'heading'=>false,
-            //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'./*tombolCreate().*/'</div>',  
-            'type'=>'info',
-            //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
-            'before'=>false,
-            'showFooter'=>false,
-        ],
-        'floatOverflowContainer'=>true,
-        'floatHeader'=>true,
-    ]); 	
+		[	
+            'attribute' =>'ACCESS_GROUP',
+            'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],[
+			'attribute' =>'ACCESS_LEVEL',
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+        ]		
+	];
+	
+	$attSroreInfo=[
+		[
+            'attribute' =>'Nama Lengkap',
+            'value'=>$modelUser->profile->NM_DEPAN.' '.$modelUser->profile->NM_TENGAH.' '.$modelUser->profile->NM_BELAKANG,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+		[
+            'attribute' =>'Nomer KTP',
+			'value'=>$modelUser->profile->KTP,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+		[
+            'attribute' =>'Alamat',
+			'value'=>$modelUser->profile->ALMAT,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+		[
+            'attribute' =>'Tempat/Tanggal Lahir',
+			'value'=>$modelUser->profile->LAHIR_TEMPAT.'/'.$modelUser->profile->LAHIR_TGL,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+		[
+            'attribute' =>'Jenis Kelamin',
+			'value'=>$modelUser->profile->LAHIR_GENDER,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+		[
+            'attribute' =>'Nomer Handphone',
+			'value'=>$modelUser->profile->HP,
+			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+			'displayOnly'=>true,	
+			'format'=>'raw', 
+		],
+	];
+		
+	
+	
+	$dvStoreData=DetailView::widget([
+		'id'=>'dv-store-data',
+		'model' => $modelUser,
+		'attributes'=>$attSroreData,
+		'condensed'=>true,
+		'hover'=>true,
+		'panel'=>[
+			'heading'=>'<b>User Data </b>',
+			'type'=>DetailView::TYPE_DEFAULT,
+		],
+		'mode'=>DetailView::MODE_VIEW,
+		//'buttons1'=>'{update}',
+		'buttons1'=>'',
+		'buttons2'=>'{view}{save}',		
+		/* 'saveOptions'=>[ 
+			'id' =>'editBtn1',
+			'value'=>'/marketing/sales-promo/review?id='.$model->ID,
+			'params' => ['custom_param' => true],
+		],	 */	
+	]);
+	
+	$dvStoreInfo=DetailView::widget([
+		'id'=>'dv-store-info',
+		'model' => $modelUser,
+		'attributes'=>$attSroreInfo,
+		'condensed'=>true,
+		'hover'=>true,
+		'panel'=>[
+			'heading'=>'<b>User Info</b>',
+			'type'=>DetailView::TYPE_DEFAULT,
+		],
+		'mode'=>DetailView::MODE_VIEW,
+		'buttons1'=>'',
+		'buttons2'=>'{view}{save}'
+	]);
+	
+	
+	
 ?>
-
-<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
-			<?=$gvuserKg?>
+<div style="height:100%;font-family: verdana, arial, sans-serif ;font-size: 8pt">
+	<div class="row" >
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<?=$dvStoreData ?>		
+		</div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<?=$dvStoreInfo ?>			
 		</div>
 	</div>
 </div>
+

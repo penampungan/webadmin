@@ -29,18 +29,61 @@ class PpobTransaksiSaldoController extends Controller
         ];
     }
 
+	public function beforeAction($action){
+        $modulIndentify=4; //OUTLET
+       // Check only when the user is logged in.
+       // Author piter Novian [ptr.nov@gmail.com].
+       if (!Yii::$app->user->isGuest){
+           if (Yii::$app->session['userSessionTimeout']< time() ) {
+               // timeout
+               Yii::$app->user->logout();
+               return $this->goHome(); 
+           } else {	
+               //add Session.
+               Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+               //check validation [access/url].
+               $checkAccess=Yii::$app->getUserOpt->UserMenuPermission($modulIndentify);
+               if($checkAccess['modulMenu']['MODUL_STS']==0 OR $checkAccess['ModulPermission']['STATUS']==0){				
+                   $this->redirect(array('/site/alert'));
+               }else{
+                   if($checkAccess['PageViewUrl']==true){						
+                       return true;
+                   }else{
+                       $this->redirect(array('/site/alert'));
+                   }					
+               }			 
+           }
+       }else{
+           Yii::$app->user->logout();
+           return $this->goHome(); 
+       }
+   }
     /**
      * Lists all PpobTransaksiSaldo models.
      * @return mixed
      */
     public function actionIndex()
     {
+        $paramCari=Yii::$app->getRequest()->getQueryParam('industri');
+        
         $searchModel = new PpobTransaksiSaldoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider = $searchModel->searchTrans(Yii::$app->request->queryParams);
+        $dataProviderPaid = $searchModel->searchPaid(Yii::$app->request->queryParams);
+        $dataProviderMutasi = $searchModel->searchMutasi(Yii::$app->request->queryParams);
+        $dataProviderExpired = $searchModel->searchExpired(Yii::$app->request->queryParams);
+        $dataProviderAmbil = $searchModel->searchAmbil(Yii::$app->request->queryParams);
+        $dataProviderHistory = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>'171123091625.0001.180105232829'])->one();
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'dataProviderPaid' => $dataProviderPaid,
+            'dataProviderMutasi' => $dataProviderMutasi,
+            'dataProviderExpired' => $dataProviderExpired,
+            'dataProviderAmbil' => $dataProviderAmbil,
             'dataProvider' => $dataProvider,
+            'dataProviderHistory' => $dataProviderHistory,
+            'dataProviderDetail' => $dataProviderDetail,
         ]);
     }
 
@@ -54,7 +97,7 @@ class PpobTransaksiSaldoController extends Controller
      */
     public function actionView($ID, $STORE_ID, $TRANS_DATE)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($ID, $STORE_ID, $TRANS_DATE),
         ]);
     }
@@ -72,7 +115,7 @@ class PpobTransaksiSaldoController extends Controller
             return $this->redirect(['view', 'ID' => $model->ID, 'STORE_ID' => $model->STORE_ID, 'TRANS_DATE' => $model->TRANS_DATE]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -94,9 +137,43 @@ class PpobTransaksiSaldoController extends Controller
             return $this->redirect(['view', 'ID' => $model->ID, 'STORE_ID' => $model->STORE_ID, 'TRANS_DATE' => $model->TRANS_DATE]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
+    }
+    /**
+     * Deposit an existing PpobTransaksiSaldo model.
+     * If Deposit is successful, the browser will be redirected to the 'view' page.
+     * @param string $ID
+     * @param string $STORE_ID
+     * @param string $TRANS_DATE
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeposit($ID, $STORE_ID, $TRANS_DATE)
+    {
+        $model = $this->findModel($ID, $STORE_ID, $TRANS_DATE);
+        $model->STATUS = 1;        
+        $model->STATUS_NM = "Paid";        
+        $model->update();
+        return $this->redirect(['index']);
+    }
+    /**
+     * Ambil an existing PpobTransaksiSaldo model.
+     * If Ambil is successful, the browser will be redirected to the 'view' page.
+     * @param string $ID
+     * @param string $STORE_ID
+     * @param string $TRANS_DATE
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionAmbil($ID, $STORE_ID, $TRANS_DATE)
+    {
+        $model = $this->findModel($ID, $STORE_ID, $TRANS_DATE);
+        $model->STATUS = 4;        
+        $model->STATUS_NM = "Pengembalian Saldo";        
+        $model->update();
+        return $this->redirect(['index']);
     }
 
     /**

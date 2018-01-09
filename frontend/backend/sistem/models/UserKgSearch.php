@@ -6,7 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\backend\sistem\models\UserKg;
-
+use frontend\backend\sistem\models\UserKgProfile;
+use common\models\UserImage;
 /**
  * UserKgSearch represents the model behind the search form of `frontend\backend\sistem\models\UserKg`.
  */
@@ -19,7 +20,7 @@ class UserKgSearch extends UserKg
     {
         return [
             [['id', 'status', 'ACCESS_SITE', 'ONLINE', 'lft', 'rgt', 'lvl', 'icon_type', 'YEAR_AT', 'MONTH_AT'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'create_at', 'updated_at', 'ACCESS_ID', 'ACCESS_GROUP', 'ACCESS_LEVEL', 'UUID', 'ID_GOOGLE', 'ID_FB', 'ID_TWITTER', 'ID_LINKEDIN', 'ID_YAHOO', 'TEMPLATE', 'icon'], 'safe'],
+            [['username','NM_DEPAN', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'create_at', 'updated_at', 'ACCESS_ID', 'ACCESS_GROUP', 'ACCESS_LEVEL', 'UUID', 'ID_GOOGLE', 'ID_FB', 'ID_TWITTER', 'ID_LINKEDIN', 'ID_YAHOO', 'TEMPLATE', 'icon'], 'safe'],
         ];
     }
 
@@ -114,5 +115,18 @@ class UserKgSearch extends UserKg
             ->andFilterWhere(['like', 'ACCESS_LEVEL', 'OWNER']);
 
         return $dataProvider;
+    }
+
+    public function getProfile()
+    {
+        return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'ACCESS_ID']);
+    }
+    public function getImage()
+    {
+        return $this->hasOne(UserImage::className(),['ACCESS_ID'=>'ACCESS_ID']);
+    }
+    public function getUser()
+    {
+        return $this->hasOne(UserKg::className(),['ACCESS_ID'=>'ACCESS_ID']);
     }
 }

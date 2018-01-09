@@ -28,12 +28,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'useradmin-button-create-modal',
+		'id' => 'ppobtransaksisaldo-button-create-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-plus fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH USER ADMIN</b>
+			</span><b> TAMBAH MEMBER SALDO</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -47,19 +47,19 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='useradmin-button-create-content'></div>";
+		echo "<div id='ppobtransaksisaldo-button-create-content'></div>";
 	Modal::end();
 	
 	/*
 	 * BUTTON - VIEW
 	*/
 	Modal::begin([
-		'id' => 'useradmin-button-view-modal',
+		'id' => 'ppobtransaksisaldo-button-view-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT USER ADMIN</b>
+			</span><b> LIHAT MEMBER SALDO</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -71,7 +71,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='useradmin-button-view-content'></div>";
+		echo "<div id='ppobtransaksisaldo-button-view-content'></div>";
 	Modal::end();
 	
 	/*
@@ -79,12 +79,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'useradmin-button-update-modal',
+		'id' => 'ppobtransaksisaldo-button-update-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH USER ADMIN</b>
+			</span><b> UBAH DATA MEMBER SALDO</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -98,31 +98,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='useradmin-button-update-content'></div>";
+		echo "<div id='ppobtransaksisaldo-button-update-content'></div>";
 	Modal::end();
 	
-	/*
-	 * BUTTON - UPDATE
-	*/
-	Modal::begin([
-		//'id' => 'sync_save',
-		'id' => 'useradmin-button-change-modal',
-		'header' => '
-			<span class="fa-stack fa-xs">																	
-				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
-				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> Change Password USER ADMIN</b>
-		',	
-		'size' => 'modal-md',
-		'options' => ['class'=>'slide'],
-		'headerOptions'=>[
-			'style'=> 'border-radius:5px; background-color:'.$modalHeaderColor,
-		],
-		'clientOptions' => [
-			'backdrop' => FALSE, //Static=disable, false=enable
-			'keyboard' => TRUE,	// Kyboard 
-		]
-	]);
-		echo "<div id='useradmin-button-change-content'></div>";
-	Modal::end();
 ?>

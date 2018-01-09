@@ -3,7 +3,7 @@
 namespace frontend\backend\ppob\models;
 
 use Yii;
-
+use common\models\Store;
 /**
  * This is the model class for table "ppob_transaksi_saldo".
  *
@@ -93,5 +93,10 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
             'UPDATE_BY' => 'Update  By',
             'UPDATE_AT' => 'Update  At',
         ];
+    }
+
+    public function getStore()
+    {
+        return $this->hasOne(Store::className(),['STORE_ID'=>'STORE_ID']);
     }
 }

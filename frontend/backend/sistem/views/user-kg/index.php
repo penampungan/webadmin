@@ -102,12 +102,12 @@ $this->registerCss("
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
 	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-lg-6" style="font-family: tahoma ;font-size: 8pt;">
+		<div class="col-xs-12 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 8pt;">
 			<div class="row">		
 			<?=$_indexUser?>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-lg-6" style="font-family: tahoma ;font-size: 8pt;">
+		<div class="col-xs-12 col-sm-8 col-lg-8" style="font-family: tahoma ;font-size: 8pt;">
 			<div class="row">		
 				<div  style="padding-top:10px">				
 					<?=$_indexExpand?>

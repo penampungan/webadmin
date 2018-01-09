@@ -19,7 +19,7 @@ class UserAdminSearch extends UserAdmin
     {
         return [
             [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'EMP_ID', 'avatar', 'TEMPLATE', 'avatarImage'], 'safe'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token','newPassword','newPasswordConfirm', 'email', 'EMP_ID', 'avatar', 'TEMPLATE', 'avatarImage'], 'safe'],
         ];
     }
 
