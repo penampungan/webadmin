@@ -12,6 +12,7 @@ use yii\helpers\Url;
 use yii\data\ArrayDataProvider;
 use common\models\StoreSearch;
 use frontend\backend\sistem\models\UserKg;
+use frontend\backend\sistem\models\UserKgSearch;
 use frontend\backend\sistem\models\ProductSearch;
 use frontend\backend\sistem\models\CustomerSearch;
 use frontend\backend\sistem\models\KaryawanSearch;
@@ -61,68 +62,113 @@ use common\models\Userlogin;
 		'expandTitle'=>'Click Icon',
 		'collapseTitle'=>'Click Icon',			
 		'detail'=>function ($model, $key, $index, $column){
-            // print_r($model);die();
+			// print_r($model);die();
+			$paramCari=Yii::$app->getRequest()->getQueryParam('UserKg');
+			// print_r($paramCari);die();
 			$id=$model['id'];
             $userId=$model['ACCESS_ID'];
             // print_r($userId);die();
-			$modelUser=UserKg::find()->where(['ACCESS_ID'=>$userId])->One();
+			$user=UserKg::find()->orderBy(['ACCESS_ID'=>SORT_ASC])->One();
+			
 			if($id==1){ 
-				//== Detail Toko ==				
-				// if($modelToko){
-				// 	return Yii::$app->controller->renderPartial('_detailToko',[
-				// 		'userId'=>$userId,
-				// 		'data'=>$model,
-				// 		'modelToko'=>$modelToko
-				// 	]);
-				// }				
+				//== Detail Profile ==	
+				if (empty($paramCari)) {
+					$modelUser = UserKgSearch::find()->where(['ACCESS_ID'=>$user->ACCESS_ID])->one();
+				} else {
+					$modelUser = UserKgSearch::find()->where(['ACCESS_ID'=>$userId])->one();
+				}		
+				return Yii::$app->controller->renderPartial('_indexUserProfile',[
+					'modelUser'=>$modelUser
+				]);
 			}elseif($id==2){
 				//== Detail Store==
-				$searchModelStore = StoreSearch::find()->where(['ACCESS_GROUP'=>$userId])->all();
-				$dataProviderStore = new ArrayDataProvider([
-					'allModels'=>$searchModelStore,	
-					'pagination' => [
-						'pageSize' => 20,
-					],
-				]);
+				if (empty($paramCari)) {
+					$searchModelStore = StoreSearch::find()->where(['ACCESS_GROUP'=>$user->ACCESS_ID])->all();
+					$dataProviderStore = new ArrayDataProvider([
+						'allModels'=>$searchModelStore,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);	
+				} else {
+					$searchModelStore = StoreSearch::find()->where(['ACCESS_GROUP'=>$userId])->all();
+					$dataProviderStore = new ArrayDataProvider([
+						'allModels'=>$searchModelStore,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);	
+				}
+
 				return Yii::$app->controller->renderPartial('_indexStore',[
 					//'storeId'=>$storeId,
 					'dataProviderStore'=>$dataProviderStore
                 ]);
 			}elseif($id==3){
 				//== Detail Prodak==
-                $searchModel = ProductSearch::find()->select('product.*,STORE_NM')->leftJoin('store','product.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$userId])->all();
-				$dataProviderProdak =new ArrayDataProvider([
-					'allModels'=>$searchModel,	
-					'pagination' => [
-						'pageSize' => 20,
-					],
-				]);
+				if (empty($paramCari)) {
+					$searchModel = ProductSearch::find()->select('product.*,STORE_NM')->leftJoin('store','product.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$user->ACCESS_ID])->all();
+					$dataProviderProdak =new ArrayDataProvider([
+						'allModels'=>$searchModel,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);	
+				} else {				
+					$searchModel = ProductSearch::find()->select('product.*,STORE_NM')->leftJoin('store','product.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$userId])->all();
+					$dataProviderProdak =new ArrayDataProvider([
+						'allModels'=>$searchModel,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);	
+				}
 				return Yii::$app->controller->renderPartial('_indexProduk',[
 					// 'storeId'=>$storeId,
 					'dataProviderProdak'=>$dataProviderProdak
 				]);
 			}elseif($id==4){
 				//== Detail Karyawan==
-				$searchModelKar = KaryawanSearch::find()->select('karyawan.*,STORE_NM')->leftJoin('store','karyawan.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$userId])->all();
-				$dataProviderKar =new ArrayDataProvider([
-					'allModels'=>$searchModelKar,	
-					'pagination' => [
-						'pageSize' => 20,
-					],
-				]);				
+				if (empty($paramCari)) {
+					$searchModelKar = KaryawanSearch::find()->select('karyawan.*,STORE_NM')->leftJoin('store','karyawan.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$user->ACCESS_ID])->all();
+					$dataProviderKar =new ArrayDataProvider([
+						'allModels'=>$searchModelKar,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);
+				} else {
+					$searchModelKar = KaryawanSearch::find()->select('karyawan.*,STORE_NM')->leftJoin('store','karyawan.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$userId])->all();
+					$dataProviderKar =new ArrayDataProvider([
+						'allModels'=>$searchModelKar,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);
+				}								
 				return Yii::$app->controller->renderPartial('_indexKaryawan',[
 					// 'storeId'=>$storeId,
 					'dataProviderKar'=>$dataProviderKar
 				]);
 			}elseif($id==5){
 				//== Detail User Operatioal==
-				$modalUser=UserKg::find()->where(['ACCESS_GROUP'=>$userId,'ACCESS_LEVEL'=>'OPS'])->all();
-				$dataProviderUserOps= new ArrayDataProvider([
-					'allModels'=>$modalUser,	
-					'pagination' => [
-						'pageSize' => 20,
-					],
-				]);
+				if (empty($paramCari)) {
+					$modalUser=UserKg::find()->where(['ACCESS_GROUP'=>$user->ACCESS_ID,'ACCESS_LEVEL'=>'OPS'])->all();
+					$dataProviderUserOps= new ArrayDataProvider([
+						'allModels'=>$modalUser,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);
+				} else {
+					$modalUser=UserKg::find()->where(['ACCESS_GROUP'=>$userId,'ACCESS_LEVEL'=>'OPS'])->all();
+					$dataProviderUserOps= new ArrayDataProvider([
+						'allModels'=>$modalUser,	
+						'pagination' => [
+							'pageSize' => 20,
+						],
+					]);	
+				}				
 				return Yii::$app->controller->renderPartial('_indexUserOps',[
 					'userId'=>$userId,
 					'dataProviderUserOps'=>$dataProviderUserOps
@@ -162,47 +208,6 @@ use common\models\Userlogin;
 		'format'=>'raw',
 		'headerOptions'=>Yii::$app->gv->gvContainHeader('center','300px',$headerColor,'#ffffff'),
 		'contentOptions'=>Yii::$app->gv->gvContainBody('left','300px',''),			
-	];
-	
-	//ACTION
-	$attDinamikMenu[]=[
-		'class' => 'kartik\grid\ActionColumn',
-		'template' => '{view}',
-		'header'=>'ACTION',		
-		'headerOptions'=>[
-			'style'=>[
-				'text-align'=>'center',
-				'width'=>'5px',
-				'font-family'=>'verdana, arial, sans-serif',
-				'font-size'=>'10pt',
-				'background-color'=>$headerColor,
-				'color'=>'black',
-			]
-		],
-		'contentOptions'=>[
-			'style'=>[
-				'text-align'=>'center',
-				'width'=>'5px',
-				'font-family'=>'tahoma, arial, sans-serif',
-				'font-size'=>'10pt',
-				'color'=>'black',
-			]
-		],	
-		'buttons' => [
-			'view' =>function ($url,$model){
-				$id=$model['id'];
-				$storeId=$model['ACCESS_ID']	;
-				if ($id == 1){
-					$urlPilih='';
-				}elseif($id == 2){
-					$urlPilih='';
-				}else{
-					$urlPilih='';
-				}
-				return  tombolExpadDetail($urlPilih);
-			},
-			
-		], 		
 	];
 	
 	

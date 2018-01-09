@@ -16,10 +16,35 @@ use Yii;
  * @property int $status
  * @property string $create_at
  * @property string $updated_at
- * @property string $ACCESS_ID *Schema1  username= piter  ACCESS_ID= 123  ACCESS_GROUP=OWNER  ACCESS_SITE=" 2 "=website & mobile App  status= 10 *Schema2   username= syaka  ACCESS_UNIX= 1234  ACCESS_GROUP=123  ACCESS_SITE=" 3"=Mobile App  status= 0 *Schema2   username= s
+ * @property string $ACCESS_ID *Schema1
+  username= piter
+  ACCESS_ID= 123
+  ACCESS_GROUP=OWNER
+  ACCESS_SITE=" 2 "=website & mobile App
+  status= 10
+ *Schema2 
+  username= syaka
+  ACCESS_UNIX= 1234
+  ACCESS_GROUP=123
+  ACCESS_SITE=" 3"=Mobile App
+  status= 0
+ *Schema2 
+  username= s
  * @property string $ACCESS_GROUP
- * @property string $ACCESS_LEVEL ACCESS_UNIX -> validate group.  ADMIN = Administrasi registrasi/admin system OWNER = PEMILIK OTHER  = FOLLOWER [ACCESS_UNIX] 1.KASIR 2.INVENTORY 3.ACCONTING 
- * @property int $ACCESS_SITE POSITION_SITE (APP POSITION) 1 = ADMIN   = Admin Control 2 = BACKEND = User Backend (web/mobile). 3 = MOBILE    = Mobile Control 
+ * @property string $ACCESS_LEVEL ACCESS_UNIX -> validate group.
+ 
+ ADMIN = Administrasi registrasi/admin system
+ OWNER = PEMILIK
+ OTHER  = FOLLOWER [ACCESS_UNIX]
+ 1.KASIR
+ 2.INVENTORY
+ 3.ACCONTING
+ 
+ * @property int $ACCESS_SITE POSITION_SITE (APP POSITION)
+ 1 = ADMIN   = Admin Control
+ 2 = BACKEND = User Backend (web/mobile).
+ 3 = MOBILE    = Mobile Control
+ 
  * @property string $UUID
  * @property int $ONLINE 0 = ofline and 1 = online 
  * @property string $ID_GOOGLE

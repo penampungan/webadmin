@@ -124,7 +124,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                     return  tombolDelete($url, $model);
                 },
                 'change' =>function($url, $model,$key){
-                    return  tombolChangePassword($url, $model);
+                    return  tombolChange($url, $model);
                 }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),

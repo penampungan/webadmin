@@ -1,57 +1,109 @@
 <?php
-
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\widgets\Select2;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\widgets\Breadcrumbs;
+use kartik\widgets\Spinner;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+use kartik\widgets\FileInput;
+use yii\helpers\Json;
+use yii\web\Response;
+use yii\widgets\Pjax;
+use kartik\widgets\ActiveForm;
+use kartik\tabs\TabsX;
+use kartik\date\DatePicker;
+use yii\web\View;
 
-/* @var $this yii\web\View */
-/* @var $searchModel frontend\backend\ppob\models\PpobTransaksiSaldoSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+$this->registerCss("
+	:link {
+		color: #fdfdfd;
+	}
+	/* mouse over link */
+	a:hover {
+		color: #5a96e7;
+	}
+	/* selected link */
+	a:active {
+		color: blue;
+	}
+	#gv-data-transaksi-saldo .kv-grid-container{
+			height:400px
+        }
+    #w9 :link {
+        color: black;
+    }
+    /* mouse over link */
+    #w9-container a:hover {
+        color: #5a96e7;
+    }
+    /* selected link */
+    #w9-container a:active {
+        color: blue;
+    }
+");
 
-$this->title = 'Ppob Transaksi Saldos';
-$this->params['breadcrumbs'][] = $this->title;
+$this->registerJs($this->render('ppobTransaksiSaldo_script.js'),View::POS_READY);
+echo $this->render('ppobTransaksiSaldo_modal'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum'); //echo difinition
+$this->title = 'PPOB-Transaksi Saldo';
+
+$Action=$this->render('_indexAction',[
+	'searchModel' => $searchModel,
+	'dataProviderDetail' => $dataProviderDetail,
+    'dataProvider' => $dataProvider,
+]);
+
+$HistoriPaid=$this->render('_indexHistoriPaid',[
+	'searchModel' => $searchModel,
+	'dataProviderPaid' => $dataProviderPaid,
+]);
+
+$HistoriMutasi=$this->render('_indexHistoriMutasi',[
+	'searchModel' => $searchModel,
+	'dataProviderMutasi' => $dataProviderMutasi,
+]);
+
+$HistoriExpired=$this->render('_indexHistoriExpired',[
+	'searchModel' => $searchModel,
+	'dataProviderExpired' => $dataProviderExpired,
+]);
+
+$HistoriAmbil=$this->render('_indexHistoriAmbil',[
+	'searchModel' => $searchModel,
+	'dataProviderAmbil' => $dataProviderAmbil,
+]);
+
+$items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Detail Transaksi',
+        'content'=>$Action,
+        'active'=>true
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> History Paid',
+        'content'=>$HistoriPaid
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> History Mutasi',
+        'content'=>$HistoriMutasi
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> History Expierd',
+        'content'=>$HistoriExpired
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> History Pengembalian Saldo',
+        'content'=>$HistoriAmbil
+    ],
+];
+
+$tabIndex=TabsX::widget([
+    'items'=>$items,
+	'enableStickyTabs'=>true,
+    'encodeLabels'=>false
+]);
+
 ?>
-<div class="ppob-transaksi-saldo-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Ppob Transaksi Saldo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'ID',
-            'TRANS_ID',
-            'STORE_ID',
-            'ACCESS_GROUP',
-            'TRANS_DATE',
-            //'TGL',
-            //'WAKTU',
-            //'SALDO_DEPOSIT',
-            //'DES_STORE',
-            //'SALDO_CURRENT',
-            //'SALDO_MUTASI',
-            //'SALDO_BACK',
-            //'METODE_PEMBAYARAN',
-            //'DESTINATION_ACCOUNT_NM',
-            //'DESTINATION_ACCOUNT_NO',
-            //'SOURCE_ACCOUNT_NM',
-            //'SOURCE_ACCOUNT_NO',
-            //'EMAIL:email',
-            //'KETERANGAN:ntext',
-            //'STATUS',
-            //'STATUS_NM',
-            //'CREATE_BY',
-            //'CREATE_AT',
-            //'UPDATE_BY',
-            //'UPDATE_AT',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-</div>
+<?=$tabIndex?>
