@@ -64,7 +64,7 @@ class PpobTransaksiSaldoController extends Controller
      */
     public function actionIndex()
     {
-        $paramCari=Yii::$app->getRequest()->getQueryParam('industri');
+        $paramCari=Yii::$app->getRequest()->getQueryParam('transid');
         
         $searchModel = new PpobTransaksiSaldoSearch();
         $dataProvider = $searchModel->searchTrans(Yii::$app->request->queryParams);
@@ -73,7 +73,13 @@ class PpobTransaksiSaldoController extends Controller
         $dataProviderExpired = $searchModel->searchExpired(Yii::$app->request->queryParams);
         $dataProviderAmbil = $searchModel->searchAmbil(Yii::$app->request->queryParams);
         $dataProviderHistory = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>'171123091625.0001.180105232829'])->one();
+        if (empty($paramCari)) {
+            //$dataProviderDetail = PpobTransaksiSaldo::find()->where(['STATUS'=>'0'])->orderBy(['TRANS_ID'=>SORT_ASC])->one();
+            $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>'171123091625.0001.180105232829'])->one();
+        } else { 
+            $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>$paramCari])->one();
+        }
+        
         
         return $this->render('index', [
             'searchModel' => $searchModel,

@@ -94,5 +94,47 @@ use yii\base\DynamicModel;
 		$content = Html::button($label1,$options1);		
 		return '<li>'.$content.'</li>';
 	}
-	
+	/*
+	 * LINK EXPORT EXCEL.
+	*/
+	function tombolExportExcel(){
+		$title1 = Yii::t('app', ' Export Excel');
+		$url = Url::toRoute(['/ppob/ppob-transaksi/export-file']);
+		$options1 = [
+					'id'=>'transaksi-export-excel',
+					'data-pjax' => true,
+					'class'=>"btn btn-primary btn-xs",
+					'title'=>'Export Excel'
+		];
+		$icon1 = '<span class="fa-stack fa-sm text-left">
+				  <b class="fa fa-circle fa-stack-2x" style="color:#ffffff"></b>
+				  <b class="fa fa-file-excel-o fa-stack-1x" style="color:#000000"></b>
+				</span>
+		';
+		$label1 = $icon1 . $title1;
+		$content = Html::a($label1,$url,$options1);
+		return $content;
+	}	
+	/*
+	 * BUTTON DOWNLOAD FORMAT & LIST DATA PRODUCK OPNAME
+	*/
+	function tombolUploadFormat(){
+		$title= Yii::t('app','Import Excel');
+		$url = Url::toRoute(['/ppob/ppob-transaksi/upload-file']);
+		$options1 = ['value'=>$url,
+					'id'=>'ppobtransaksi-button-upload',
+					'data-pjax' => false,
+					'class'=>"btn btn-warning btn-xs",
+					'title'=>'Import Excel'
+		];
+		$icon1 = '<span class="fa-stack fa-sm text-left">
+				  <b class="fa fa-circle fa-stack-2x" style="color:#ffffff"></b>
+				  <b class="fa fa-upload fa-stack-1x" style="color:#000000"></b>
+				</span>
+		';
+		$label1 = $icon1.' '.$title ;
+		$content = Html::button($label1,$options1);
+		return $content;		
+	}
+
 ?>

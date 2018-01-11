@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\backend\ppob\models\PpobTransaksiSaldo;
+use frontend\backend\sistem\models\UserKgProfile;
 
 use common\models\Store;
 /**
@@ -351,5 +352,9 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
      public function getStore()
     {
         return $this->hasOne(Store::className(),['STORE_ID'=>'STORE_ID']);
+    }
+     public function getUser()
+    {
+        return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'STORE_ID']);
     }
 }
