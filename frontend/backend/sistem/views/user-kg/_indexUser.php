@@ -97,7 +97,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ];
         };
         
-        $attDinamikbuttonField[]=[			
+        $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{edit}{delete}{change}',

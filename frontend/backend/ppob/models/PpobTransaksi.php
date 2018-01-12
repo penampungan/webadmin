@@ -4,6 +4,7 @@ namespace frontend\backend\ppob\models;
 
 use Yii;
 
+use frontend\backend\sistem\models\UserKgProfile;
 /**
  * This is the model class for table "ppob_transaksi".
  *
@@ -133,5 +134,15 @@ class PpobTransaksi extends \yii\db\ActiveRecord
             'UPDATE_BY' => 'Update  By',
             'UPDATE_AT' => 'Update  At',
         ];
+    }
+    public function getUser()
+    {
+        if ($this->ACCESS_GROUP){
+            return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
+        }else{
+            return '';
+        }
+        
+         
     }
 }

@@ -79,6 +79,9 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,				
         'pjax'=>true,
+        'rowOptions' => function($model, $key, $index, $grid){
+            if($model['STATUS']==1){return ['class' => 'success'];}
+        },
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,

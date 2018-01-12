@@ -74,13 +74,12 @@ class PpobTransaksiSaldoController extends Controller
         $dataProviderAmbil = $searchModel->searchAmbil(Yii::$app->request->queryParams);
         $dataProviderHistory = $searchModel->search(Yii::$app->request->queryParams);
         if (empty($paramCari)) {
-            //$dataProviderDetail = PpobTransaksiSaldo::find()->where(['STATUS'=>'0'])->orderBy(['TRANS_ID'=>SORT_ASC])->one();
+            // $dataProviderDetail = PpobTransaksiSaldo::find()->where(['STATUS'=>'0'])->orderBy(['TRANS_ID'=>SORT_ASC]);
             $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>'171123091625.0001.180105232829'])->one();
         } else { 
             $dataProviderDetail = PpobTransaksiSaldo::find()->where(['TRANS_ID'=>$paramCari])->one();
         }
-        
-        
+        // print_r($dataProviderDetail);die();        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProviderPaid' => $dataProviderPaid,
@@ -139,13 +138,14 @@ class PpobTransaksiSaldoController extends Controller
     {
         $model = $this->findModel($ID, $STORE_ID, $TRANS_DATE);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'ID' => $model->ID, 'STORE_ID' => $model->STORE_ID, 'TRANS_DATE' => $model->TRANS_DATE]);
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            return $this->redirect(['index']);   
         }
 
-        return $this->renderAjax('update', [
-            'model' => $model,
-        ]);
+        // return $this->renderAjax('update', [
+        //     'model' => $model,
+        // ]);
+        
     }
     /**
      * Deposit an existing PpobTransaksiSaldo model.
@@ -159,8 +159,7 @@ class PpobTransaksiSaldoController extends Controller
     public function actionDeposit($ID, $STORE_ID, $TRANS_DATE)
     {
         $model = $this->findModel($ID, $STORE_ID, $TRANS_DATE);
-        $model->STATUS = 1;        
-        $model->STATUS_NM = "Paid";        
+        $model->STATUS = 1;         
         $model->update();
         return $this->redirect(['index']);
     }
@@ -176,8 +175,7 @@ class PpobTransaksiSaldoController extends Controller
     public function actionAmbil($ID, $STORE_ID, $TRANS_DATE)
     {
         $model = $this->findModel($ID, $STORE_ID, $TRANS_DATE);
-        $model->STATUS = 4;        
-        $model->STATUS_NM = "Pengembalian Saldo";        
+        $model->STATUS = 4;             
         $model->update();
         return $this->redirect(['index']);
     }

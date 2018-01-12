@@ -29,15 +29,15 @@ $aryStt= [
         [
             'columns' => [
                 [
+                    'label'=>'Nama',
                     'attribute' =>'nmdepan',
-                    //'value'=>$dataProviderDetail->nmdepan,
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
                 [
+                    'label'=>'KTP',
                     'attribute' =>'ktp',
-                    //'value'=>$dataProviderDetail->ktp,
                     'labelColOptions' => ['style' => 'text-align:right;width: 10%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -47,8 +47,8 @@ $aryStt= [
         [
             'columns'=>[
                 [
+                    'label'=>'Alamat',
                     'attribute' =>'alamat',
-                   // 'value'=>$dataProviderDetail->alamat,
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -58,9 +58,8 @@ $aryStt= [
         [
             'columns'=>[
                 [
-                   // 'attribute' =>'Temapt/Tanggal Lahir',
+                    'label'=>'Tempat/Tanggal Lahir',
                     'attribute' =>'tgllahir',
-                   // 'value'=>$dataProviderDetail->lahirtempat.'/'.$dataProviderDetail->tgllahir,
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -75,16 +74,52 @@ $aryStt= [
         [
             'columns' => [
                 [
+                    'label'=>'Store ID',
                     'attribute' =>'storeid',
-                    //'value'=>$dataProviderDetail->storeid,
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
                 [
+                    'label'=>'Nama Store',
                     'attribute' =>'storenm',
-                    //'value'=>$dataProviderDetail->storenm,
                     'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
+                    'displayOnly'=>true,	
+                    'format'=>'raw', 
+                ],
+            ],
+        ], 
+        [
+            'columns' => [
+                [
+                    'label'=>'Alamat Store',
+                    'attribute' =>'alamatstore',
+                    'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
+                    'displayOnly'=>true,	
+                    'format'=>'raw', 
+                ],
+            ],
+        ],
+        [
+            'columns' => [
+                [
+                    'label'=>'PIC',
+                    'attribute' =>'pic',
+                    'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
+                    'displayOnly'=>true,	
+                    'format'=>'raw', 
+                ],
+                [
+                    'label'=>'Telphone',
+                    'attribute' =>'tlp',
+                    'labelColOptions' => ['style' => 'text-align:right;width: 10%'],
+                    'displayOnly'=>true,	
+                    'format'=>'raw', 
+                ],
+                [
+                    'label'=>'FAX',
+                    'attribute' =>'fax',
+                    'labelColOptions' => ['style' => 'text-align:right;width: 10%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
@@ -186,10 +221,19 @@ $aryStt= [
 			'heading'=>'<b>Info Transaksi Deposit </b>',
             'type'=>DetailView::TYPE_DEFAULT,
             //'footer'=>tombolAmbil($url, $model),
-		],
+        ],
         'mode'=>DetailView::MODE_VIEW,
         'buttons1'=>'{update}',
-        'buttons2'=>'{view}{save}',	
+        'buttons2'=>'{view}{save}',        
+		'saveOptions'=>[ 
+			'id' =>'saveBtn',
+            'value'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
+            // ,
+            'params' => ['custom_param' => true],
+        ],
+        'formOptions'=>[
+            'action'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
+        ]	
 	]);
 	
 ?>

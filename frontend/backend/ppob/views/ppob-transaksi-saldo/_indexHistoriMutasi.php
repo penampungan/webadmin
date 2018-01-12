@@ -77,7 +77,10 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'id'=>'gv-data-transaksi-saldo',
         'dataProvider' => $dataProviderMutasi,
         'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
+        'columns'=>$attDinamikField,
+        'rowOptions' => function($model, $key, $index, $grid){
+            if($model['STATUS']==2){return ['class' => 'warning'];}	
+        },				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[

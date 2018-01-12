@@ -101,16 +101,16 @@ $this->registerCss("
 		echo "<div id='ppobtransaksi-button-update-content'></div>";
 	Modal::end();
 	/*
-	 * BUTTON - UPDATE
+	 * BUTTON - upload
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'ppobtransaksi-button-upload-modal',
+		'id' => 'ppobtransaksi-button-search-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> Import File Excel </b>
+			</span><b> Search Data Taransaksi </b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -124,6 +124,6 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='ppobtransaksi-button-upload-content'></div>";
+		echo "<div id='ppobtransaksi-button-search-content'></div>";
 	Modal::end();
 ?>

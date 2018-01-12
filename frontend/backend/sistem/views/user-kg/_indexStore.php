@@ -12,31 +12,31 @@ use yii\helpers\Url;
 use yii\web\View;
 
 $this->registerCss("
-	#list-prodak :link {
+	#list-Store :link {
 		color:black;
 	}
 	/* mouse over link */
-	#list-prodak a:hover {
+	#list-Store a:hover {
 		color: black;
 	}
 	/* selected link */
-	list-prodak a:active {
+	list-Store a:active {
 		color: black;
 	}
 	.kv-panel {
 		//min-height: 340px;
 		height: 300px;
 	}
-	#list-prodak .kv-grid-container{
+	#list-Store .kv-grid-container{
 		height:350px
 	}
 ");
 
 
 	$aryFieldStore= [
-        ['ID' =>0, 'ATTR' =>['FIELD'=>'STORE_NM','SIZE' => '180px','label'=>'Store','align'=>'left','format'=>'raw','mergeHeader'=>false]],
-        ['ID' =>1, 'ATTR' =>['FIELD'=>'PROVINCE_NM','SIZE' => '180px','label'=>'PROVINSI','align'=>'left','format'=>'raw','mergeHeader'=>false]],
-        ['ID' =>2, 'ATTR' =>['FIELD'=>'CITY_NAME','SIZE' => '180px','label'=>'KOTA','align'=>'left','format'=>'raw','mergeHeader'=>false]],
+        ['ID' =>0, 'ATTR' =>['FIELD'=>'STORE_NM','SIZE' => '180px','label'=>'STORE NAME','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>TRUE,'groupedRow'=>true]],
+        ['ID' =>1, 'ATTR' =>['FIELD'=>'PROVINCE_NM','SIZE' => '180px','label'=>'PROVINSI','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>false,'groupedRow'=>false]],
+        ['ID' =>2, 'ATTR' =>['FIELD'=>'CITY_NAME','SIZE' => '180px','label'=>'KOTA','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>false,'groupedRow'=>false]],
 		];	
 	$valFieldsStore = ArrayHelper::map($aryFieldStore, 'ID', 'ATTR'); 
 	$bColor='rgba(87,114,111, 1)';
@@ -119,8 +119,10 @@ $this->registerCss("
 						'font-weight'=>'bold',
 						'border-left-color'=>'transparant',		
 						'border-left'=>'0px',									
-				]
-			],	
+				],            			
+			],
+			'group'=>$value[$key]['group'],
+			'groupedRow'=>$value[$key]['groupedRow'],		
 		];	
 	};	
 	

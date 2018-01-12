@@ -56,7 +56,7 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
             [['SALDO_DEPOSIT', 'SALDO_CURRENT', 'SALDO_MUTASI', 'SALDO_BACK'], 'number'],
             [['KETERANGAN'], 'string'],
             [['STATUS'], 'integer'],
-            [['TRANS_ID','username', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
+            [['TRANS_ID', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
             [['STORE_ID', 'DES_STORE'], 'string', 'max' => 25],
             [['ACCESS_GROUP'], 'string', 'max' => 15],
             [['METODE_PEMBAYARAN', 'DESTINATION_ACCOUNT_NM', 'DESTINATION_ACCOUNT_NO', 'SOURCE_ACCOUNT_NM', 'SOURCE_ACCOUNT_NO', 'EMAIL', 'STATUS_NM'], 'string', 'max' => 100],
@@ -97,6 +97,7 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
         ];
     }
 
+  
     public function getStore()
     {
         if ($this->STORE_ID){
@@ -119,25 +120,17 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
         $result=$this->user;
         return $result!=''?$result->NM_DEPAN.' '.$result->NM_TENGAH.' '.$result->NM_BELAKANG:'';
     }
-    // public function getNmbelakang(){
-    //     $result=$this->user;
-    //     return $result!=''?$result->NM_BELAKANG:'';
-    // }
-    // public function getNmtengah(){
-    //     $result=$this->user;
-    //     return $result!=''?$result->NM_TENGAH:'';
-    // }
     public function getAlamat(){
         $result=$this->user;
         return $result!=''?$result->ALMAT:'';
     }
     public function getTgllahir(){
         $result=$this->user;
-        return $result!=''?$result->LAHIR_TGL:'';
+        return $result!=''?$result->LAHIR_TEMPAT.'/'.$result->LAHIR_TGL:'';
     }
     public function getLahirtempat(){
         $result=$this->user;
-        return $result!=''?$result->LAHIR_TEMPAT:'';
+        return $result!=''?:'';
     }
     public function getKtp(){
         $result=$this->user;
@@ -150,5 +143,21 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
     public function getStorenm(){
         $result=$this->store;
         return $result!=''?$result->STORE_NM:'';
+    }
+    public function getAlamatstore(){
+        $result=$this->store;
+        return $result!=''?$result->ALAMAT:'';
+    }
+    public function getPic(){
+        $result=$this->store;
+        return $result!=''?$result->PIC:'';
+    }
+    public function getTlp(){
+        $result=$this->store;
+        return $result!=''?$result->TLP:'';
+    }
+    public function getFax(){
+        $result=$this->store;
+        return $result!=''?$result->FAX:'';
     }
 }

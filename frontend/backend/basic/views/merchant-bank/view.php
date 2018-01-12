@@ -10,14 +10,9 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'BANK_ID',
             'BANK_NM',
-            'STATUS',
             'DCRP_DETIL:ntext',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
+            'STATUS',
         ],
     ]) ?>
 

@@ -8,7 +8,9 @@ use frontend\backend\ppob\models\PpobTransaksiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use ptrnov\postman4excel\Postman4ExcelBehavior;
+use yii\helpers\Json;
 
 /**
  * PpobTransaksiController implements the CRUD actions for PpobTransaksi model.
@@ -70,8 +72,19 @@ class PpobTransaksiController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PpobTransaksiSearch();
-        $dataProviderAll = $searchModel->searchAll(Yii::$app->request->queryParams);
+        
+        $paramCari=Yii::$app->getRequest()->getQueryParam('id');
+		if ($paramCari!=''){
+            $date = explode(" - ", $paramCari);
+			$cari=['tgllama'=>$date[0],'tglbaru'=>$date[1]];			
+		}else{
+            $cek = date('Y-m-d',strtotime('-2 month',strtotime(date('Y-m-d')))).' - '.date('Y-m-d');
+            $date = explode(" - ", $cek);
+			$cari=['tgllama'=>$date[0],'tglbaru'=>$date[1]];			
+        };
+        // print_r($cari);die();
+        $searchModel = new PpobTransaksiSearch($cari);
+        $dataProviderAll = $searchModel->searchDataSeluruh(Yii::$app->request->queryParams);
         $dataProviderFirst = $searchModel->searchFirst(Yii::$app->request->queryParams);
         $dataProviderPending = $searchModel->searchPending(Yii::$app->request->queryParams);
         $dataProviderSuccess = $searchModel->searchSuccess(Yii::$app->request->queryParams);
@@ -158,20 +171,19 @@ class PpobTransaksiController extends Controller
     }
 
   
-    public function actionUploadFile(){
-		$model = new \yii\base\DynamicModel([
-			'uploadExport'
+    public function actionPencarianIndex(){
+		$modelPeriode = new \yii\base\DynamicModel([
+			'TGL','ACCESS_GROUP','STORE_ID'
 		]);		
-		$model->addRule(['uploadExport'], 'required')
-         ->addRule(['uploadExport'], 'safe');
+		$modelPeriode->addRule(['TGL','ACCESS_GROUP','STORE_ID'], 'required')
+         ->addRule(['TGL','ACCESS_GROUP','STORE_ID'], 'safe');
 		 
-		if (!$model->load(Yii::$app->request->post())) {
-			return $this->renderAjax('form_upload',[
-				'model' => $model
+		if (!$modelPeriode->load(Yii::$app->request->post())) {
+			return $this->renderAjax('form_cari',[
+				'modelPeriode' => $modelPeriode
 			]);
 		}
 	}
-	
     /**
      * Finds the PpobTransaksi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -189,28 +201,46 @@ class PpobTransaksiController extends Controller
     }
 
     public function actionExportFile(){
-        // $aryPaid=[
-		// 	['TERMINAL_ID'=>'01234567890','FINGER_ID'=>'321','KARYAWAN'=>'Piter','TGL_IN'=>'2017-09-05','TGL_OUT'=>'2017-09-05','JAM_IN'=>'08:00:00','JAM_OUT'=>'17:00:00'],
-		// 	['TERMINAL_ID'=>'112312312312','FINGER_ID'=>'321','KARYAWAN'=>'Piter','TGL_IN'=>'2017-09-05','TGL_OUT'=>'2017-09-06','JAM_IN'=>'08:00:00','JAM_OUT'=>'02:00:00'],
-		// ];
-		// $modelPrd=AbsenImportPeriode::find()->where(['TIPE'=>'1','AKTIF'=>'1'])->one();
-		// $closingParam=['tglStart'=>$modelPrd->TGL_START,'tglEnd'=>$modelPrd->TGL_END];
-		// $searchModelDetail = new AbsenPayrollPaidSearch();
-		// $dataProviderDetail=$searchModelDetail->searchExcelExportPaid(Yii::$app->request->queryParams);
-        // $aryPaid=$dataProviderDetail->getModels();	
-    
-		$searchModel = new PpobTransaksiSearch();
+        $paramCari=Yii::$app->getRequest()->getQueryParam('id');
+		if ($paramCari!=''){
+            $date = explode(" - ", $paramCari);
+			$cari=['tgllama'=>$date[0],'tglbaru'=>$date[1]];			
+		}else{
+            $cek = date('Y-m-d',strtotime('-2 month',strtotime(date('Y-m-d')))).' - '.date('Y-m-d');
+            $date = explode(" - ", $cek);
+			$cari=['tgllama'=>$date[0],'tglbaru'=>$date[1]];			
+        };
+		$searchModel = new PpobTransaksiSearch($cari);
 		$dataProvider=$searchModel->searchExcelExport(Yii::$app->request->queryParams);
-		$aryPaid=$dataProvider->allModels;	
-		//  print_r($aryPaid);die();
+		$dataProviderBaru=$searchModel->searchExcelExportBaru(Yii::$app->request->queryParams);
+		$dataProviderPending=$searchModel->searchExcelExportPending(Yii::$app->request->queryParams);
+		$dataProviderSuccess=$searchModel->searchExcelExportSuccess(Yii::$app->request->queryParams);
+		$dataProviderGagal=$searchModel->searchExcelExportGagal(Yii::$app->request->queryParams);
+    
+        $aryPaid=$dataProvider->allModels;	
+		$aryPaid2=$dataProviderBaru->allModels;	
+		$aryPaid3=$dataProviderPending->allModels;	
+		$aryPaid4=$dataProviderSuccess->allModels;	
+		$aryPaid5=$dataProviderGagal->allModels;	
+        //  print_r($aryPaid);die();
+        if (!empty($aryPaid)) {
+            
 		$excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid);
         $excel_titlePaid = $excel_dataPaid['excel_title'];
         $excel_ceilsPaid = $excel_dataPaid['excel_ceils'];
+		$excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid2);
+        $excel_ceilsPaid2 = $excel_dataPaid['excel_ceils'];
+		$excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid3);
+        $excel_ceilsPaid3 = $excel_dataPaid['excel_ceils'];
+		// $excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid4);
+        // $excel_ceilsPaid4 = $excel_dataPaid['excel_ceils'];
+		// $excel_dataPaid = Postman4ExcelBehavior::excelDataFormat($aryPaid5);
+        // $excel_ceilsPaid5 = $excel_dataPaid['excel_ceils'];
 		$excel_content = [
 			 [
-				'sheet_name' => 'Payroll-Paid-Data',
+				'sheet_name' =>'Seluruh Transaksi Penjualan',
                 'sheet_title' => [
-					['TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK']
+					['ID','TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK','TYPE_NM','KELOMPOK','KTG_ID','KTG_NM','ID_CODE','CODE','NAME','DENOM','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL','PERMIT','FUNGSI','MSISDN','ID_PELANGGAN','PEMBAYARAN','RESPON_REFF_ID','RESPON_NAMA_PELANGGAN','RESPON_ADMIN_BANK','RESPON_TAGIHAN','RESPON_TOTAL_BAYAR','RESPON_MESSAGE','RESPON_STRUK','RESPON_TOKEN','STATUS']
 				],
 			    'ceils' => $excel_ceilsPaid,
                 'freezePane' => 'A2',
@@ -241,9 +271,195 @@ class PpobTransaksiController extends Controller
 				],
                'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
                'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
-			]
+            ],
+			 [
+				'sheet_name' =>'Transaksi Penjualan Baru',
+                'sheet_title' => [
+					['ID','TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK','TYPE_NM','KELOMPOK','KTG_ID','KTG_NM','ID_CODE','CODE','NAME','DENOM','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL','PERMIT','FUNGSI','MSISDN','ID_PELANGGAN','PEMBAYARAN','RESPON_REFF_ID','RESPON_NAMA_PELANGGAN','RESPON_ADMIN_BANK','RESPON_TAGIHAN','RESPON_TOTAL_BAYAR','RESPON_MESSAGE','RESPON_STRUK','RESPON_TOKEN','STATUS']
+				],
+			    'ceils' => $excel_ceilsPaid2,
+                'freezePane' => 'A2',
+                'columnGroup'=>false,
+                'autoSize'=>false,
+                'headerColor' => Postman4ExcelBehavior::getCssClass("header"),
+                'headerStyle'=>[					
+					[
+						'TRANS_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'TRANS_DATE' =>['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'TGL' => ['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'JAM' => ['font-size'=>'8','width'=>'15','valign'=>'center','align'=>'center'],
+						'ACCESS_GROUP' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','width'=>'10','valign'=>'center','align'=>'center']
+					]						
+				],
+				'contentStyle'=>[
+					[						
+						'TRANS_ID' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TRANS_DATE' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TGL' => ['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'JAM' => ['font-size'=>'8','valign'=>'center','align'=>'right'],
+						'ACCESS_GROUP' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','valign'=>'center','align'=>'center']
+					]
+				],
+               'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
+               'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
+            ],
+			 [
+				'sheet_name' =>'Transaksi Penjualan Pending',
+                'sheet_title' => [
+					['ID','TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK','TYPE_NM','KELOMPOK','KTG_ID','KTG_NM','ID_CODE','CODE','NAME','DENOM','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL','PERMIT','FUNGSI','MSISDN','ID_PELANGGAN','PEMBAYARAN','RESPON_REFF_ID','RESPON_NAMA_PELANGGAN','RESPON_ADMIN_BANK','RESPON_TAGIHAN','RESPON_TOTAL_BAYAR','RESPON_MESSAGE','RESPON_STRUK','RESPON_TOKEN','STATUS']
+				],
+			    'ceils' => $excel_ceilsPaid3,
+                'freezePane' => 'A2',
+                'columnGroup'=>false,
+                'autoSize'=>false,
+                'headerColor' => Postman4ExcelBehavior::getCssClass("header"),
+                'headerStyle'=>[					
+					[
+						'TRANS_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'TRANS_DATE' =>['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'TGL' => ['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+						'JAM' => ['font-size'=>'8','width'=>'15','valign'=>'center','align'=>'center'],
+						'ACCESS_GROUP' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','width'=>'10','valign'=>'center','align'=>'center']
+					]						
+				],
+				'contentStyle'=>[
+					[						
+						'TRANS_ID' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TRANS_DATE' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'TGL' => ['font-size'=>'8','valign'=>'center','align'=>'left'],
+						'JAM' => ['font-size'=>'8','valign'=>'center','align'=>'right'],
+						'ACCESS_GROUP' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'STORE_ID' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+						'ID_PRODUK' =>['font-size'=>'8','valign'=>'center','align'=>'center']
+					]
+				],
+               'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
+               'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
+            ],
+			//  [
+			// 	'sheet_name' =>'Transaksi Penjualan Success',
+            //     'sheet_title' => [
+			// 		['ID','TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK','TYPE_NM','KELOMPOK','KTG_ID','KTG_NM','ID_CODE','CODE','NAME','DENOM','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL','PERMIT','FUNGSI','MSISDN','ID_PELANGGAN','PEMBAYARAN','RESPON_REFF_ID','RESPON_NAMA_PELANGGAN','RESPON_ADMIN_BANK','RESPON_TAGIHAN','RESPON_TOTAL_BAYAR','RESPON_MESSAGE','RESPON_STRUK','RESPON_TOKEN','STATUS']
+			// 	],
+			//     'ceils' => $excel_ceilsPaid4,
+            //     'freezePane' => 'A2',
+            //     'columnGroup'=>false,
+            //     'autoSize'=>false,
+            //     'headerColor' => Postman4ExcelBehavior::getCssClass("header"),
+            //     'headerStyle'=>[					
+			// 		[
+			// 			'TRANS_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'TRANS_DATE' =>['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+			// 			'TGL' => ['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+			// 			'JAM' => ['font-size'=>'8','width'=>'15','valign'=>'center','align'=>'center'],
+			// 			'ACCESS_GROUP' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'STORE_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'ID_PRODUK' =>['font-size'=>'8','width'=>'10','valign'=>'center','align'=>'center']
+			// 		]						
+			// 	],
+			// 	'contentStyle'=>[
+			// 		[						
+			// 			'TRANS_ID' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'TRANS_DATE' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'TGL' => ['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'JAM' => ['font-size'=>'8','valign'=>'center','align'=>'right'],
+			// 			'ACCESS_GROUP' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+			// 			'STORE_ID' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+			// 			'ID_PRODUK' =>['font-size'=>'8','valign'=>'center','align'=>'center']
+			// 		]
+			// 	],
+            //    'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
+            //    'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
+            // ],
+			//  [
+			// 	'sheet_name' =>'Transaksi Penjualan Gagal',
+            //     'sheet_title' => [
+			// 		['ID','TRANS_ID','TRANS_DATE','TGL','JAM','ACCESS_GROUP','STORE_ID','ID_PRODUK','TYPE_NM','KELOMPOK','KTG_ID','KTG_NM','ID_CODE','CODE','NAME','DENOM','HARGA_DASAR','MARGIN_FEE_KG','MARGIN_FEE_MEMBER','HARGA_JUAL','PERMIT','FUNGSI','MSISDN','ID_PELANGGAN','PEMBAYARAN','RESPON_REFF_ID','RESPON_NAMA_PELANGGAN','RESPON_ADMIN_BANK','RESPON_TAGIHAN','RESPON_TOTAL_BAYAR','RESPON_MESSAGE','RESPON_STRUK','RESPON_TOKEN','STATUS']
+			// 	],
+			//     'ceils' => $excel_ceilsPaid5,
+            //     'freezePane' => 'A2',
+            //     'columnGroup'=>false,
+            //     'autoSize'=>false,
+            //     'headerColor' => Postman4ExcelBehavior::getCssClass("header"),
+            //     'headerStyle'=>[					
+			// 		[
+			// 			'TRANS_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'TRANS_DATE' =>['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+			// 			'TGL' => ['font-size'=>'8','width'=>'20','valign'=>'center','align'=>'center'],
+			// 			'JAM' => ['font-size'=>'8','width'=>'15','valign'=>'center','align'=>'center'],
+			// 			'ACCESS_GROUP' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'STORE_ID' =>['font-size'=>'8','width'=>'12','valign'=>'center','align'=>'center'],
+			// 			'ID_PRODUK' =>['font-size'=>'8','width'=>'10','valign'=>'center','align'=>'center']
+			// 		]						
+			// 	],
+			// 	'contentStyle'=>[
+			// 		[						
+			// 			'TRANS_ID' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'TRANS_DATE' =>['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'TGL' => ['font-size'=>'8','valign'=>'center','align'=>'left'],
+			// 			'JAM' => ['font-size'=>'8','valign'=>'center','align'=>'right'],
+			// 			'ACCESS_GROUP' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+			// 			'STORE_ID' =>['font-size'=>'8','valign'=>'center','align'=>'center'],
+			// 			'ID_PRODUK' =>['font-size'=>'8','valign'=>'center','align'=>'center']
+			// 		]
+			// 	],
+            //    'oddCssClass' => Postman4ExcelBehavior::getCssClass("odd"),
+            //    'evenCssClass' => Postman4ExcelBehavior::getCssClass("even"),
+            // ]
 		];
-		$excel_file = "Payroll-Paid-Data";
+		$excel_file = "Data Transaksi Penjualana - ".$cek." ";
 		$this->export4excel($excel_content, $excel_file,0);
+        } else {
+            return $this->redirect(['index']);
+        }
+        
     }
+
+    // THE CONTROLLER
+public function actionSubaccess() {
+    $out = [];
+    
+    $paramCari=Yii::$app->getRequest()->getQueryParam('TGL');
+    if (!empty($paramCari)) {
+        // $parents = $_POST['TGL'];
+            $date = explode(" - ", $paramCari);
+            $data= PpobTransaksi::find()->where(['between','TGL',$date[0],$date[1]])->count();
+           if ($data>0) {
+            $access= PpobTransaksi::find()->where(['between','TGL',$date[0],$date[1]])->groupBy(['ACCESS_GROUP'])->all();
+            foreach($access as $accesss){
+                echo "<option value='".$accesss->ACCESS_GROUP."'>".$accesss->ACCESS_GROUP."</option>";
+            }
+            return;
+           } else {
+               echo "<option> - </option>";
+               return;
+           }
+
+            // echo ;
+    }
+    // echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+public function actionSubstore() {
+    $paramCari=Yii::$app->getRequest()->getQueryParam('ACCESS_GROUP');
+    if (!empty($paramCari)) {
+            $data= PpobTransaksi::find()->where(['STORE_ID',$paramCari])->count();
+           if ($data>0) {
+            $store= PpobTransaksi::find()->where(['STORE_ID',$paramCari])->groupBy(['STORE_ID'])->all();
+            foreach($store as $stores){
+                echo "<option value='".$stores->STORE_ID."'>".$stores->ACCESS_GROUP."</option>";
+            }
+            return;
+           } else {
+               echo "<option> - </option>";
+               return;
+           }
+    }
+}
+ 
 }

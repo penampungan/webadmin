@@ -349,12 +349,4 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
         $query->orderBy(['STORE_ID'=>SORT_ASC]);
         return $dataProvider;
     }
-     public function getStore()
-    {
-        return $this->hasOne(Store::className(),['STORE_ID'=>'STORE_ID']);
-    }
-     public function getUser()
-    {
-        return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'STORE_ID']);
-    }
 }

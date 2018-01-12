@@ -39,9 +39,9 @@ $(document).on('click','#ppobtransaksi-button-update', function(ehead){
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#ppobtransaksi-button-upload', function(ehead){ 			  
-	$('#ppobtransaksi-button-upload-modal').modal('show')
-	.find('#ppobtransaksi-button-upload-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#ppobtransaksi-button-search', function(ehead){ 			  
+	$('#ppobtransaksi-button-search-modal').modal('show')
+	.find('#ppobtransaksi-button-search-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
