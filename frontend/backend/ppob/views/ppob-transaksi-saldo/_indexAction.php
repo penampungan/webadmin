@@ -133,13 +133,31 @@ $aryStt= [
         [
             'columns' => [
                 [
-                    'attribute' =>'TRANS_ID',
+                    'label' =>'TRANS_ID',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->TRANS_ID=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->TRANS_ID;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
                 [
-                    'attribute' =>'TRANS_DATE',
+                    'label' =>'TRANS_DATE',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->TRANS_DATE=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->TRANS_DATE;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -149,13 +167,31 @@ $aryStt= [
         [
             'columns' => [
                 [
-                    'attribute' =>'SALDO_DEPOSIT',
+                    'label' =>'SALDO_DEPOSIT',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->SALDO_DEPOSIT=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->SALDO_DEPOSIT;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
                 [
-                    'attribute' =>'DES_STORE',
+                    'label' =>'DES_STORE',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->DES_STORE=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->DES_STORE;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -165,13 +201,31 @@ $aryStt= [
         [
             'columns' => [
                 [
-                    'attribute' =>'SALDO_CURRENT',
+                    'label' =>'SALDO_CURRENT',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->SALDO_CURRENT=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->SALDO_CURRENT;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 20%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
                 ],
                 [
-                    'attribute' =>'SALDO_BACK',
+                    'label' =>'SALDO BACK',
+                    'value' =>function()use($dataProviderDetail)
+                    {
+                        if ($dataProviderDetail->SALDO_BACK=='') {
+                            return '';
+                        }else {
+                            return $dataProviderDetail->SALDO_BACK;
+                        } 
+                        
+                    },
                     'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
                     'displayOnly'=>true,	
                     'format'=>'raw', 
@@ -209,32 +263,49 @@ $aryStt= [
             ],
         ],
 	];
-
-
-	$dvTransaksi=DetailView::widget([
-		'id'=>'dv-transaksi-data',
-		'model' => $dataProviderDetail,
-		'attributes'=>$attInfoTransaksi,
-		'condensed'=>true,
-		'hover'=>true,
-		'panel'=>[
-			'heading'=>'<b>Info Transaksi Deposit </b>',
-            'type'=>DetailView::TYPE_DEFAULT,
-            //'footer'=>tombolAmbil($url, $model),
-        ],
-        'mode'=>DetailView::MODE_VIEW,
-        'buttons1'=>'{update}',
-        'buttons2'=>'{view}{save}',        
-		'saveOptions'=>[ 
-			'id' =>'saveBtn',
-            'value'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
-            // ,
-            'params' => ['custom_param' => true],
-        ],
-        'formOptions'=>[
-            'action'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
-        ]	
-	]);
+    if ($dataProviderDetail['ID']!="" && $dataProviderDetail['STORE_ID']!="" && $dataProviderDetail['TRANS_DATE']!="") {
+        $dvTransaksi=DetailView::widget([
+            'id'=>'dv-transaksi-data',
+            'model' => $dataProviderDetail,
+            'attributes'=>$attInfoTransaksi,
+            'condensed'=>true,
+            'hover'=>true,
+            'panel'=>[
+                'heading'=>'<b>Info Transaksi Deposit </b>',
+                'type'=>DetailView::TYPE_DEFAULT,
+                //'footer'=>tombolAmbil($url, $model),
+            ],
+            'mode'=>DetailView::MODE_VIEW,
+            'buttons1'=>'{update}',
+            'buttons2'=>'{view}{save}',        
+            'saveOptions'=>[ 
+                'id' =>'saveBtn',
+                'value'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
+                // ,
+                'params' => ['custom_param' => true],
+            ],
+            'formOptions'=>[
+                'action'=>'/ppob/ppob-transaksi-saldo/deposit?ID='.$dataProviderDetail['ID'].'&STORE_ID='.$dataProviderDetail['STORE_ID'].'&TRANS_DATE='.$dataProviderDetail['TRANS_DATE'],
+            ]	
+        ]);
+    } else {
+        $dvTransaksi=DetailView::widget([
+            'id'=>'dv-transaksi-data',
+            'model' => $dataProviderDetail,
+            'attributes'=>$attInfoTransaksi,
+            'condensed'=>true,
+            'hover'=>true,
+            'panel'=>[
+                'heading'=>'<b>Info Transaksi Deposit </b>',
+                'type'=>DetailView::TYPE_DEFAULT,
+                //'footer'=>tombolAmbil($url, $model),
+            ],
+            'mode'=>DetailView::MODE_VIEW,
+            'buttons1'=>'',
+            'buttons2'=>'{view}',   	
+        ]);
+    }
+    
 	
 ?>
 

@@ -10,7 +10,23 @@ use kartik\daterange\DateRangePicker;
 use kartik\depdrop\DepDropAction;
 use yii\web\JsExpression;
 use frontend\backend\ppob\models\PpobTransaksi;
+use yii\web\View;
 
+$this->registerJs("
+	$('#date-id-y').change(function() { 
+		change();
+	 });
+	 function change()
+	 {
+		 var selectValue=$('#date-id-y').val();
+		 $('#date-id-store').empty();
+		 $.post('/ppob/ppob-transaksi/substore?ACCESS_GROUP='+selectValue,
+			function(data){
+				$('select#date-id-store').html(data);
+			});
+
+	 };
+",View::POS_READY);
 ?>
 
 <div class="ppob-transaksi-create">
@@ -22,7 +38,7 @@ use frontend\backend\ppob\models\PpobTransaksi;
 			//'enableAjaxValidation'=>true,
 			//'method' => 'post',
 			//'validationUrl'=>Url::toRoute('/inventory/stock-opname/valid')
-			'action' =>['/ppob/ppob-transaksi/index']
+			'action' =>['/ppob/ppob-transaksi/pencarian-index']
    ]); ?>
 			   <?=$form->field($modelPeriode, 'TGL')->widget(DateRangePicker::classname(), [
 						'options' => [
@@ -40,7 +56,7 @@ use frontend\backend\ppob\models\PpobTransaksi;
 									  type: 'GET',
 									  data: 'TGL='+TGL,
 									  success: function(result){
-										$('select#date-id').html(result);
+										$('select#date-id-y').html(result);
 									  },
 									  error: function(){
 										alert('failure');
@@ -62,44 +78,16 @@ use frontend\backend\ppob\models\PpobTransaksi;
 			<?= $form->field($modelPeriode, 'ACCESS_GROUP')->widget(Select2::classname(), [
 				// 'data' => ArrayHelper::map(PpobTransaksi::find()->all(),'ACCESS_GROUP','ACCESS_GROUP'),
 				'options' => [
-					'id'=>'date-id',
-					'placeholder' => 'Select a state ...'
+					'id'=>'date-id-y',
+					'placeholder' => 'Select a state ...',
 				],
 				'pluginOptions' => [
-					'allowClear' => true
+					'allowClear' => true,
 				],
-				'pluginEvents' => [					
-					'onchange'=>'$.post("/ppob/ppob-transaksi/subaccess?ACCESS_GROUP='.'"+$("#date-id").val(),
-						function(data){
-							alert("tes");
-						})'
-				]
 			]);?>
 
 			<?= $form->field($modelPeriode, 'STORE_ID')->widget(Select2::classname(), [
-				// 'data' => ArrayHelper::map(PpobTransaksi::find()->all(),'STORE_ID','STORE_ID'),
-				'options' => ['id'=>'date-id-store','placeholder' => 'Select a state ...'],
-				'pluginOptions' => [
-					'allowClear' => true
-				],'pluginEvents' => [
-					"select2:select" => "function() {
-						var ACCESS_GROUP = $('#date-id').val();
-						alert(ACCESS_GROUP)
-						// $(document).onChange('ACCESS_GROUP', function (){
-							$.ajax({                                      
-							  url: '/ppob/ppob-transaksi/subaccess',              
-							  type: 'GET',
-							  data: 'ACCESS_GROUP='+ACCESS_GROUP,
-							  success: function(result){
-								$('select#date-id-store').html(result);
-							  },
-							  error: function(){
-								alert('failure');
-							  } 
-						   });
-						// });
-					 }",
-				]
+				'options' => ['id'=>'date-id-store','placeholder' => 'Select a state ...',],
 				]);?>
 
 			<div class="form-group">

@@ -117,11 +117,11 @@ use kartik\daterange\DateRangePicker;
 		return $content;
 	}
 	
-	/*
-	 * BUTTON SEARCH
-	*/
+	// /*
+	//  * BUTTON SEARCH
+	// */
 	function tombolSearchData(){
-		$title= Yii::t('app','');
+		$title= Yii::t('app','Search');
 		$url = Url::toRoute(['/ppob/ppob-transaksi/pencarian-index']);
 		$options1 = ['value'=>$url,
 					'id'=>'ppobtransaksi-button-search',
@@ -137,127 +137,6 @@ use kartik\daterange\DateRangePicker;
 		$label1 = $icon1.' '.$title ;
 		$content = Html::button($label1,$options1);
 		return $content;		
-	}
-
-	function getTanggal()
-	{
-		$daterange=DateRangePicker::widget([
-			'name'=>'date_range1',
-			'presetDropdown'=>true,
-			'hideInput'=>true,
-			'options' => [
-				'id'=>'date-id-x'
-			],
-			'pluginEvents' => [
-				"apply.daterangepicker" => "function() {
-					//console.log('test');
-					var x = document.getElementById('date-id-x').value;
-					$.pjax.reload({						
-			 			url:'/ppob/ppob-transaksi/index?id='+x, 
-						container: '#gv-data-ppobtransaksi',
-						//timeout: 1000,
-					});
-				 }",
-				
-			]
-		]);
-		return $daterange;
-	}
-	function getTanggal2()
-	{
-		$daterange=DateRangePicker::widget([
-			'name'=>'date_range1',
-			'presetDropdown'=>true,
-			'hideInput'=>true,
-			'options' => [
-				'id'=>'date-id-x1'
-			],
-			'pluginEvents' => [
-				"apply.daterangepicker" => "function() {
-					//console.log('test');
-					var x = document.getElementById('date-id-x').value;
-					$.pjax.reload({						
-			 			url:'/ppob/ppob-transaksi/index?id='+x, 
-						container: '#gv-data-ppobtransaksi',
-						//timeout: 1000,
-					});
-				 }",
-				
-			]
-		]);
-		return $daterange;
-	}
-	function getTanggal3()
-	{
-		$daterange=DateRangePicker::widget([
-			'name'=>'date_range1',
-			'presetDropdown'=>true,
-			'hideInput'=>true,
-			'options' => [
-				'id'=>'date-id-x2'
-			],
-			'pluginEvents' => [
-				"apply.daterangepicker" => "function() {
-					//console.log('test');
-					var x = document.getElementById('date-id-x').value;
-					$.pjax.reload({						
-			 			url:'/ppob/ppob-transaksi/index?id='+x, 
-						container: '#gv-data-ppobtransaksi',
-						//timeout: 1000,
-					});
-				 }",
-				
-			]
-		]);
-		return $daterange;
-	}
-	function getTanggal4()
-	{
-		$daterange=DateRangePicker::widget([
-			'name'=>'date_range1',
-			'presetDropdown'=>true,
-			'hideInput'=>true,
-			'options' => [
-				'id'=>'date-id-x3'
-			],
-			'pluginEvents' => [
-				"apply.daterangepicker" => "function() {
-					//console.log('test');
-					var x = document.getElementById('date-id-x').value;
-					$.pjax.reload({						
-			 			url:'/ppob/ppob-transaksi/index?id='+x, 
-						container: '#gv-data-ppobtransaksi',
-						//timeout: 1000,
-					});
-				 }",
-				
-			]
-		]);
-		return $daterange;
-	}
-	function getTanggal5()
-	{
-		$daterange=DateRangePicker::widget([
-			'name'=>'date_range1',
-			'presetDropdown'=>true,
-			'hideInput'=>true,
-			'options' => [
-				'id'=>'date-id-x4'
-			],
-			'pluginEvents' => [
-				"apply.daterangepicker" => "function() {
-					//console.log('test');
-					var x = document.getElementById('date-id-x').value;
-					$.pjax.reload({						
-			 			url:'/ppob/ppob-transaksi/index?id='+x, 
-						container: '#gv-data-ppobtransaksi',
-						//timeout: 1000,
-					});
-				 }",
-				
-			]
-		]);
-		return $daterange;
 	}
 	
 ?>

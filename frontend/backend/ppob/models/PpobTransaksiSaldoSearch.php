@@ -5,6 +5,7 @@ namespace frontend\backend\ppob\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use frontend\backend\ppob\models\PpobTransaksiSaldo;
 use frontend\backend\sistem\models\UserKgProfile;
 
@@ -17,11 +18,13 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
     /**
      * @inheritdoc
      */
+    public $tgllama;
+    public $tglbaru;
     public function rules()
     {
         return [
             [['ID', 'STATUS'], 'integer'],
-            [['TRANS_ID', 'STORE_ID', 'ACCESS_GROUP', 'TRANS_DATE', 'TGL', 'WAKTU', 'DES_STORE', 'METODE_PEMBAYARAN', 'DESTINATION_ACCOUNT_NM', 'DESTINATION_ACCOUNT_NO', 'SOURCE_ACCOUNT_NM', 'SOURCE_ACCOUNT_NO', 'EMAIL', 'KETERANGAN', 'STATUS_NM', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT'], 'safe'],
+            [['TRANS_ID', 'STORE_ID', 'ACCESS_GROUP', 'TRANS_DATE', 'TGL', 'WAKTU', 'DES_STORE', 'METODE_PEMBAYARAN', 'DESTINATION_ACCOUNT_NM', 'DESTINATION_ACCOUNT_NO', 'SOURCE_ACCOUNT_NM', 'SOURCE_ACCOUNT_NO', 'EMAIL', 'KETERANGAN', 'STATUS_NM', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT','tgllama','tglbaru'], 'safe'],
             [['SALDO_DEPOSIT', 'SALDO_CURRENT', 'SALDO_MUTASI', 'SALDO_BACK'], 'number'],
         ];
     }
@@ -347,6 +350,74 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
             ->andFilterWhere(['like', 'CREATE_BY', $this->CREATE_BY])
             ->andFilterWhere(['like', 'UPDATE_BY', $this->UPDATE_BY]);
         $query->orderBy(['STORE_ID'=>SORT_ASC]);
+        return $dataProvider;
+    }
+
+    public function searchExcelExport($params)
+    {
+        // print_r($this->ACCESS_GROUP);die();
+            $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'";
+       $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
+        return $dataProvider;
+    }
+    public function searchExcelExportNew($params)
+    {
+        $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0";
+         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
+        return $dataProvider;
+    }
+    public function searchExcelExportPaid($params)
+    {
+        $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1";
+        $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
+        return $dataProvider;
+    }
+    public function searchExcelExportMutasi($params)
+    {
+        $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=2";
+        $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
+        return $dataProvider;
+    }
+    public function searchExcelExportExpierd($params)
+    {
+        $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3";
+        $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
+        return $dataProvider;
+    }
+    public function searchExcelExportAmbil($params)
+    {
+        $query = "SELECT `TRANS_ID`, `STORE_ID`, `ACCESS_GROUP`, `TRANS_DATE`, `TGL`, `WAKTU`, `SALDO_DEPOSIT`, `DES_STORE`, `SALDO_CURRENT`, `SALDO_MUTASI`, `SALDO_BACK`, `METODE_PEMBAYARAN`, `DESTINATION_ACCOUNT_NM`, `DESTINATION_ACCOUNT_NO`, `SOURCE_ACCOUNT_NM`, `SOURCE_ACCOUNT_NO`, `EMAIL`, `KETERANGAN`, `STATUS_NM` FROM `ppob_transaksi_saldo` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=4";
+        $qrySql= Yii::$app->db->createCommand($query)->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $qrySql,
+        ]);
+
         return $dataProvider;
     }
 }

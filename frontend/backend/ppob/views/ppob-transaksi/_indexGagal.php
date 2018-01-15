@@ -73,7 +73,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ];
         };
     $gvppobMasterHarga2=GridView::widget([
-        'id'=>'gv-data-ppobtransaksi',
+        'id'=>'gv-data-ppobtransaksi-gagal',
         'dataProvider' => $dataProviderGagal,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,
@@ -81,7 +81,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             [
                 'columns'=>[
                     ['content'=>'DATA OWNER', 'options'=>[
-                            'colspan'=>4,
+                            'colspan'=>3,
                             'style'=>[
                                 'width'=>'10px',
                                 'text-align'=>'center',
@@ -91,7 +91,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                             ]
                         ]
                     ],
-                    ['content'=>'DATA Prodak', 'options'=>[
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
                             'colspan'=>14,
                             'style'=>[
                                 'width'=>'10px',
@@ -112,7 +112,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-ppobtransaksi',
+                'id'=>'gv-data-ppobtransaksi-gagal',
             ],						  
         ],
         'hover'=>true, //cursor select

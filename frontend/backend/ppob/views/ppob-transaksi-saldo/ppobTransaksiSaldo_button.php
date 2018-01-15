@@ -111,5 +111,25 @@ use yii\base\DynamicModel;
 		$content = Html::a($label1,url::to(['/ppob/ppob-transaksi-saldo/ambil','ID' => $model['ID'], 'STORE_ID' => $model['STORE_ID'], 'TRANS_DATE' => $model['TRANS_DATE']]),$options1);		
 		return '<li>'.$content.'</li>';
 	}
-    
+    /*
+	 * LINK EXPORT EXCEL.
+	*/
+	function tombolExportExcel(){
+		$title1 = Yii::t('app', ' Export Excel');
+		$url = Url::toRoute(['/ppob/ppob-transaksi-saldo/export-file']);
+		$options1 = [
+					'id'=>'transaksi-saldo-export-excel',
+					'data-pjax' =>0,
+					'class'=>"btn btn-primary btn-xs",
+					'title'=>'Export Excel'
+		];
+		$icon1 = '<span class="fa-stack fa-sm text-left">
+				  <b class="fa fa-circle fa-stack-2x" style="color:#ffffff"></b>
+				  <b class="fa fa-file-excel-o fa-stack-1x" style="color:#000000"></b>
+				</span>
+		';
+		$label1 = $icon1 . $title1;
+		$content = Html::a($label1,$url,$options1);
+		return $content;
+	}
 ?>

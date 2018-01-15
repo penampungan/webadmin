@@ -18,8 +18,8 @@ class PpobTransaksiSearch extends PpobTransaksi
 {
     public $tgllama;
     public $tglbaru;
-	// public $TAHUN;
-	// public $BULAN;
+	public $ACCESS_GROUP;
+	public $STORE_ID;
     /**
      * @inheritdoc
      */
@@ -40,7 +40,6 @@ class PpobTransaksiSearch extends PpobTransaksi
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-
     /**
      * Creates data provider instance with search query applied
      *
@@ -50,12 +49,19 @@ class PpobTransaksiSearch extends PpobTransaksi
      */
     public function searchExcelExport($params)
     {
-        $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
-        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        // print_r($this->ACCESS_GROUP);die();
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND 
+            ACCESS_GROUP='".$this->ACCESS_GROUP."' AND 
+            STORE_ID='".$this->STORE_ID."'";
+        } else {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND 
+            ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
+            STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        }
         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $qrySql,
         ]);
@@ -64,12 +70,18 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchExcelExportBaru($params)
     {
-        $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
-        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0 AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0 GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0 GROUP BY STORE_ID LIMIT 1)";
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='0' AND
+            ACCESS_GROUP='".$this->ACCESS_GROUP."' AND 
+            STORE_ID='".$this->STORE_ID."'";
+        } else {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='0' AND
+            ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
+            STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        }
         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $qrySql,
         ]);
@@ -78,12 +90,18 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchExcelExportPending($params)
     {
-        $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi`
-        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 GROUP BY STORE_ID LIMIT 1)";
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='3' AND
+            ACCESS_GROUP='".$this->ACCESS_GROUP."' AND 
+            STORE_ID='".$this->STORE_ID."'";
+        } else {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='3' AND
+            ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
+            STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        }
         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $qrySql,
         ]);
@@ -92,12 +110,18 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchExcelExportSuccess($params)
     {
-        $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
-        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=2 AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=2 GROUP BY STORE_ID LIMIT 1)";
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='1' AND
+            ACCESS_GROUP='".$this->ACCESS_GROUP."' AND 
+            STORE_ID='".$this->STORE_ID."'";
+        } else {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='1' AND
+            ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
+            STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        }
         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $qrySql,
         ]);
@@ -106,12 +130,18 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchExcelExportGagal($params)
     {
-        $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
-        WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3 AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3 GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3 GROUP BY STORE_ID LIMIT 1)";
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='3' AND
+            ACCESS_GROUP='".$this->ACCESS_GROUP."' AND 
+            STORE_ID='".$this->STORE_ID."'";
+        } else {
+            $query = "SELECT ID,TRANS_ID,TRANS_DATE,TGL,JAM,ACCESS_GROUP,STORE_ID,ID_PRODUK,TYPE_NM,KELOMPOK,KTG_ID,KTG_NM,ID_CODE,CODE,`NAME`,DENOM,HARGA_DASAR,MARGIN_FEE_KG,MARGIN_FEE_MEMBER,HARGA_JUAL,PERMIT,FUNGSI,MSISDN,ID_PELANGGAN,PEMBAYARAN,RESPON_REFF_ID,RESPON_NAMA_PELANGGAN,RESPON_ADMIN_BANK,RESPON_TAGIHAN,RESPON_TOTAL_BAYAR,RESPON_MESSAGE,RESPON_STRUK,RESPON_TOKEN,STATUS FROM `ppob_transaksi` 
+            WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS='3' AND
+            ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
+            STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
+        }
         $qrySql= Yii::$app->db->createCommand($query)->queryAll();
-
         $dataProvider = new ArrayDataProvider([
             'allModels' => $qrySql,
         ]);
@@ -121,11 +151,15 @@ class PpobTransaksiSearch extends PpobTransaksi
     
     public function searchDataSeluruh($params)
     {
-		$qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND 
-        ACCESS_GROUP=(SELECT ACCESS_GROUP FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."'  GROUP BY ACCESS_GROUP LIMIT 1) AND 
-        STORE_ID=(SELECT STORE_ID FROM ppob_transaksi WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' GROUP BY STORE_ID LIMIT 1)";
-		$qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
-		$provider = new ArrayDataProvider([
+       
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND ACCESS_GROUP='".$this->ACCESS_GROUP."' AND STORE_ID='".$this->STORE_ID."';";
+        } else {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."';";
+        }
+
+        $qrySql= Yii::$app->db->createCommand($qryStr)->queryAll();
+        $provider = new ArrayDataProvider([
 			'allModels' => $qrySql,
 			'pagination' => [
 				'pageSize' => 20,
@@ -182,8 +216,12 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchFirst($params)
     {
-		$qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0 ;";
-		$qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
+        if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND ACCESS_GROUP='".$this->ACCESS_GROUP."' AND STORE_ID='".$this->STORE_ID."' AND STATUS=0 ;";
+        } else {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=0 ;";
+        }
+        $qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
 		$provider = new ArrayDataProvider([
 			'allModels' => $qrySql,
 			'pagination' => [
@@ -241,8 +279,12 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchPending($params)
     {
-		$qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 ;";
-		$qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
+		if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND ACCESS_GROUP='".$this->ACCESS_GROUP."' AND STORE_ID='".$this->STORE_ID."' AND STATUS=1 ;";
+        } else {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=1 ;";
+        }
+        $qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
 		$provider = new ArrayDataProvider([
 			'allModels' => $qrySql,
 			'pagination' => [
@@ -300,8 +342,12 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchSuccess($params)
     {
-		$qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=2 ;";
-		$qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
+		if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND ACCESS_GROUP='".$this->ACCESS_GROUP."' AND STORE_ID='".$this->STORE_ID."' AND STATUS=2 ;";
+        } else {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=2 ;";
+        }
+        $qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
 		$provider = new ArrayDataProvider([
 			'allModels' => $qrySql,
 			'pagination' => [
@@ -359,8 +405,12 @@ class PpobTransaksiSearch extends PpobTransaksi
     }
     public function searchGagal($params)
     {
-		$qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3 ;";
-		$qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
+		if ($this->tgllama!='' && $this->tglbaru!='' && $this->ACCESS_GROUP!='' && $this->STORE_ID!='') {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND ACCESS_GROUP='".$this->ACCESS_GROUP."' AND STORE_ID='".$this->STORE_ID."' AND STATUS=3 ;";
+        } else {
+            $qryStr="SELECT * FROM `ppob_transaksi` WHERE TGL BETWEEN '".$this->tgllama."' AND '".$this->tglbaru."' AND STATUS=3 ;";
+        }
+        $qrySql= Yii::$app->production_api->createCommand($qryStr)->queryAll(); 
 		$provider = new ArrayDataProvider([
 			'allModels' => $qrySql,
 			'pagination' => [

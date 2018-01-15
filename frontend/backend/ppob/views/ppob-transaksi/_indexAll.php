@@ -114,7 +114,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             [
                 'columns'=>[
                     ['content'=>'DATA OWNER', 'options'=>[
-                            'colspan'=>4,
+                            'colspan'=>3,
                             'style'=>[
                                 'width'=>'10px',
                                 'text-align'=>'center',
@@ -124,7 +124,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                             ]
                         ]
                     ],
-                    ['content'=>'DATA Prodak', 'options'=>[
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
                             'colspan'=>14,
                             'style'=>[
                                 'width'=>'10px',

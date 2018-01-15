@@ -74,10 +74,38 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         };
            
     $gvppobTransasksiSaldo=GridView::widget([
-        'id'=>'gv-data-transaksi-saldo',
+        'id'=>'gv-data-transaksi-saldo-expierd',
         'dataProvider' => $dataProviderExpired,
         'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
+        'columns'=>$attDinamikField,
+        'beforeHeader'=>[
+            [
+                'columns'=>[
+                    ['content'=>'DATA OWNER', 'options'=>[
+                            'colspan'=>3,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#53ff1a',
+                            ]
+                        ]
+                    ],
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
+                            'colspan'=>14,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#53ff1a',
+                            ]
+                        ]
+                    ],
+                ]
+            ]
+        ],  				
         'pjax'=>true,
         'rowOptions' => function($model, $key, $index, $grid){
             if($model['STATUS']==3){return ['class' => 'danger'];}	

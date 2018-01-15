@@ -52,9 +52,9 @@ $this->title = 'PPOB-Transaksi';
 $cookies = Yii::$app->request->cookies;
 $storeId = $cookies->getValue('TGL');
 $storeNm = $cookies->getValue('ACCESS_GROUP');
-$storeNm = $cookies->getValue('STORE_ID');
+// $storeNm = $cookies->getValue('STORE_ID');
 
-// print_r($storeId);die();
+// print_r($storeId.$storeNm);die();
 $All=$this->render('_indexAll',[
 	'searchModel' => $searchModel,
 	'dataProviderAll' => $dataProviderAll,
