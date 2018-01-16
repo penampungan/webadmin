@@ -96,7 +96,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-transaksi-saldo',
             ],						  
         ],
         'hover'=>true, //cursor select

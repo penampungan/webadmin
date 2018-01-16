@@ -107,7 +107,7 @@ use common\models\Userlogin;
 			}elseif($id==3){
 				//== Detail Prodak==
 				if (empty($paramCari)) {
-					$searchModel = ProductSearch::find()->select('product.*,STORE_NM')->leftJoin('store','product.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$user->ACCESS_ID])->all();
+					$searchModel = ProductSearch::find()->select('product.*,STORE_NM')->leftJoin('store','product.STORE_ID=store.STORE_ID')->leftJoin('user','store.ACCESS_GROUP=user.ACCESS_ID')->where(['user.ACCESS_ID'=>$user->ACCESS_ID])->orderBy('STORE_NM',SORT_ASC)->all();
 					$dataProviderProdak =new ArrayDataProvider([
 						'allModels'=>$searchModel,	
 						'pagination' => [

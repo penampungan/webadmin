@@ -32,7 +32,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(ppobtransaksisaldoAryColumn() as $key =>$value[]){			
+        foreach(ppobtransaksisaldoPaidAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -74,15 +74,46 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         };
            
     $gvppobTransasksiSaldo=GridView::widget([
-        'id'=>'gv-data-transaksi-saldo',
+        'id'=>'gv-data-transaksi-saldo-paid',
         'dataProvider' => $dataProviderPaid,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,				
         'pjax'=>true,
+        'beforeHeader'=>[
+            [
+                'columns'=>[
+                    ['content'=>'DATA OWNER', 'options'=>[
+                            'colspan'=>3,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#53ff1a',
+                            ]
+                        ]
+                    ],
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
+                            'colspan'=>14,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#53ff1a',
+                            ]
+                        ]
+                    ],
+                ]
+            ]
+        ],  
+        'rowOptions' => function($model, $key, $index, $grid){
+            if($model['STATUS']==1){return ['class' => 'success'];}
+        },
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-transaksi-saldo-paid',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -97,7 +128,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px"> </div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolExportExcel().'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,

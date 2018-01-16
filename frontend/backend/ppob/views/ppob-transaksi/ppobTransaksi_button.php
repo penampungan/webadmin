@@ -5,7 +5,8 @@ use yii\helpers\Url;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\FileInput;
 use yii\base\DynamicModel;
-	
+use kartik\daterange\DateRangePicker;
+
 	/*
 	 * BUTTON CREATE
 	*/
@@ -102,7 +103,7 @@ use yii\base\DynamicModel;
 		$url = Url::toRoute(['/ppob/ppob-transaksi/export-file']);
 		$options1 = [
 					'id'=>'transaksi-export-excel',
-					'data-pjax' => true,
+					'data-pjax' =>0,
 					'class'=>"btn btn-primary btn-xs",
 					'title'=>'Export Excel'
 		];
@@ -114,27 +115,28 @@ use yii\base\DynamicModel;
 		$label1 = $icon1 . $title1;
 		$content = Html::a($label1,$url,$options1);
 		return $content;
-	}	
-	/*
-	 * BUTTON DOWNLOAD FORMAT & LIST DATA PRODUCK OPNAME
-	*/
-	function tombolUploadFormat(){
-		$title= Yii::t('app','Import Excel');
-		$url = Url::toRoute(['/ppob/ppob-transaksi/upload-file']);
+	}
+	
+	// /*
+	//  * BUTTON SEARCH
+	// */
+	function tombolSearchData(){
+		$title= Yii::t('app','Search');
+		$url = Url::toRoute(['/ppob/ppob-transaksi/pencarian-index']);
 		$options1 = ['value'=>$url,
-					'id'=>'ppobtransaksi-button-upload',
+					'id'=>'ppobtransaksi-button-search',
 					'data-pjax' => false,
-					'class'=>"btn btn-warning btn-xs",
-					'title'=>'Import Excel'
+					'class'=>"btn btn-info btn-xs",
+					'title'=>'Pencarian'
 		];
 		$icon1 = '<span class="fa-stack fa-sm text-left">
 				  <b class="fa fa-circle fa-stack-2x" style="color:#ffffff"></b>
-				  <b class="fa fa-upload fa-stack-1x" style="color:#000000"></b>
+				  <b class="fa fa-search fa-stack-1x" style="color:#000000"></b>
 				</span>
 		';
 		$label1 = $icon1.' '.$title ;
 		$content = Html::button($label1,$options1);
 		return $content;		
 	}
-
+	
 ?>

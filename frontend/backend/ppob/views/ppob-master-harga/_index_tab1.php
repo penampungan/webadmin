@@ -141,7 +141,37 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'id'=>'gv-harga-exist',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
+        'columns'=>$attDinamikField,
+        'beforeHeader'=>[
+            [
+                'columns'=>[
+                    ['content'=>'DATA', 'options'=>[
+                            'colspan'=>3,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#ff3333',
+                                'color'=>'#ffffff'
+                            ]
+                        ]
+                    ],
+                    ['content'=>'DATA', 'options'=>[
+                            'colspan'=>14,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#ff3333',
+                                'color'=>'#ffffff'
+                            ]
+                        ]
+                    ],
+                ]
+            ]
+        ],  				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[

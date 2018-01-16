@@ -28,16 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'TYPE_PAY_ID',
             'TYPE_PAY_NM',
-            'STATUS',
             'DCRP_DETIL:ntext',
-            'CREATE_BY',
-            'CREATE_AT',
-            'UPDATE_BY',
-            'UPDATE_AT',
-            'CREATE_UUID',
-            'UPDATE_UUID',
+            'STATUS',
         ],
     ]) ?>
 

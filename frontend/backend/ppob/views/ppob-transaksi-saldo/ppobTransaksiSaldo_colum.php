@@ -2,6 +2,8 @@
 use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
 use yii\helpers\Html;
+use common\models\Store;
+use frontend\backend\sistem\models\UserKg;
 
 /**
  * DESCRIPTION REFRENCE
@@ -32,51 +34,51 @@ function ppobtransaksisaldoAryColumn(){
 		['STATUS_NM' => 'Expired', 'STT_NM' => 'Expired'],
 		['STATUS_NM' => 'Pengembalian Saldo', 'STT_NM' => 'Pengembalian Saldo'],		
 	  ];
+	// $aryFieldColomn[]=[
+	// 'ID' =>0, 'ATTR' =>[
+	// 	'ATR_FIELD'=>'TRANS_ID','ATR_LABEL'=>'Trans ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+	// 	'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+	// 	'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+	// 	'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+	// 	// PENGUNAAN FILTER 
+	// 	// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+	// 	// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+	// 	// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-']	
+	// 	// 'FILTER_OPTION'=>[],
+	// 	]
+	// ];	  
 	$aryFieldColomn[]=[
 	'ID' =>0, 'ATTR' =>[
-		'ATR_FIELD'=>'TRANS_ID','ATR_LABEL'=>'Trans ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
-		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
-		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
-		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
-		// PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-']	
-		// 'FILTER_OPTION'=>[],
-		]
-	];	  
-	$aryFieldColomn[]=[
-	'ID' =>1, 'ATTR' =>[
 		'ATR_FIELD'=>'STORE_ID','ATR_LABEL'=>'Store ID','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'100px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
 		//PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
-		// 'FILTER_OPTION'=>[],		
+		'FILTER'=>ArrayHelper::map(Store::find()->groupBy('STORE_NM')->all(),'STORE_ID','STORE_NM'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+		'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+		'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-','class'=>'form-control'],
+		'FILTER_OPTION'=>[],	
 		]
 	];	
 	//--NAMA---
 	$aryFieldColomn[]=[
-	'ID' =>2, 'ATTR' =>[
+	'ID' =>1, 'ATTR' =>[
 		'ATR_FIELD'=>'ACCESS_GROUP','ATR_LABEL'=>'Access Group','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
 		'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
 		//PENGUNAAN FILTER 
-		// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
-		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
-		// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
-		// 'FILTER_OPTION'=>[],
+		'FILTER'=>ArrayHelper::map(UserKg::find()->all(),'ACCESS_GROUP','username'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+		'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+		'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-','class'=>'form-control'],
+		'FILTER_OPTION'=>[],	
 		//DATE TIME PLUGIN
 		// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['format' => 'yyyy-mm-dd','autoclose' => true,'todayHighlight' => true,'autoWidget' => false,'todayBtn' => true,]],
 		]
 	];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-	'ID' =>3, 'ATTR' =>[
+	'ID' =>2, 'ATTR' =>[
 		'ATR_FIELD'=>'TRANS_DATE','ATR_LABEL'=>'Trans Date','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 		'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 		'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -90,7 +92,7 @@ function ppobtransaksisaldoAryColumn(){
 	];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>4, 'ATTR' =>[
+		'ID' =>3, 'ATTR' =>[
 			'ATR_FIELD'=>'SALDO_DEPOSIT','ATR_LABEL'=>'Saldo Deposit','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -104,7 +106,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>5, 'ATTR' =>[
+		'ID' =>4, 'ATTR' =>[
 			'ATR_FIELD'=>'DES_STORE','ATR_LABEL'=>'DES Store','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -118,7 +120,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>6, 'ATTR' =>[
+		'ID' =>5, 'ATTR' =>[
 			'ATR_FIELD'=>'SALDO_CURRENT','ATR_LABEL'=>'Saldo Current','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -132,7 +134,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>7, 'ATTR' =>[
+		'ID' =>6, 'ATTR' =>[
 			'ATR_FIELD'=>'SALDO_MUTASI','ATR_LABEL'=>'Saldo Mutasi','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -146,7 +148,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>8, 'ATTR' =>[
+		'ID' =>7, 'ATTR' =>[
 			'ATR_FIELD'=>'SALDO_BACK','ATR_LABEL'=>'Saldo Back','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -160,7 +162,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>9, 'ATTR' =>[
+		'ID' =>8, 'ATTR' =>[
 			'ATR_FIELD'=>'METODE_PEMBAYARAN','ATR_LABEL'=>'Metode Pembayaran','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -174,7 +176,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>10, 'ATTR' =>[
+		'ID' =>9, 'ATTR' =>[
 			'ATR_FIELD'=>'DESTINATION_ACCOUNT_NM','ATR_LABEL'=>'Destination Account','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
@@ -188,7 +190,7 @@ function ppobtransaksisaldoAryColumn(){
 		];
 	//--NAMA---	
 	$aryFieldColomn[]=[
-		'ID' =>11, 'ATTR' =>[
+		'ID' =>10, 'ATTR' =>[
 			'ATR_FIELD'=>'SOURCE_ACCOUNT_NM','ATR_LABEL'=>'Source Account','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
 			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
 			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,

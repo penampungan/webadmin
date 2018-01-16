@@ -28,7 +28,7 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-data-transaksi-saldo .kv-grid-container{
+	#gv-data-ppobtransaksi .kv-grid-container{
 			height:400px
         }
     #w5 :link {
@@ -49,6 +49,12 @@ echo $this->render('ppobTransaksi_modal'); //echo difinition
 echo $this->render('ppobTransaksi_colum'); //echo difinition
 $this->title = 'PPOB-Transaksi';
 
+$cookies = Yii::$app->request->cookies;
+$storeId = $cookies->getValue('TGL');
+$storeNm = $cookies->getValue('ACCESS_GROUP');
+// $storeNm = $cookies->getValue('STORE_ID');
+
+// print_r($storeId.$storeNm);die();
 $All=$this->render('_indexAll',[
 	'searchModel' => $searchModel,
 	'dataProviderAll' => $dataProviderAll,
@@ -105,5 +111,9 @@ $tabIndex=TabsX::widget([
 ]);
 
 ?>
+<div class="col-xs-12 col-sm-12 col-lg-12">
+    <div class="pull-right">
+        <?=tombolSearchData()?>
+    </div>
+</div>
 <?=$tabIndex?>
-

@@ -72,52 +72,48 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'groupedRow'=>$value[$key]['ATR_GROUPROW'],	
             ];
         };
-        
-        $attDinamikField[]=[			
-            //ACTION
-            'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}',
-            'header'=>'ACTION',
-            'dropdown' => true,
-            'dropdownOptions'=>[
-                'class'=>'pull-right dropdown',
-                'style'=>'width:100%;background-color:#E6E6FA'				
-            ],
-            'dropdownButton'=>[
-                'label'=>'ACTION',
-                'class'=>'btn btn-info btn-xs',
-                'style'=>'width:100%'		
-            ],
-            'buttons' => [
-                'view' =>function ($url, $model){
-                    return  tombolView($url, $model);
-                },
-                'edit' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdate($url, $model);
-                    //}					
-                },
-                'delete' =>function($url, $model,$key){
-                    return  tombolDelete($url, $model);
-                }
-            ],
-            'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
-            'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
-        ]; 
     
-    $gvppobMasterHarga=GridView::widget([
-        'id'=>'gv-data-industri',
+    $gvppobMasterHarga4=GridView::widget([
+        'id'=>'gv-data-ppobtransaksi-success',
         'dataProvider' => $dataProviderSuccess,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,
+        'beforeHeader'=>[
+            [
+                'columns'=>[
+                    ['content'=>'DATA OWNER', 'options'=>[
+                            'colspan'=>3,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#FFB400',
+                            ]
+                        ]
+                    ],
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
+                            'colspan'=>14,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#FFB400',
+                            ]
+                        ]
+                    ],
+                ]
+            ]
+        ], 
         'rowOptions' => function($model, $key, $index, $grid){
-            if($model->STATUS==1){return ['class' => 'success'];}	
+            if($model['STATUS']==1){return ['class' => 'success'];}	
         },					
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-ppobtransaksi-success',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -146,7 +142,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
 	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
 		<div class="row">
-			<?=$gvppobMasterHarga?>
+			<?=$gvppobMasterHarga4?>
 		</div>
 	</div>
 </div>

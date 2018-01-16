@@ -31,6 +31,18 @@ $this->registerCss("
 	#gv-data-transaksi-saldo .kv-grid-container{
 			height:400px
         }
+	#gv-data-transaksi-saldo-paid .kv-grid-container{
+			height:400px
+        }
+	#gv-data-transaksi-saldo-ambil .kv-grid-container{
+			height:400px
+        }
+	#gv-data-transaksi-saldo-expierd .kv-grid-container{
+			height:400px
+        }
+	#gv-data-transaksi-saldo-mutasi .kv-grid-container{
+			height:400px
+        }
     #w7 :link {
         color: black;
     }
@@ -47,6 +59,11 @@ $this->registerCss("
 $this->registerJs($this->render('ppobTransaksiSaldo_script.js'),View::POS_READY);
 echo $this->render('ppobTransaksiSaldo_modal'); //echo difinition
 echo $this->render('ppobTransaksiSaldo_colum'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_ambil'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_expired'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_mutasi'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_paid'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_button'); //echo difinition
 $this->title = 'PPOB-Transaksi Saldo';
 
 $Action=$this->render('_indexAction',[

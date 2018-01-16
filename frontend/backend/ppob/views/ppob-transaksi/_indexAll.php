@@ -76,7 +76,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{delete}',
+            'template' => '{view}{delete}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[
@@ -106,21 +106,49 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         ]; 
     
     $gvppobMasterHarga=GridView::widget([
-        'id'=>'gv-data-industri',
+        'id'=>'gv-data-ppobtransaksi',
         'dataProvider' => $dataProviderAll,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,
+        'beforeHeader'=>[
+            [
+                'columns'=>[
+                    ['content'=>'DATA OWNER', 'options'=>[
+                            'colspan'=>3,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#FFB400',
+                            ]
+                        ]
+                    ],
+                    ['content'=>'DATA TRANSAKSI', 'options'=>[
+                            'colspan'=>14,
+                            'style'=>[
+                                'width'=>'10px',
+                                'text-align'=>'center',
+                                'font-family'=>'tahoma',
+                                'font-size'=>'8pt',
+                                'background-color'=>'#FFB400',
+                            ]
+                        ]
+                    ],
+                ]
+            ]
+        ],  
         'rowOptions' => function($model, $key, $index, $grid){
-            if ($model->STATUS==0){return ['class' => 'default'];}
-            elseif($model->STATUS==1){return ['class' => 'success'];}
-            elseif($model->STATUS==2){return ['class' => 'warning'];}
-            elseif($model->STATUS==3){return ['class' => 'danger'];}	
+            if ($model['STATUS']==0){return ['class' => 'default'];}
+            elseif($model['STATUS']==1){return ['class' => 'success'];}
+            elseif($model['STATUS']==2){return ['class' => 'warning'];}
+            elseif($model['STATUS']==3){return ['class' => 'danger'];}	
         },				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-ppobtransaksi',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -135,7 +163,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolExportExcel().' '.tombolUploadFormat().'</div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolExportExcel().'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
