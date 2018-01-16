@@ -32,7 +32,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(ppobtransaksisaldoAryColumn() as $key =>$value[]){			
+        foreach(ppobtransaksisaldoPaidAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -113,7 +113,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-transaksi-saldo-paid',
             ],						  
         ],
         'hover'=>true, //cursor select

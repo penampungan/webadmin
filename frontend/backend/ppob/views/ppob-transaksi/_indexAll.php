@@ -76,7 +76,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{delete}',
+            'template' => '{view}{delete}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[

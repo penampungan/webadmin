@@ -112,7 +112,7 @@ $this->registerCss("
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
 			</span><b> Search Data Taransaksi </b>
 		',	
-		'size' => 'modal-md',
+		'size' => 'modal-sm',
 		'options' => ['class'=>'slide'],
 		'headerOptions'=>[
 			'style'=> 'border-radius:5px; background-color:'.$modalHeaderColor,

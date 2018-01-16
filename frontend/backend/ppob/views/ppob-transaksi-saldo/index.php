@@ -59,6 +59,10 @@ $this->registerCss("
 $this->registerJs($this->render('ppobTransaksiSaldo_script.js'),View::POS_READY);
 echo $this->render('ppobTransaksiSaldo_modal'); //echo difinition
 echo $this->render('ppobTransaksiSaldo_colum'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_ambil'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_expired'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_mutasi'); //echo difinition
+echo $this->render('ppobTransaksiSaldo_colum_paid'); //echo difinition
 echo $this->render('ppobTransaksiSaldo_button'); //echo difinition
 $this->title = 'PPOB-Transaksi Saldo';
 

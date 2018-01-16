@@ -20,11 +20,19 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
      */
     public $tgllama;
     public $tglbaru;
+    public $storeidpaid;
+    public $accessgrouppaid;
+    public $storeidmutasi;
+    public $accessgroupmutasi;
+    public $storeidexpierd;
+    public $accessgroupexpierd;
+    public $storeidambil;
+    public $accessgroupambil;
     public function rules()
     {
         return [
             [['ID', 'STATUS'], 'integer'],
-            [['TRANS_ID', 'STORE_ID', 'ACCESS_GROUP', 'TRANS_DATE', 'TGL', 'WAKTU', 'DES_STORE', 'METODE_PEMBAYARAN', 'DESTINATION_ACCOUNT_NM', 'DESTINATION_ACCOUNT_NO', 'SOURCE_ACCOUNT_NM', 'SOURCE_ACCOUNT_NO', 'EMAIL', 'KETERANGAN', 'STATUS_NM', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT','tgllama','tglbaru'], 'safe'],
+            [['TRANS_ID', 'accessgroupambil','storeidambil','storeidpaid','accessgrouppaid','storeidmutasi','accessgroupmutasi','storeidexpierd','accessgroupexpierd','STORE_ID', 'ACCESS_GROUP', 'TRANS_DATE', 'TGL', 'WAKTU', 'DES_STORE', 'METODE_PEMBAYARAN', 'DESTINATION_ACCOUNT_NM', 'DESTINATION_ACCOUNT_NO', 'SOURCE_ACCOUNT_NM', 'SOURCE_ACCOUNT_NO', 'EMAIL', 'KETERANGAN', 'STATUS_NM', 'CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT','tgllama','tglbaru'], 'safe'],
             [['SALDO_DEPOSIT', 'SALDO_CURRENT', 'SALDO_MUTASI', 'SALDO_BACK'], 'number'],
         ];
     }
@@ -186,8 +194,8 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
         ]);
 
         $query->andFilterWhere(['like', 'TRANS_ID', $this->TRANS_ID])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'STORE_ID', $this->storeidpaid])
+            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->accessgrouppaid])
             ->andFilterWhere(['like', 'DES_STORE', $this->DES_STORE])
             ->andFilterWhere(['like', 'METODE_PEMBAYARAN', $this->METODE_PEMBAYARAN])
             ->andFilterWhere(['like', 'DESTINATION_ACCOUNT_NM', $this->DESTINATION_ACCOUNT_NM])
@@ -236,8 +244,8 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
         ]);
 
         $query->andFilterWhere(['like', 'TRANS_ID', $this->TRANS_ID])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'STORE_ID', $this->storeidmutasi])
+            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->accessgroupmutasi])
             ->andFilterWhere(['like', 'DES_STORE', $this->DES_STORE])
             ->andFilterWhere(['like', 'METODE_PEMBAYARAN', $this->METODE_PEMBAYARAN])
             ->andFilterWhere(['like', 'DESTINATION_ACCOUNT_NM', $this->DESTINATION_ACCOUNT_NM])
@@ -284,10 +292,10 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
             'CREATE_AT' => $this->CREATE_AT,
             'UPDATE_AT' => $this->UPDATE_AT,
         ]);
-
+        
         $query->andFilterWhere(['like', 'TRANS_ID', $this->TRANS_ID])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'STORE_ID', $this->storeidexpierd])
+            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->accessgroupexpierd])
             ->andFilterWhere(['like', 'DES_STORE', $this->DES_STORE])
             ->andFilterWhere(['like', 'METODE_PEMBAYARAN', $this->METODE_PEMBAYARAN])
             ->andFilterWhere(['like', 'DESTINATION_ACCOUNT_NM', $this->DESTINATION_ACCOUNT_NM])
@@ -336,8 +344,8 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
         ]);
 
         $query->andFilterWhere(['like', 'TRANS_ID', $this->TRANS_ID])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'STORE_ID', $this->storeidambil])
+            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->accessgroupambil])
             ->andFilterWhere(['like', 'DES_STORE', $this->DES_STORE])
             ->andFilterWhere(['like', 'METODE_PEMBAYARAN', $this->METODE_PEMBAYARAN])
             ->andFilterWhere(['like', 'DESTINATION_ACCOUNT_NM', $this->DESTINATION_ACCOUNT_NM])

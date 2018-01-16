@@ -160,4 +160,29 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
         $result=$this->store;
         return $result!=''?$result->FAX:'';
     }
+    
+    public function getStoreidpaid(){
+        return $this->STORE_ID;
+    }
+    public function getAccessgrouppaid(){
+        return $this->ACCESS_GROUP;
+    }
+    public function getStoreidmutasi(){
+        return $this->STORE_ID;
+    }
+    public function getAccessgroupmutasi(){
+        return $this->ACCESS_GROUP;
+    }
+    public function getStoreidexpierd(){
+        return $this->STORE_ID;
+    }
+    public function getAccessgroupexpierd(){
+        return $this->ACCESS_GROUP;
+    }
+    public function getStoreidambil(){
+        return $this->STORE_ID;
+    }
+    public function getAccessgroupambil(){
+        return $this->ACCESS_GROUP;
+    }
 }
