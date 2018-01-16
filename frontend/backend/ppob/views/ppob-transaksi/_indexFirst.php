@@ -32,7 +32,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(ppobTransaksiAryColumn() as $key =>$value[]){			
+        foreach(ppobTransaksiBaruAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -44,6 +44,12 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'mergeHeader'=>$value[$key]['ATR_HEADER_MERGE'],
                 'hAlign'=>$value[$key]['H_VALIGN'],
                 'vAlign'=>$value[$key]['V_VALIGN'],
+                // 'value'=>function($model){
+                //     if ($model['typenmbaru']){
+                //         $fieldBaru=$model['typenmbaru'];
+                //     };//elseif($model['typenmbaru']){                    
+                //     return $fieldBaru;
+                // },
                 //'hidden'=>false,
                 'noWrap'=>true,	
                 'format'=>$value[$key]['ATR_FORMAT'],
@@ -107,7 +113,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ]
         ], 
         'rowOptions' => function($model, $key, $index, $grid){
-            if ($model['STATUS']==0){return ['class' => 'default'];}
+            if ($model['BARU_STATUS']==0){return ['class' => 'default'];}
         },				
         'pjax'=>true,
         'pjaxSettings'=>[

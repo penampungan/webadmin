@@ -18,8 +18,9 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
     /**
      * @inheritdoc
      */
-    public $tgllama;
-    public $tglbaru;
+    
+	public $ACCESS_GROUP;
+    public $STORE_ID;
     public $storeidpaid;
     public $accessgrouppaid;
     public $storeidmutasi;
@@ -37,6 +38,7 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
         ];
     }
 
+    
     /**
      * @inheritdoc
      */
@@ -162,6 +164,8 @@ class PpobTransaksiSaldoSearch extends PpobTransaksiSaldo
     }
     public function searchPaid($params)
     {
+        
+        // print_r($this->STORE_ID);die();
         $query = PpobTransaksiSaldo::find();
 
         // add conditions that should always apply here

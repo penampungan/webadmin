@@ -35,7 +35,7 @@ $(document).on('click','#ppobtransaksi-button-update', function(ehead){
 	.load($(this).attr('value'));
 });
 /*
- * BUTTON UPDATE
+ * BUTTON Search
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	

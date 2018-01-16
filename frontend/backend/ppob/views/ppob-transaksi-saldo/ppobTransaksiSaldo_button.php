@@ -132,4 +132,25 @@ use yii\base\DynamicModel;
 		$content = Html::a($label1,$url,$options1);
 		return $content;
 	}
+	// /*
+	//  * BUTTON SEARCH
+	// */
+	function tombolSearchData(){
+		$title= Yii::t('app','Search');
+		$url = Url::toRoute(['/ppob/ppob-transaksi-saldo/pencarian-index']);
+		$options1 = ['value'=>$url,
+					'id'=>'ppobtransaksisaldo-button-search',
+					'data-pjax' => false,
+					'class'=>"btn btn-info btn-xs",
+					'title'=>'Pencarian'
+		];
+		$icon1 = '<span class="fa-stack fa-sm text-left">
+				  <b class="fa fa-circle fa-stack-2x" style="color:#ffffff"></b>
+				  <b class="fa fa-search fa-stack-1x" style="color:#000000"></b>
+				</span>
+		';
+		$label1 = $icon1.' '.$title ;
+		$content = Html::button($label1,$options1);
+		return $content;		
+	}
 ?>
