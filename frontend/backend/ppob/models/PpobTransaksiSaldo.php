@@ -5,6 +5,7 @@ namespace frontend\backend\ppob\models;
 use Yii;
 use common\models\Store;
 use frontend\backend\sistem\models\UserKgProfile;
+use frontend\backend\sistem\models\UserKg;
 /**
  * This is the model class for table "ppob_transaksi_saldo".
  *
@@ -39,7 +40,6 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
     public static function tableName()
     {
         return 'ppob_transaksi_saldo';
@@ -106,34 +106,41 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
             return '';
         }
     }
-    public function getUser()
+    public function getUserprofile()
     {
         if ($this->ACCESS_GROUP){
             return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
         }else{
             return '';
         }
-        
-         
     }
+    public function getUser()
+    {
+        if ($this->ACCESS_GROUP){
+            return $this->hasOne(UserKg::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
+        }else{
+            return '';
+        }
+    }
+
     public function getNmdepan(){
-        $result=$this->user;
+        $result=$this->userprofile;
         return $result!=''?$result->NM_DEPAN.' '.$result->NM_TENGAH.' '.$result->NM_BELAKANG:'';
     }
     public function getAlamat(){
-        $result=$this->user;
+        $result=$this->userprofile;
         return $result!=''?$result->ALMAT:'';
     }
     public function getTgllahir(){
-        $result=$this->user;
+        $result=$this->userprofile;
         return $result!=''?$result->LAHIR_TEMPAT.'/'.$result->LAHIR_TGL:'';
     }
     public function getLahirtempat(){
-        $result=$this->user;
+        $result=$this->userprofile;
         return $result!=''?:'';
     }
     public function getKtp(){
-        $result=$this->user;
+        $result=$this->userprofile;
         return $result!=''?$result->KTP:'';
     }
     public function getStoreid(){
@@ -162,27 +169,35 @@ class PpobTransaksiSaldo extends \yii\db\ActiveRecord
     }
     
     public function getStoreidpaid(){
-        return $this->STORE_ID;
+        $result=$this->store;
+        return $result!=''?$result->STORE_NM:'';
     }
     public function getAccessgrouppaid(){
-        return $this->ACCESS_GROUP;
+        $result=$this->user;
+        return $result!=''?$result->username:'';
     }
     public function getStoreidmutasi(){
-        return $this->STORE_ID;
+        $result=$this->store;
+        return $result!=''?$result->STORE_NM:'';
     }
     public function getAccessgroupmutasi(){
-        return $this->ACCESS_GROUP;
+        $result=$this->user;
+        return $result!=''?$result->username:'';
     }
     public function getStoreidexpierd(){
-        return $this->STORE_ID;
+        $result=$this->store;
+        return $result!=''?$result->STORE_NM:'';
     }
     public function getAccessgroupexpierd(){
-        return $this->ACCESS_GROUP;
+        $result=$this->user;
+        return $result!=''?$result->username:'';
     }
     public function getStoreidambil(){
-        return $this->STORE_ID;
+        $result=$this->store;
+        return $result!=''?$result->STORE_NM:'';
     }
     public function getAccessgroupambil(){
-        return $this->ACCESS_GROUP;
+        $result=$this->user;
+        return $result!=''?$result->username:'';
     }
 }

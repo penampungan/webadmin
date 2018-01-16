@@ -71,9 +71,21 @@ class PpobTransaksiSaldoController extends Controller
      */
     public function actionIndex()
     {
+        $cookies = Yii::$app->request->cookies;
+        $ACCESS_GROUP = $cookies->getValue('ACCESS_GROUP_deposit');
+        $STORE_ID = $cookies->getValue('STORE_ID_deposit');
+
+        if ($ACCESS_GROUP!='' && $STORE_ID!=''){
+            $cari=['ACCESS_GROUP'=>$ACCESS_GROUP,'STORE_ID'=>$STORE_ID,'accessgroupambil'=>$ACCESS_GROUP,'storeidambil'=>$STORE_ID,'storeidpaid'=>$STORE_ID,'accessgrouppaid'=>$ACCESS_GROUP,'storeidmutasi'=>$STORE_ID,'accessgroupmutasi'=>$ACCESS_GROUP,'storeidexpierd'=>$STORE_ID,'accessgroupexpierd'=>$ACCESS_GROUP];			
+            // print_r($cari);die();
+        }else {
+            $cari='';
+        } 
+      
         $paramCari=Yii::$app->getRequest()->getQueryParam('transid');
         
-        $searchModel = new PpobTransaksiSaldoSearch();
+        // print_r($cari);die();
+        $searchModel = new PpobTransaksiSaldoSearch($cari);
         $dataProvider = $searchModel->searchTrans(Yii::$app->request->queryParams);
         $dataProviderPaid = $searchModel->searchPaid(Yii::$app->request->queryParams);
         $dataProviderMutasi = $searchModel->searchMutasi(Yii::$app->request->queryParams);
@@ -206,7 +218,30 @@ class PpobTransaksiSaldoController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    public function actionPencarianIndex(){
+		// $modelPeriode = new \yii\base\DynamicModel([
+		// 	'TGL','ACCESS_GROUP','STORE_ID'
+		// ]);		
+		// $modelPeriode->addRule(['TGL','ACCESS_GROUP','STORE_ID'], 'required')
+        //  ->addRule(['TGL','ACCESS_GROUP','STORE_ID'], 'safe');
+        $modelPeriode = new PpobTransaksiSaldo();
+		if ($modelPeriode->load(Yii::$app->request->post())) {
+            
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name'=>'ACCESS_GROUP_deposit',
+                'value'=>''.$modelPeriode->ACCESS_GROUP.'',
+            ]));
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name'=>'STORE_ID_deposit',
+                'value'=>''.$modelPeriode->STORE_ID.'',
+            ]));
+            return $this->redirect(['index']);
+        }else {
+            return $this->renderAjax('form_cari',[
+				'modelPeriode' => $modelPeriode
+			]);
+	   }
+	}
     /**
      * Finds the PpobTransaksiSaldo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -503,5 +538,26 @@ class PpobTransaksiSaldoController extends Controller
             return $this->redirect(['index']);
         }
         
+    }
+    public function actionSubstore() {
+        $paramCari=Yii::$app->getRequest()->getQueryParam('ACCESS_GROUP');
+        // print_r($paramCari);die();
+        if (!empty($paramCari)) {
+               $data= PpobTransaksiSaldo::find()->select('STORE_ID,ACCESS_GROUP')->where(['ACCESS_GROUP'=>$paramCari])->count();
+               if ($data>0) {
+                $access= PpobTransaksiSaldo::find()->select('STORE_ID,ACCESS_GROUP')->where(['ACCESS_GROUP'=>$paramCari])->groupBy(['STORE_ID'])->all();
+                
+                echo "<option value=''>Pilih STORE</option>";
+                foreach($access as $accesss){
+                    echo "<option value='".$accesss->STORE_ID."'>".$accesss->store['STORE_NM']."</option>";
+                }
+                return;
+               } else {
+    
+                echo "<option>Pilih STORE</option>";
+                   echo "<option value=''> - </option>";
+                   return;
+               }
+        }
     }
 }

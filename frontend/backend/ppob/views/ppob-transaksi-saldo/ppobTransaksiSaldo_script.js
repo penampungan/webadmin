@@ -34,3 +34,14 @@ $(document).on('click','#ppobtransaksisaldo-button-update', function(ehead){
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
+/*
+ * BUTTON Search
+*/
+$.fn.modal.Constructor.prototype.enforceFocus = function(){};
+//$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
+$(document).on('click','#ppobtransaksisaldo-button-search', function(ehead){ 			  
+	$('#ppobtransaksisaldo-button-search-modal').modal('show')
+	.find('#ppobtransaksisaldo-button-search-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+	//.load(ehead.target.value);
+	.load($(this).attr('value'));
+});

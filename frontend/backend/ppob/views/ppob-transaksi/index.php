@@ -47,6 +47,10 @@ $this->registerJs($this->render('ppobTransaksi_script.js'),View::POS_READY);
 echo $this->render('ppobTransaksi_button'); //echo difinition
 echo $this->render('ppobTransaksi_modal'); //echo difinition
 echo $this->render('ppobTransaksi_colum'); //echo difinition
+echo $this->render('ppobTransaksi_colum_baru'); //echo difinition
+echo $this->render('ppobTransaksi_colum_gagal'); //echo difinition
+echo $this->render('ppobTransaksi_colum_pending'); //echo difinition
+echo $this->render('ppobTransaksi_colum_success'); //echo difinition
 $this->title = 'PPOB-Transaksi';
 
 $cookies = Yii::$app->request->cookies;

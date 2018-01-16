@@ -101,7 +101,7 @@ $this->registerCss("
 		echo "<div id='ppobtransaksi-button-update-content'></div>";
 	Modal::end();
 	/*
-	 * BUTTON - upload
+	 * BUTTON - Search
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',

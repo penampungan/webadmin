@@ -32,7 +32,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(ppobTransaksiAryColumn() as $key =>$value[]){			
+        foreach(ppobTransaksiSuccessAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -107,7 +107,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ]
         ], 
         'rowOptions' => function($model, $key, $index, $grid){
-            if($model['STATUS']==1){return ['class' => 'success'];}	
+            if($model['SUCCESS_STATUS']==1){return ['class' => 'success'];}	
         },					
         'pjax'=>true,
         'pjaxSettings'=>[

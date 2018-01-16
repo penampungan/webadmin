@@ -3,8 +3,9 @@
 namespace frontend\backend\ppob\models;
 
 use Yii;
-
+use common\models\Store;
 use frontend\backend\sistem\models\UserKgProfile;
+use frontend\backend\sistem\models\UserKg;
 /**
  * This is the model class for table "ppob_transaksi".
  *
@@ -65,6 +66,7 @@ class PpobTransaksi extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'ppob_transaksi';
@@ -77,7 +79,7 @@ class PpobTransaksi extends \yii\db\ActiveRecord
     {
         return [
             [['TRANS_ID', 'TRANS_DATE', 'STORE_ID', 'ID_PRODUK'], 'required'],
-            [['TRANS_DATE', 'TGL', 'JAM', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
+            [['TRANS_DATE', 'TGL', 'JAM', 'CREATE_AT', 'UPDATE_AT','typenmbaru'], 'safe'],
             [['NAME', 'RESPON_MESSAGE', 'RESPON_STRUK'], 'string'],
             [['DENOM', 'HARGA_DASAR', 'MARGIN_FEE_KG', 'MARGIN_FEE_MEMBER', 'HARGA_JUAL', 'PEMBAYARAN', 'RESPON_ADMIN_BANK', 'RESPON_TAGIHAN', 'RESPON_TOTAL_BAYAR'], 'number'],
             [['PERMIT', 'STATUS'], 'integer'],
@@ -135,14 +137,29 @@ class PpobTransaksi extends \yii\db\ActiveRecord
             'UPDATE_AT' => 'Update  At',
         ];
     }
-    public function getUser()
+    public function getStore()
+    {
+        if ($this->STORE_ID){
+            return $this->hasOne(Store::className(),['STORE_ID'=>'STORE_ID']);
+        }else{
+            return '';
+        }
+    }
+    public function getUserprofile()
     {
         if ($this->ACCESS_GROUP){
             return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
         }else{
             return '';
         }
-        
-         
     }
+    public function getUser()
+    {
+        if ($this->ACCESS_GROUP){
+            return $this->hasOne(UserKg::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
+        }else{
+            return '';
+        }
+    }
+   
 }

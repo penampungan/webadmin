@@ -480,7 +480,7 @@ public function actionSubaccess() {
             
             echo "<option>Pilih Access Group</option>";
             foreach($access as $accesss){
-                echo "<option value='".$accesss->ACCESS_GROUP."'>".$accesss->ACCESS_GROUP."</option>";
+                echo "<option value='".$accesss->ACCESS_GROUP."'>".$accesss->user['username']."</option>";
             }
             return;
            } else {
@@ -504,7 +504,7 @@ public function actionSubstore() {
             
             echo "<option>Pilih STORE_ID</option>";
             foreach($access as $accesss){
-                echo "<option value='".$accesss->STORE_ID."'>".$accesss->STORE_ID."</option>";
+                echo "<option value='".$accesss->STORE_ID."'>".$accesss->store['STORE_NM']."</option>";
             }
             return;
            } else {

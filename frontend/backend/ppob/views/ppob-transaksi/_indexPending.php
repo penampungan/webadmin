@@ -32,7 +32,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(ppobTransaksiAryColumn() as $key =>$value[]){			
+        foreach(ppobTransaksiPendingAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -108,7 +108,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         ], 				
         'pjax'=>true,
         'rowOptions' => function($model, $key, $index, $grid){
-            if($model['STATUS']==2){return ['class' => 'warning'];}	
+            if($model['PENDING_STATUS']==2){return ['class' => 'warning'];}	
         },	
         'pjaxSettings'=>[
             'options'=>[
