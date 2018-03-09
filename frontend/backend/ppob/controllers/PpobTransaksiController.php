@@ -235,7 +235,7 @@ class PpobTransaksiController extends Controller
             // print_r($cari);die();
         }else{
             $date = date('Y-m-d',strtotime('-2 month',strtotime(date('Y-m-d')))).' - '.date('Y-m-d');
-            $tanggal = explode(" - ", $cek);
+            $tanggal = explode(" - ", $date);
 			$cari=['tgllama'=>$tanggal[0],'tglbaru'=>$tanggal[1]];			
         };
         // print_r($cari);die();
@@ -257,7 +257,7 @@ class PpobTransaksiController extends Controller
         $excel_titlePaid = $excel_dataPaid['excel_title'];
         $excel_ceilsPaid = $excel_dataPaid['excel_ceils']; 
 
-        // print_r(isset($excel_ceilsPaid));die();
+        // print_r($excel_ceilsPaid);die();
         if (!empty($excel_ceilsPaid)) {
 	
             $excel_content[] = 

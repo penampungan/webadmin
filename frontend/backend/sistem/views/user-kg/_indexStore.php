@@ -34,7 +34,7 @@ $this->registerCss("
 
 
 	$aryFieldStore= [
-        ['ID' =>0, 'ATTR' =>['FIELD'=>'STORE_NM','SIZE' => '180px','label'=>'STORE NAME','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>TRUE,'groupedRow'=>true]],
+        ['ID' =>0, 'ATTR' =>['FIELD'=>'STORE_NM','SIZE' => '180px','label'=>'STORE NAME','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>false,'groupedRow'=>false]],
         ['ID' =>1, 'ATTR' =>['FIELD'=>'PROVINCE_NM','SIZE' => '180px','label'=>'PROVINSI','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>false,'groupedRow'=>false]],
         ['ID' =>2, 'ATTR' =>['FIELD'=>'CITY_NAME','SIZE' => '180px','label'=>'KOTA','align'=>'left','format'=>'raw','mergeHeader'=>false,'group'=>false,'groupedRow'=>false]],
 		];	

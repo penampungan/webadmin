@@ -18,9 +18,9 @@ class StoreMembershipSearch extends StoreMembership
     public function rules()
     {
         return [
-            [['ID', 'STATUS', 'STORE_STATUS', 'FAKTURE_TEMPO', 'PAY_DURATION_ACTIVE', 'PAY_DURATION_BONUS'], 'integer'],
-            [['CREATE_BY', 'CREATE_AT', 'UPDATE_BY', 'UPDATE_AT', 'ACCESS_GROUP', 'STORE_ID', 'STORE_NM', 'FAKTURE', 'FAKTURE_DATE', 'PAY_PAKAGE', 'PAY_DATE'], 'safe'],
-            [['PAY_TOTAL'], 'number'],
+            [['ID', 'STORE_STT', 'FAKTURE_TEMPO', 'PAYMENT_STT', 'PAYMENT_METHODE', 'DOMPET_AUTODEBET', 'PAKET_ID', 'PAKET_DURATION', 'PAKET_DURATION_BONUS'], 'integer'],
+            [['ACCESS_GROUP', 'STORE_ID', 'KASIR_ID', 'STORE_STT_NM', 'STORE_DATE_END_LATES', 'STORE_DATE_START', 'STORE_DATE_END', 'FAKTURE_NO', 'FAKTURE_DATE_START', 'FAKTURE_DATE_END', 'PAYMENT_STT_NM', 'PAYMENT_DATE', 'PAYMENT_METHODE_NM', 'PAKET_GROUP', 'PAKET_NM', 'CREATE_BY', 'UPDATE_BY', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
+            [['HARGA_BULAN', 'HARGA_HARI', 'HARGA_PAKET', 'HARGA_PAKET_HARI'], 'number'],
         ];
     }
 
@@ -61,25 +61,39 @@ class StoreMembershipSearch extends StoreMembership
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
+            'STORE_STT' => $this->STORE_STT,
+            'STORE_DATE_END_LATES' => $this->STORE_DATE_END_LATES,
+            'STORE_DATE_START' => $this->STORE_DATE_START,
+            'STORE_DATE_END' => $this->STORE_DATE_END,
+            'FAKTURE_DATE_START' => $this->FAKTURE_DATE_START,
+            'FAKTURE_TEMPO' => $this->FAKTURE_TEMPO,
+            'FAKTURE_DATE_END' => $this->FAKTURE_DATE_END,
+            'PAYMENT_STT' => $this->PAYMENT_STT,
+            'PAYMENT_DATE' => $this->PAYMENT_DATE,
+            'PAYMENT_METHODE' => $this->PAYMENT_METHODE,
+            'DOMPET_AUTODEBET' => $this->DOMPET_AUTODEBET,
+            'PAKET_ID' => $this->PAKET_ID,
+            'PAKET_DURATION' => $this->PAKET_DURATION,
+            'PAKET_DURATION_BONUS' => $this->PAKET_DURATION_BONUS,
+            'HARGA_BULAN' => $this->HARGA_BULAN,
+            'HARGA_HARI' => $this->HARGA_HARI,
+            'HARGA_PAKET' => $this->HARGA_PAKET,
+            'HARGA_PAKET_HARI' => $this->HARGA_PAKET_HARI,
             'CREATE_AT' => $this->CREATE_AT,
             'UPDATE_AT' => $this->UPDATE_AT,
-            'STATUS' => $this->STATUS,
-            'STORE_STATUS' => $this->STORE_STATUS,
-            'FAKTURE_DATE' => $this->FAKTURE_DATE,
-            'FAKTURE_TEMPO' => $this->FAKTURE_TEMPO,
-            'PAY_PAKAGE' => $this->PAY_PAKAGE,
-            'PAY_DATE' => $this->PAY_DATE,
-            'PAY_DURATION_ACTIVE' => $this->PAY_DURATION_ACTIVE,
-            'PAY_DURATION_BONUS' => $this->PAY_DURATION_BONUS,
-            'PAY_TOTAL' => $this->PAY_TOTAL,
         ]);
 
-        $query->andFilterWhere(['like', 'CREATE_BY', $this->CREATE_BY])
-            ->andFilterWhere(['like', 'UPDATE_BY', $this->UPDATE_BY])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
+        $query->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
             ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'STORE_NM', $this->STORE_NM])
-            ->andFilterWhere(['like', 'FAKTURE', $this->FAKTURE]);
+            ->andFilterWhere(['like', 'KASIR_ID', $this->KASIR_ID])
+            ->andFilterWhere(['like', 'STORE_STT_NM', $this->STORE_STT_NM])
+            ->andFilterWhere(['like', 'FAKTURE_NO', $this->FAKTURE_NO])
+            ->andFilterWhere(['like', 'PAYMENT_STT_NM', $this->PAYMENT_STT_NM])
+            ->andFilterWhere(['like', 'PAYMENT_METHODE_NM', $this->PAYMENT_METHODE_NM])
+            ->andFilterWhere(['like', 'PAKET_GROUP', $this->PAKET_GROUP])
+            ->andFilterWhere(['like', 'PAKET_NM', $this->PAKET_NM])
+            ->andFilterWhere(['like', 'CREATE_BY', $this->CREATE_BY])
+            ->andFilterWhere(['like', 'UPDATE_BY', $this->UPDATE_BY]);
 
         return $dataProvider;
     }

@@ -121,9 +121,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'columns'=>$attDinamikGroupField,
         'rowOptions'   => function ($model, $key, $index, $grid) {
 			
-			$btnclick= ['onclick' => '
-				document.cookie="INDUSTRY_GRP_ID" + "=" +'.$model->INDUSTRY_GRP_ID.';
-				document.cookie="INDUSTRY_GRP_NM" + "=" +"'.$model->INDUSTRY_GRP_NM.'";
+			$btnclick= ['ondblclick' => '
 				$.pjax.reload({
 					url: "'.Url::to(["/basic/industri/"]).'?industri="+'.$model->INDUSTRY_GRP_ID.',
 					container: "#gv-data-industri",

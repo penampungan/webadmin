@@ -131,7 +131,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'striped'=>true,
         'rowOptions'   => function ($model, $key, $index, $grid) {
 			
-			$btnclick= ['onclick' => '
+			$btnclick= ['ondblclick' => '
 				$.pjax.reload({
 					url: "'.Url::to(["/basic/product-unit/"]).'?unit="+'.$model->UNIT_ID_GRP.',
 					container: "#gv-data-productunit",
