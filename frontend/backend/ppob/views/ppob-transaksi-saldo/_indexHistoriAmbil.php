@@ -106,7 +106,8 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 ]
             ]
         ],  				
-        'pjax'=>true,'rowOptions' => function($model, $key, $index, $grid){
+        'pjax'=>true,
+        'rowOptions' => function($model, $key, $index, $grid){
             if($model['STATUS']==4){return ['class' => 'danger'];}	
         },
         'pjaxSettings'=>[

@@ -100,7 +100,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}{change}',
+            'template' => '{view}{edit}{delete}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[
@@ -124,11 +124,6 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'delete' =>function($url, $model,$key){
                     return  tombolDelete($url, $model);
                 },
-                'change' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolChangePassword($url, $model);
-                    //}					
-                }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
@@ -148,9 +143,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         ],
         'rowOptions'   => function ($model, $key, $index, $grid) {
 			
-			$btnclick= ['onclick' => '
-            document.cookie="ACCESS_ID" + "=" +'.$model->ACCESS_ID.';
-            document.cookie="username" + "=" +"'.$model->username.'";
+			$btnclick= ['ondblclick' => '
 				$.pjax.reload({
 					url: "'.Url::to(["/sistem/user-kg"]).'?UserKg[ACCESS_ID]="+'.$model->ACCESS_ID.',
 					container: "#expand-menu",

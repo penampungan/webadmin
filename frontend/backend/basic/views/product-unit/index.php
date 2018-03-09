@@ -51,14 +51,15 @@ $indexDetail=$this->render('indexDetail',[
 ?>
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-	<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
-			<?=$indexGroup?>
-		</div>
+<div style="margin-top: -10px;margin-bottom: 10px;">
+		<?=tombolKembali()?>
 	</div>
-    <div class="col-xs-6 col-sm-8 col-lg-8" style="font-family: tahoma ;font-size: 9pt;">
 		<div class="row">
-			<?=$indexDetail?>
+		<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">
+				<?=$indexGroup?>
+			</div>
+			<div class="col-xs-6 col-sm-8 col-lg-8" style="font-family: tahoma ;font-size: 9pt;">
+				<?=$indexDetail?>
+			</div>
 		</div>
-	</div>
 </div>

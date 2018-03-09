@@ -32,18 +32,15 @@ $indexIndustr=$this->render('indexDetail',[
 ]);
 ?>
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-	<div class="col-xs-12 col-sm-12 col-lg-12">
+	<div style="margin-top: -10px;margin-bottom: 10px;">
+		<?=tombolKembali()?>
+	</div>
 		<div class="row">
-			<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">
-				<div class="row">
-					<?=$indexGroup?>
-				</div>
+		<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">
+				<?=$indexGroup?>
 			</div>
 			<div class="col-xs-6 col-sm-8 col-lg-8" style="font-family: tahoma ;font-size: 9pt;">
-				<div class="row">
-					<?=$indexIndustr?>
-				</div>
+				<?=$indexIndustr?>
 			</div>
 		</div>
-	</div>
 </div>
