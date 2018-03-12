@@ -28,22 +28,15 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-data-merchent-bank .kv-grid-container{
+	#gv-data-akun .kv-grid-container{
 			height:400px
 		}
 ");
 
-$this->registerJs($this->render('jurnaltemplatereport_script.js'),View::POS_READY);
-echo $this->render('jurnaltemplatereport_button'); //echo difinition
-echo $this->render('jurnaltemplatereport_modal'); //echo difinition
-echo $this->render('jurnaltemplatereport_colum'); //echo difinition
-$this->title = 'Jurnal Template Report';
-
-
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-bank fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Jurnal Template Report</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Jurnal Akun</b></div>';
 	
         $attDinamikField=[
             [
@@ -56,7 +49,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(jurnaltemplatereportAryColumn() as $key =>$value[]){			
+        foreach(jurnalakunAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -130,15 +123,15 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         ]; 
     
     $gvMerchantType=GridView::widget([
-        'id'=>'gv-data-merchent-bank ',
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'id'=>'gv-data-akun',
+        'dataProvider' => $dataProviderGrp,
+        'filterModel' => $searchModelGrp,
         'columns'=>$attDinamikField,				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-merchent-bank ',
+                'id'=>'gv-data-akun',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -164,13 +157,4 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
     ]); 	
 ?>
 
-<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-<div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
 			<?= $gvMerchantType?>
-		</div>
-	</div>
-</div>

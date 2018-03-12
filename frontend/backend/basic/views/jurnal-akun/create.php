@@ -5,10 +5,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\JurnalAkun */
-
-$this->title = 'Create Jurnal Akun';
-$this->params['breadcrumbs'][] = ['label' => 'Jurnal Akuns', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jurnal-akun-create">
 

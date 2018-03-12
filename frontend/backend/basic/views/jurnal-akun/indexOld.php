@@ -33,17 +33,17 @@ $this->registerCss("
 		}
 ");
 
-$this->registerJs($this->render('jurnaltemplatereport_script.js'),View::POS_READY);
-echo $this->render('jurnaltemplatereport_button'); //echo difinition
-echo $this->render('jurnaltemplatereport_modal'); //echo difinition
-echo $this->render('jurnaltemplatereport_colum'); //echo difinition
-$this->title = 'Jurnal Template Report';
+$this->registerJs($this->render('jurnalakun_script.js'),View::POS_READY);
+echo $this->render('jurnalakun_button'); //echo difinition
+echo $this->render('jurnalakun_modal'); //echo difinition
+echo $this->render('jurnalakun_colum'); //echo difinition
+$this->title = 'Jurnal Akun';
 
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-bank fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Jurnal Template Report</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Jurnal Akun</b></div>';
 	
         $attDinamikField=[
             [
@@ -56,7 +56,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(jurnaltemplatereportAryColumn() as $key =>$value[]){			
+        foreach(jurnalakunAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],

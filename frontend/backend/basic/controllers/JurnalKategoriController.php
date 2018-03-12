@@ -28,7 +28,35 @@ class JurnalKategoriController extends Controller
             ],
         ];
     }
-
+    public function beforeAction($action){
+        $modulIndentify=4; //OUTLET
+       // Check only when the user is logged in.
+       // Author piter Novian [ptr.nov@gmail.com].
+       if (!Yii::$app->user->isGuest){
+           if (Yii::$app->session['userSessionTimeout']< time() ) {
+               // timeout
+               Yii::$app->user->logout();
+               return $this->goHome(); 
+           } else {	
+               //add Session.
+               Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+               //check validation [access/url].
+               $checkAccess=Yii::$app->getUserOpt->UserMenuPermission($modulIndentify);
+               if($checkAccess['modulMenu']['MODUL_STS']==0 OR $checkAccess['ModulPermission']['STATUS']==0){				
+                   $this->redirect(array('/site/alert'));
+               }else{
+                   if($checkAccess['PageViewUrl']==true){						
+                       return true;
+                   }else{
+                       $this->redirect(array('/site/alert'));
+                   }					
+               }			 
+           }
+       }else{
+           Yii::$app->user->logout();
+           return $this->goHome(); 
+       }
+   }
     /**
      * Lists all JurnalKategori models.
      * @return mixed
@@ -52,7 +80,7 @@ class JurnalKategoriController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -66,11 +94,11 @@ class JurnalKategoriController extends Controller
     {
         $model = new JurnalKategori();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->KTG_CODE]);
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            return $this->redirect(['/basic/jurnal-akun']);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +115,10 @@ class JurnalKategoriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->KTG_CODE]);
+            return $this->redirect(['/basic/jurnal-akun']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,9 +132,11 @@ class JurnalKategoriController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->STATUS = 3;
+        $model->save();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/basic/jurnal-akun']);
     }
 
     /**

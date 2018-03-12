@@ -12,13 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'KTG_CODE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'KTG_NM')->textInput(['maxlength' => true])->label('NAMA KATEGORI') ?>
 
-    <?= $form->field($model, 'KTG_NM')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'STATUS')->textInput() ?>
-
-    <?= $form->field($model, 'KETERANGAN')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'KETERANGAN')->textarea(['rows' => 6])->label('KETERANGAN') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

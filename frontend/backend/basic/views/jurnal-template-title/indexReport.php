@@ -33,13 +33,6 @@ $this->registerCss("
 		}
 ");
 
-$this->registerJs($this->render('jurnaltemplatereport_script.js'),View::POS_READY);
-echo $this->render('jurnaltemplatereport_button'); //echo difinition
-echo $this->render('jurnaltemplatereport_modal'); //echo difinition
-echo $this->render('jurnaltemplatereport_colum'); //echo difinition
-$this->title = 'Jurnal Template Report';
-
-
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-bank fa-stack-2x" style="color:#000000"></b>
@@ -69,6 +62,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'hAlign'=>$value[$key]['H_VALIGN'],
                 'vAlign'=>$value[$key]['V_VALIGN'],
                 //'hidden'=>false,
+                'value'=>$value[$key]['VALUE'],
                 'noWrap'=>true,	
                 'format'=>$value[$key]['ATR_FORMAT'],
                 'headerOptions'=>[		
@@ -114,15 +108,15 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
             'buttons' => [
                 'view' =>function ($url, $model){
-                    return  tombolView($url, $model);
+                    return  tombolViewReport($url, $model);
                 },
                 'edit' =>function($url, $model,$key){
                     //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdate($url, $model);
+                    return  tombolUpdateReport($url, $model);
                     //}					
                 },
                 'delete' =>function($url, $model,$key){
-                    return  tombolDelete($url, $model);
+                    return  tombolDeleteReport($url, $model);
                 }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
@@ -130,17 +124,30 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         ]; 
     
     $gvMerchantType=GridView::widget([
-        'id'=>'gv-data-merchent-bank ',
+        'id'=>'gv-data-report',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns'=>$attDinamikField,				
+        'columns'=>$attDinamikField,        
+        'rowOptions'   => function ($model, $key, $index, $grid) {
+			
+			$btnclick= ['ondblclick' => '
+				$.pjax.reload({
+					url: "'.Url::to(["/basic/jurnal-template-title/"]).'?jurnalreport="+'.$model->RPT_GROUP__ID.',
+					container: "#gv-data-title",
+					timeout: 1000,
+				});
+				
+			
+			'];
+			return $btnclick;
+		},				
         'pjax'=>true,
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-merchent-bank ',
+                'id'=>'gv-data-report',
             ],						  
-        ],
+        ],				
         'hover'=>true, //cursor select
         'responsive'=>true,
         'responsiveWrap'=>true,
@@ -150,27 +157,19 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'export' => false,
         'panel'=>[''],
         'toolbar' => false,
+        'summary'=>false,
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreateReport().'</div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
             'showFooter'=>false,
         ],
-        'floatOverflowContainer'=>true,
-        'floatHeader'=>true,
+        // 'floatOverflowContainer'=>true,
+        // 'floatHeader'=>true,
     ]); 	
 ?>
 
-<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
-<div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
-		<div class="row">
 			<?= $gvMerchantType?>
-		</div>
-	</div>
-</div>
