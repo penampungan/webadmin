@@ -42,7 +42,7 @@ $this->title = 'Store Membership Paket';
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-star fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership Pakage</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership Paket</b></div>';
 	
         $attDinamikField=[
             [
@@ -70,14 +70,14 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 //'hidden'=>false,
                 'value'=>function($data)use($value,$key){
                     $val=$value[$key]['ATR_FIELD'];	
-                    if($val=='STATUS'){
-                        if ($data->STATUS == 0) {
+                    if($val=='PAKET_STT'){
+                        if ($data->PAKET_STT == 0) {
                           return Html::a('
                             <span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
                               <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
                             </span>','',['title'=>'KELUAR']);
-                        }else if ($data->STATUS == 1) {
+                        }else if ($data->PAKET_STT == 1) {
                           return Html::a('<span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
                               <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>

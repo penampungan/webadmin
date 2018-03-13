@@ -52,7 +52,7 @@ class StoreMembershipPaketController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -67,10 +67,10 @@ class StoreMembershipPaketController extends Controller
         $model = new StoreMembershipPaket();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->PAKET_ID]);
+            return $this->redirect(['/account/store-membership-paket']);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +87,10 @@ class StoreMembershipPaketController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->PAKET_ID]);
+            return $this->redirect(['/account/store-membership-paket']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,8 +104,9 @@ class StoreMembershipPaketController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->PAKET_STT=0;
+        $model->save();
         return $this->redirect(['index']);
     }
 

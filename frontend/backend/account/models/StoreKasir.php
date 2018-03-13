@@ -4,6 +4,7 @@ namespace frontend\backend\account\models;
 
 use Yii;
 
+use frontend\backend\account\models\Store;
 /**
  * This is the model class for table "store_kasir".
  *
@@ -12,7 +13,10 @@ use Yii;
  * @property string $ACCESS_GROUP ACCESS_GROUP
  * @property string $STORE_ID
  * @property string $PERANGKAT_UUID NAMA PAKET
- * @property int $KASIR_STT 0=TRIAL (14 hari) ;1=Active; 2=Deactive (BALUM BAYAR) 3=Delete
+ * @property int $KASIR_STT 0=TRIAL (14 hari)
+ ;1=Active;
+ 2=Deactive (BALUM BAYAR)
+ 3=Delete
  * @property string $KASIR_STT_NM
  * @property int $DOMPET_AUTODEBET 0=tidak; 1=autodebet
  * @property string $DOMPET_AUTODEBET_NM
@@ -20,7 +24,15 @@ use Yii;
  * @property string $PAYMENT_METHODE_NM
  * @property int $PAKET_ID PAKET DEFAULT
  * @property string $DATE_START TANGGAL PEMBAYARAN
- * @property string $DATE_END TANGGAL AKHIR PEMBAYARAN. FORMULA  1. Jumlah Pembayaran  2. lama waktu aktif.  3. 8 Hari sebelum berakhir masa tengang.      a. create invoice.      b. show list masa tengang.      c. send invoice email.      d. prosess pembayaran
+ * @property string $DATE_END TANGGAL AKHIR PEMBAYARAN.
+ FORMULA
+  1. Jumlah Pembayaran
+  2. lama waktu aktif.
+  3. 8 Hari sebelum berakhir masa tengang.
+      a. create invoice.
+      b. show list masa tengang.
+      c. send invoice email.
+      d. prosess pembayaran
  * @property string $KONTRAK_DURASI
  * @property string $KONTRAK_DATE
  * @property int $STATUS 0=deaktif;1=aktif
@@ -84,5 +96,15 @@ class StoreKasir extends \yii\db\ActiveRecord
             'CREATE_AT' => 'Create  At',
             'UPDATE_AT' => 'Update  At',
         ];
+    }
+    public function getStore()
+    {
+      return $this->hasOne(Store::className(),['STORE_ID'=>'STORE_ID']);
+       
+    }
+    
+    public function getSTORE_NM(){
+        $result=$this->store;
+        return $result!=''?$result->STORE_NM:'';
     }
 }

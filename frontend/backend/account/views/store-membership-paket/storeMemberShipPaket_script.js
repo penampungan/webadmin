@@ -4,9 +4,9 @@
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#storemembershippakage-button-create', function(ehead){ 			  
-	$('#storemembershippakage-button-create-modal').modal('show')
-	.find('#storemembershippakage-button-create-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#storemembershippaket-button-create', function(ehead){ 			  
+	$('#storemembershippaket-button-create-modal').modal('show')
+	.find('#storemembershippaket-button-create-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
@@ -16,9 +16,9 @@ $(document).on('click','#storemembershippakage-button-create', function(ehead){
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#storemembershippakage-button-view', function(ehead){ 			  
-	$('#storemembershippakage-button-view-modal').modal('show')
-	.find('#storemembershippakage-button-view-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#storemembershippaket-button-view', function(ehead){ 			  
+	$('#storemembershippaket-button-view-modal').modal('show')
+	.find('#storemembershippaket-button-view-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
@@ -28,9 +28,9 @@ $(document).on('click','#storemembershippakage-button-view', function(ehead){
 */
 $.fn.modal.Constructor.prototype.enforceFocus = function(){};
 //$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
-$(document).on('click','#storemembershippakage-button-update', function(ehead){ 			  
-	$('#storemembershippakage-button-update-modal').modal('show')
-	.find('#storemembershippakage-button-update-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+$(document).on('click','#storemembershippaket-button-update', function(ehead){ 			  
+	$('#storemembershippaket-button-update-modal').modal('show')
+	.find('#storemembershippaket-button-update-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });

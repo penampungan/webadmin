@@ -23,17 +23,15 @@ $this->registerCss("
 
 	$modalHeaderColor='#fbfbfb';//' rgba(74, 206, 231, 1)';
 	
-	/*
-	 * BUTTON - FORM CREATE
-	*/
+	
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'storemembershippaket-button-create-modal',
+		'id' => 'container-button-konsumer-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-plus fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH STORE MEMBERSHIP PAKET</b>
+			</span><b> Member Konsumer</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -47,19 +45,17 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippaket-button-create-content'></div>";
+		echo "<div id='container-button-konsumer-content'></div>";
 	Modal::end();
 	
-	/*
-	 * BUTTON - VIEW
-	*/
+	
 	Modal::begin([
-		'id' => 'storemembershippaket-button-view-modal',
+		'id' => 'container-button-pakage-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT STORE MEMBERSHIP PAKET</b>
+			</span><b> Membership Pakage</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -71,20 +67,17 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippaket-button-view-content'></div>";
+		echo "<div id='container-button-pakage-content'></div>";
 	Modal::end();
 	
-	/*
-	 * BUTTON - UPDATE
-	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'storemembershippaket-button-update-modal',
+		'id' => 'container-button-membership-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH STORE MEMBERSHIP PAKET</b>
+			</span><b> Store Membership</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -98,7 +91,52 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippaket-button-update-content'></div>";
+		echo "<div id='container-button-membership-content'></div>";
+	Modal::end();
+	
+	Modal::begin([
+		'id' => 'container-button-paket-modal',
+		'header' => '
+			<span class="fa-stack fa-xs">																	
+				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
+				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
+			</span><b> Membership Paket</b>
+		',	
+		'size' => 'modal-md',
+		'options' => ['class'=>'slide'],
+		'headerOptions'=>[
+			'style'=> 'border-radius:5px; background-color:'.$modalHeaderColor,
+		],
+		'clientOptions' => [
+			'backdrop' => FALSE, //Static=disable, false=enable
+			'keyboard' => TRUE,	// Kyboard 
+		]
+	]);
+		echo "<div id='container-button-paket-content'></div>";
+	Modal::end();
+	
+	Modal::begin([
+		//'id' => 'sync_save',
+		'id' => 'container-button-kasir-modal',
+		'header' => '
+			<span class="fa-stack fa-xs">																	
+				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
+				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
+			</span><b> Store Kasir</b>
+		',	
+		'size' => 'modal-md',
+		'options' => ['class'=>'slide'],
+		'headerOptions'=>[
+			'style'=> 'border-radius:5px; background-color:'.$modalHeaderColor,
+			//'toggleButton' => ['label' => 'click me'],
+		],
+		//'clientOptions' => ['backdrop' => 'static', 'keyboard' => TRUE]
+		'clientOptions' => [
+			'backdrop' => FALSE, //Static=disable, false=enable
+			'keyboard' => TRUE,	// Kyboard 
+		]
+	]);
+		echo "<div id='container-button-kasir-content'></div>";
 	Modal::end();
 	
 ?>

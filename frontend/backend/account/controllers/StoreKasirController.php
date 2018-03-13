@@ -35,15 +35,49 @@ class StoreKasirController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new StoreKasirSearch();
+        $paramCari='';
+        //PencarianIndex
+		$modelPeriode = new \yii\base\DynamicModel([
+			'OWNER'
+		]);		
+		$modelPeriode->addRule(['OWNER'], 'required')
+         ->addRule(['OWNER'], 'safe');			
+         if ($modelPeriode->load(Yii::$app->request->get())) {
+			$hsl = \Yii::$app->request->get();	
+			$paramCari=$hsl['DynamicModel']['OWNER'];
+		};					
+		//PUBLIC PARAMS	
+		$cari=['ACCESS_GROUP'=>$paramCari];	
+        $searchModel = new StoreKasirSearch($cari);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if (!empty($paramCari)) {
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'paramCari'=>$paramCari
+            ]);	
+        } else {
+            Yii::$app->session->setFlash('error', "Anda belum memilih Owner");
+            return $this->redirect(['/account/container-store']);
+        }
+        
+        
     }
-
+    public function actionPencarianIndex(){
+		$modelPeriode = new \yii\base\DynamicModel([
+			'OWNER'
+		]);		
+		$modelPeriode->addRule(['OWNER'], 'required')
+         ->addRule(['OWNER'], 'safe');
+		$data = Yii::$app->db->createCommand("select ACCESS_GROUP,b.ACCESS_ID,CONCAT(NM_DEPAN,NM_BELAKANG,NM_TENGAH)as NAMA from user as a INNER JOIN user_profile as b on a.ACCESS_GROUP=b.ACCESS_ID WHERE ACCESS_LEVEL = 'OWNER' ")->queryAll();
+        // print_r($data);die();
+        if (!$modelPeriode->load(Yii::$app->request->post())) {
+			return $this->renderAjax('form_cari',[
+                'modelPeriode' => $modelPeriode,
+                'data'=>$data
+			]);
+		}
+	}
     /**
      * Displays a single StoreKasir model.
      * @param string $id

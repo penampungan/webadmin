@@ -18,7 +18,7 @@ class StoreKasirSearch extends StoreKasir
     public function rules()
     {
         return [
-            [['KASIR_ID', 'KASIR_NM', 'ACCESS_GROUP', 'STORE_ID', 'PERANGKAT_UUID', 'KASIR_STT_NM', 'DOMPET_AUTODEBET_NM', 'PAYMENT_METHODE_NM', 'DATE_START', 'DATE_END', 'KONTRAK_DURASI', 'KONTRAK_DATE', 'CREATE_BY', 'UPDATE_BY', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
+            [['KASIR_ID', 'KASIR_NM', 'ACCESS_GROUP', 'STORE_ID', 'STORE_NM','PERANGKAT_UUID', 'KASIR_STT_NM', 'DOMPET_AUTODEBET_NM', 'PAYMENT_METHODE_NM', 'DATE_START', 'DATE_END', 'KONTRAK_DURASI', 'KONTRAK_DATE', 'CREATE_BY', 'UPDATE_BY', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
             [['KASIR_STT', 'DOMPET_AUTODEBET', 'PAYMENT_METHODE', 'PAKET_ID', 'STATUS'], 'integer'],
         ];
     }
@@ -42,7 +42,7 @@ class StoreKasirSearch extends StoreKasir
     public function search($params)
     {
         $query = StoreKasir::find();
-
+        $query->joinWith(['store']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -73,8 +73,8 @@ class StoreKasirSearch extends StoreKasir
 
         $query->andFilterWhere(['like', 'KASIR_ID', $this->KASIR_ID])
             ->andFilterWhere(['like', 'KASIR_NM', $this->KASIR_NM])
-            ->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
+            ->andFilterWhere(['like', 'store_kasir.ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'store.STORE_NM', $this->STORE_ID])
             ->andFilterWhere(['like', 'PERANGKAT_UUID', $this->PERANGKAT_UUID])
             ->andFilterWhere(['like', 'KASIR_STT_NM', $this->KASIR_STT_NM])
             ->andFilterWhere(['like', 'DOMPET_AUTODEBET_NM', $this->DOMPET_AUTODEBET_NM])
