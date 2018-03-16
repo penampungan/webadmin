@@ -18,11 +18,13 @@ use kartik\widgets\DateTimePicker;
    ]); ?>
 		<div style="height:100%;font-family: verdana, arial, sans-serif ;font-size: 6pt;">
 		<div class="row" >
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<?php
 						echo $form->field($modelPeriode, 'OWNER')->widget(Select2::classname(), [
-							'data' =>ArrayHelper::map($data,'ACCESS_GROUP','NAMA'),
-							'options' => ['placeholder' => 'Select a state ...'],
+							'data' =>ArrayHelper::map($data,'ACCESS_GROUP', function($modelPeriode) {
+								return $modelPeriode['NAMA'].' / '.$modelPeriode['username'];
+							}),
+							'options' => ['placeholder' => 'Select a state ...','id'=>'owner_id'],
 							'pluginOptions' => [
 								'allowClear' => true
 							],

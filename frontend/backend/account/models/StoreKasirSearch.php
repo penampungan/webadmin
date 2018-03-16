@@ -74,7 +74,7 @@ class StoreKasirSearch extends StoreKasir
         $query->andFilterWhere(['like', 'KASIR_ID', $this->KASIR_ID])
             ->andFilterWhere(['like', 'KASIR_NM', $this->KASIR_NM])
             ->andFilterWhere(['like', 'store_kasir.ACCESS_GROUP', $this->ACCESS_GROUP])
-            ->andFilterWhere(['like', 'store.STORE_NM', $this->STORE_ID])
+            ->andFilterWhere(['like', 'store.STORE_ID', $this->STORE_ID])
             ->andFilterWhere(['like', 'PERANGKAT_UUID', $this->PERANGKAT_UUID])
             ->andFilterWhere(['like', 'KASIR_STT_NM', $this->KASIR_STT_NM])
             ->andFilterWhere(['like', 'DOMPET_AUTODEBET_NM', $this->DOMPET_AUTODEBET_NM])

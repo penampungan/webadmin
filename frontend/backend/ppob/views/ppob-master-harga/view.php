@@ -5,10 +5,6 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\ppob\models\PpobMasterHarga */
-
-$this->title = $model->ID;
-$this->params['breadcrumbs'][] = ['label' => 'Ppob Master Hargas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ppob-master-harga-view">
     <?= DetailView::widget([

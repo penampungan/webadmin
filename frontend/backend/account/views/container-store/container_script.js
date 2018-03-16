@@ -43,3 +43,11 @@ $(document).on('click','#container-button-kasir', function(ehead){
 	//.load(ehead.target.value);
 	.load($(this).attr('value'));
 });
+$.fn.modal.Constructor.prototype.enforceFocus = function(){};
+//$.fn.modal.prototype.constructor.Constructor.DEFAULTS.backdrop = 'static';	
+$(document).on('click','#container-button-dompet', function(ehead){ 			  
+	$('#container-button-dompet-modal').modal('show')
+	.find('#container-button-dompet-content').html('<i class=\"fa fa-2x fa-spinner fa-spin\"></i>')
+	//.load(ehead.target.value);
+	.load($(this).attr('value'));
+});

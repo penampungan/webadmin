@@ -63,7 +63,7 @@ use yii\base\DynamicModel;
 		$content = Html::a($title1,$url,$options1);		
 		return $content;
 	}
-    
+
     /*
 	 * BUTTON Hapus
 	*/
@@ -72,6 +72,17 @@ use yii\base\DynamicModel;
 		$options1 = [
 			'value'=>url::to(['/account/store-kasir/pencarian-index']),
 			'id'=>'container-button-kasir',
+			'class'=>"btn bg-purple btn-flat margin",  
+		];     
+		
+		$content = Html::button($title1,$options1);		
+		return $content;
+	}
+	function tombolAccountDompet(){
+		$title1 = Yii::t('app','Detail');
+		$options1 = [
+			'value'=>url::to(['/account/dompet-transaksi/pencarian-index']),
+			'id'=>'container-button-dompet',
 			'class'=>"btn bg-purple btn-flat margin",  
 		];     
 		

@@ -100,7 +100,7 @@ class EndUserController extends Controller
 		]);		
 		$modelPeriode->addRule(['OWNER'], 'required')
          ->addRule(['OWNER'], 'safe');
-		$data = Yii::$app->db->createCommand("select ACCESS_GROUP,b.ACCESS_ID,CONCAT(NM_DEPAN,NM_BELAKANG,NM_TENGAH)as NAMA from user as a INNER JOIN user_profile as b on a.ACCESS_GROUP=b.ACCESS_ID WHERE ACCESS_LEVEL = 'OWNER' ")->queryAll();
+		$data = Yii::$app->db->createCommand("select username,ACCESS_GROUP,b.ACCESS_ID,CONCAT(NM_DEPAN,NM_BELAKANG,NM_TENGAH)as NAMA from user as a INNER JOIN user_profile as b on a.ACCESS_GROUP=b.ACCESS_ID WHERE ACCESS_LEVEL = 'OWNER' ")->queryAll();
         // print_r($data);die();
         if (!$modelPeriode->load(Yii::$app->request->post())) {
 			return $this->renderAjax('form_cari',[

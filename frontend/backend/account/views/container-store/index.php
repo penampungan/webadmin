@@ -66,6 +66,12 @@ echo $this->render('container_modal'); //echo difinition
             <!-- <?php// Html::button('Detail',['onclick'=>"window.location.href = '" . \Yii::$app->urlManager->createUrl(['/account/store-membership-pakage']) . "';",'id'=>'jurnal-button-akun','data-pjax' => false,'class'=>"btn bg-purple btn-flat margin",'title'=>'Detail']);?> -->
             <?= tombolmembershippakage()?>
         </div>        
+        <div class="col-md-12">
+            <h3>Transaksi Dompet</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora totam assumenda ipsam praesentium exercitationem aliquam eligendi explicabo eos. Odit odio non sequi porro unde soluta eos placeat fugit ut temporibus.</p>
+            <!-- <?php// Html::button('Detail',['onclick'=>"window.location.href = '" . \Yii::$app->urlManager->createUrl(['/account/store-membership-pakage']) . "';",'id'=>'jurnal-button-akun','data-pjax' => false,'class'=>"btn bg-purple btn-flat margin",'title'=>'Detail']);?> -->
+            <?= tombolAccountDompet()?>
+        </div>        
     </div>   
 	</div>
 </div>
