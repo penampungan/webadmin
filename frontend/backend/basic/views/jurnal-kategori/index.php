@@ -43,7 +43,7 @@ $this->title = 'Jurnal Kategori';
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-bank fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Product Unit</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Jurnal Kategori</b></div>';
 	
         $attDinamikField=[
             [

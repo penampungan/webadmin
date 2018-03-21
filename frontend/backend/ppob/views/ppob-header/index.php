@@ -1,41 +1,97 @@
 <?php
-
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\widgets\Select2;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\widgets\Breadcrumbs;
+use kartik\widgets\Spinner;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+use kartik\widgets\FileInput;
+use yii\helpers\Json;
+use yii\web\Response;
+use yii\widgets\Pjax;
+use kartik\widgets\ActiveForm;
+use kartik\tabs\TabsX;
+use kartik\date\DatePicker;
+use yii\web\View;
 
-/* @var $this yii\web\View */
-/* @var $searchModel frontend\backend\ppob\models\PpobHeaderSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+$this->registerCss("
+    #w4 :link {
+        color: black;
+    }
+    /* mouse over link */
+    #w4-container a:hover {
+        color: #5a96e7;
+    }
+    /* selected link */
+    #w4-container a:active {
+        color: blue;
+    }
+");
 
-$this->title = 'Ppob Headers';
-$this->params['breadcrumbs'][] = $this->title;
+$this->registerJs($this->render('ppobMaster_script.js'),View::POS_READY);
+echo $this->render('ppobMaster_button'); //echo difinition
+echo $this->render('ppobMaster_modal'); //echo difinition
+echo $this->render('ppobMaster_colum'); //echo difinition
+$this->title = 'PPOB-Master';
+
+$Header=$this->render('_index_tab_hedear',[
+	'searchModelHeader' => $searchModelHeader,
+    'dataProviderHeader' => $dataProviderHeader,
+]);
+
+$kelompok=$this->render('_index_tab_kelompok',[
+	'searchModelKelompok' => $searchModelKelompok,
+    'dataProviderKelompok' => $dataProviderKelompok,
+]);
+$provider=$this->render('_index_tab_provider',[
+    'searchModelProvider' => $searchModelProvider,
+    'dataProviderProvider' => $dataProviderProvider,
+]);
+
+$mastertype=$this->render('_index_tab_type',[
+    'searchModelMasterType' => $searchModelMasterType,
+    'dataProviderMasterType' => $dataProviderMasterType,
+]);
+
+
+$items = [
+    [
+        'label'=>'<i class="glyphicon glyphicon-home"></i> Jenis Paket',
+        'content'=>$Header,
+        'active'=>true
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Jenis Transaksi',
+        'content'=>$kelompok
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Provider',
+        'content'=>$provider
+    ],
+    [
+        'label'=>'<i class="glyphicon glyphicon-user"></i> Type Pembayaran',
+        'content'=>$mastertype
+    ],
+];
+
+$tabIndex=TabsX::widget([
+    'items'=>$items,
+	'enableStickyTabs'=>true,
+    'encodeLabels'=>false
+]);
+
+
 ?>
-<div class="ppob-header-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Ppob Header', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'ID',
-            'HEADER_ID',
-            'HEADER_NM',
-            'HEADER_DCRP:ntext',
-            'STATUS',
-            //'CREATE_BY',
-            //'CREATE_AT',
-            //'UPDATE_BY',
-            //'UPDATE_AT',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+<div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+    <div style="margin-top: -10px;margin-bottom: 10px;">
+		<?=tombolKembali()?>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
+		<div class="row">
+			<?=$tabIndex?>
+		</div>
+	</div>
 </div>

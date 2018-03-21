@@ -28,12 +28,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'productunit-button-create-modal',
+		'id' => 'jurnal-kategori-button-create-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-plus fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH PRODUCT UNIT</b>
+			</span><b> TAMBAH JURNAL KATEGORI</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -47,19 +47,19 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-create-content'></div>";
+		echo "<div id='jurnal-kategori-button-create-content'></div>";
 	Modal::end();
 	
 	/*
 	 * BUTTON - VIEW
 	*/
 	Modal::begin([
-		'id' => 'productunit-button-view-modal',
+		'id' => 'jurnal-kategori-button-view-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT PRODUCT UNIT</b>
+			</span><b> LIHAT JURNAL KATEGORI</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -71,7 +71,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-view-content'></div>";
+		echo "<div id='jurnal-kategori-button-view-content'></div>";
 	Modal::end();
 	
 	/*
@@ -79,12 +79,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'productunit-button-update-modal',
+		'id' => 'jurnal-kategori-button-update-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH DATA PRODUCT UNIT</b>
+			</span><b> UBAH DATA JURNAL KATEGORI</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -98,7 +98,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='productunit-button-update-content'></div>";
+		echo "<div id='jurnal-kategori-button-update-content'></div>";
 	Modal::end();
 	
 ?>

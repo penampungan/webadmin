@@ -6,9 +6,6 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\ppob\models\PpobTransaksi */
 
-$this->title = $model->ID;
-$this->params['breadcrumbs'][] = ['label' => 'Ppob Transaksis', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ppob-transaksi-view">
 <?= DetailView::widget([

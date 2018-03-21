@@ -28,7 +28,7 @@ $indexGroup=$this->render('indexGroup',[
 ]);
 $indexIndustr=$this->render('indexDetail',[
     'searchModel' => $searchModel,
-    'dataProvider' => $dataProvider,
+	'dataProvider' => $dataProvider,
 ]);
 ?>
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">

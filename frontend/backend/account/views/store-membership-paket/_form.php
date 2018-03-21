@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\money\MaskMoney;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\account\models\StoreMembershipPaket */
@@ -16,29 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'PAKET_NM')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'PAKET_DURATION')->textInput() ?>
+    <?= $form->field($model, 'PAKET_DURATION')->textInput()->textInput(['type'=>'number','min'=>1,'max'=>31,'allowEmpty' => true,'integerOnly' => false])  ?>
 
-    <?= $form->field($model, 'PAKET_DURATION_BONUS')->textInput() ?>
+    <?= $form->field($model, 'PAKET_DURATION_BONUS')->textInput()->textInput(['type'=>'number','min'=>1,'max'=>30,'allowEmpty' => true,'integerOnly' => false])  ?>
 
-    <?= $form->field($model, 'HARGA_BULAN')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'HARGA_HARI')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'HARGA_PAKET')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'HARGA_PAKET_HARI')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'PAKET_STT')->textInput() ?>
-
-    <?= $form->field($model, 'PAKET_STT_NM')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CREATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'UPDATE_BY')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'CREATE_AT')->textInput() ?>
-
-    <?= $form->field($model, 'UPDATE_AT')->textInput() ?>
+    <?= $form->field($model, 'HARGA_BULAN')->widget(MaskMoney::classname(), [
+                'options' => ['placeholder' => 'Harga Barang ...'],
+                'pluginOptions'=>[
+                    'prefix'=>'Rp ',
+                    'precision' => 0
+                ],
+            ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

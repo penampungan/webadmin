@@ -97,7 +97,7 @@ class PpobProviderController extends Controller
         
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                return $this->redirect(['index']);
+                return $this->redirect(['ppob/ppob-header#w4-tab2']);
             }
         }else {
             return $this->renderAjax('create', [
@@ -119,7 +119,7 @@ class PpobProviderController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                return $this->redirect(['index']);
+                return $this->redirect(['ppob/ppob-header#w4-tab2']);
             }
         }else {
             return $this->renderAjax('update', [
@@ -140,7 +140,7 @@ class PpobProviderController extends Controller
         $model=$this->findModel($id);
         $model->STATUS ="3";
         $model->update();
-        return $this->redirect(['index']);
+        return $this->redirect(['ppob/ppob-header#w4-tab2']);
     }
 
     /**

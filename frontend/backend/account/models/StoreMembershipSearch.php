@@ -18,7 +18,7 @@ class StoreMembershipSearch extends StoreMembership
     public function rules()
     {
         return [
-            [['ID', 'STORE_STT', 'FAKTURE_TEMPO', 'PAYMENT_STT', 'PAYMENT_METHODE', 'DOMPET_AUTODEBET', 'PAKET_ID', 'PAKET_DURATION', 'PAKET_DURATION_BONUS'], 'integer'],
+            [['ID', 'STORE_STT', 'FAKTURE_TEMPO', 'PAYMENT_STT', 'KASIR_NM','PAYMENT_METHODE', 'DOMPET_AUTODEBET', 'PAKET_ID', 'PAKET_DURATION', 'PAKET_DURATION_BONUS'], 'integer'],
             [['ACCESS_GROUP', 'STORE_ID', 'KASIR_ID', 'STORE_STT_NM', 'STORE_DATE_END_LATES', 'STORE_DATE_START', 'STORE_DATE_END', 'FAKTURE_NO', 'FAKTURE_DATE_START', 'FAKTURE_DATE_END', 'PAYMENT_STT_NM', 'PAYMENT_DATE', 'PAYMENT_METHODE_NM', 'PAKET_GROUP', 'PAKET_NM', 'CREATE_BY', 'UPDATE_BY', 'CREATE_AT', 'UPDATE_AT'], 'safe'],
             [['HARGA_BULAN', 'HARGA_HARI', 'HARGA_PAKET', 'HARGA_PAKET_HARI'], 'number'],
         ];
@@ -43,7 +43,8 @@ class StoreMembershipSearch extends StoreMembership
     public function search($params)
     {
         $query = StoreMembership::find();
-
+        $query->joinWith(['store']);
+        $query->joinWith(['storekasir']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -83,9 +84,9 @@ class StoreMembershipSearch extends StoreMembership
             'UPDATE_AT' => $this->UPDATE_AT,
         ]);
 
-        $query->andFilterWhere(['like', 'ACCESS_GROUP', $this->ACCESS_GROUP])
-            ->andFilterWhere(['like', 'STORE_ID', $this->STORE_ID])
-            ->andFilterWhere(['like', 'KASIR_ID', $this->KASIR_ID])
+        $query->andFilterWhere(['like', 'store_membership.ACCESS_GROUP', $this->ACCESS_GROUP])
+            ->andFilterWhere(['like', 'store_membership.STORE_ID', $this->STORE_ID])
+            ->andFilterWhere(['like', 'store_kasir.KASIR_NM', $this->KASIR_ID])
             ->andFilterWhere(['like', 'STORE_STT_NM', $this->STORE_STT_NM])
             ->andFilterWhere(['like', 'FAKTURE_NO', $this->FAKTURE_NO])
             ->andFilterWhere(['like', 'PAYMENT_STT_NM', $this->PAYMENT_STT_NM])

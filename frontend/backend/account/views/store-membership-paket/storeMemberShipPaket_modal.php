@@ -28,12 +28,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'storemembershippakage-button-create-modal',
+		'id' => 'storemembershippaket-button-create-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-plus fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> TAMBAH STORE MEMBERSHIP PAKAGE</b>
+			</span><b> TAMBAH STORE MEMBERSHIP PAKET</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -47,19 +47,19 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippakage-button-create-content'></div>";
+		echo "<div id='storemembershippaket-button-create-content'></div>";
 	Modal::end();
 	
 	/*
 	 * BUTTON - VIEW
 	*/
 	Modal::begin([
-		'id' => 'storemembershippakage-button-view-modal',
+		'id' => 'storemembershippaket-button-view-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-search fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> LIHAT STORE MEMBERSHIP PAKAGE</b>
+			</span><b> LIHAT STORE MEMBERSHIP PAKET</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -71,7 +71,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippakage-button-view-content'></div>";
+		echo "<div id='storemembershippaket-button-view-content'></div>";
 	Modal::end();
 	
 	/*
@@ -79,12 +79,12 @@ $this->registerCss("
 	*/
 	Modal::begin([
 		//'id' => 'sync_save',
-		'id' => 'storemembershippakage-button-update-modal',
+		'id' => 'storemembershippaket-button-update-modal',
 		'header' => '
 			<span class="fa-stack fa-xs">																	
 				<i class="fa fa-circle fa-stack-2x " style="color:red"></i>
 				<i class="fa fa-pencil fa-stack-1x" style="color:#fbfbfb"></i>
-			</span><b> UBAH STORE MEMBERSHIP PAKAGE</b>
+			</span><b> UBAH STORE MEMBERSHIP PAKET</b>
 		',	
 		'size' => 'modal-md',
 		'options' => ['class'=>'slide'],
@@ -98,7 +98,7 @@ $this->registerCss("
 			'keyboard' => TRUE,	// Kyboard 
 		]
 	]);
-		echo "<div id='storemembershippakage-button-update-content'></div>";
+		echo "<div id='storemembershippaket-button-update-content'></div>";
 	Modal::end();
 	
 ?>

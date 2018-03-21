@@ -11,9 +11,9 @@ use yii\base\DynamicModel;
 	*/
 	function tombolCreate(){
 		$title= Yii::t('app','');
-		$url = Url::toRoute(['/account/store-membership-pakage/create']);
+		$url = Url::toRoute(['/account/store-membership-paket/create']);
 		$options1 = ['value'=>$url,
-					'id'=>'storemembershippakage-button-create',
+					'id'=>'storemembershippaket-button-create',
 					'data-pjax' => false,
 					'class'=>"btn btn-success btn-xs",
 					'title'=>'Tambah'
@@ -35,8 +35,8 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/account/store-membership-pakage/view','id'=>$model['PAKET_ID']]),
-			'id'=>'storemembershippakage-button-view',
+			'value'=>url::to(['/account/store-membership-paket/view','id'=>$model['PAKET_ID']]),
+			'id'=>'storemembershippaket-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
@@ -57,8 +57,8 @@ use yii\base\DynamicModel;
 	function tombolUpdate($url, $model){
 		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'value'=>url::to(['/account/store-membership-pakage/update','id'=>$model['PAKET_ID']]),
-			'id'=>'storemembershippakage-button-update',
+			'value'=>url::to(['/account/store-membership-paket/update','id'=>$model['PAKET_ID']]),
+			'id'=>'storemembershippaket-button-update',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
 		];
@@ -79,7 +79,7 @@ use yii\base\DynamicModel;
 	function tombolDelete($url, $model){
 		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'href'=>url::to(['/account/store-membership-pakage/delete','id'=>$model['PAKET_ID']]),
+			'href'=>url::to(['/account/store-membership-paket/delete','id'=>$model['PAKET_ID']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],

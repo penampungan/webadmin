@@ -70,20 +70,71 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 //'hidden'=>false,
                 'value'=>function($data)use($value,$key){
                     $val=$value[$key]['ATR_FIELD'];	
-                    if($val=='STATUS'){
-                        if ($data->STATUS == 0) {
-                          return Html::a('
-                            <span class="fa-stack fa-xl">
-                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
-                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
-                            </span>','',['title'=>'KELUAR']);
-                        }else if ($data->STATUS == 1) {
-                          return Html::a('<span class="fa-stack fa-xl">
-                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
-                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
-                            </span>','',['title'=>'AKTIF']);
+                    if($val=='STORE_STT'){
+                        if ($data->STORE_STT == 0) {
+                            return Html::a('
+                              <span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-close fa-stack-1x" style="color:#000000"></i>
+                              </span>','',['title'=>'TRIAL']);
+                          }else if ($data->STORE_STT == 1) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                              </span>','',['title'=>'Active']);
+                          }else if ($data->STORE_STT == 2) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-check fa-stack-1x" style="color:#ee0b0b"></i>
+                              </span>','',['title'=>'Deactive']);
+                          }else if ($data->STORE_STT == 3) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+                              </span>','',['title'=>'Delete']);
+                          }
+                    }
+                    if($val=='PAYMENT_STT'){
+                        if ($data->PAYMENT_STT == 0) {
+                          return 'TRIAL';
+                        }else if ($data->PAYMENT_STT == 1) {
+                          return 'LUNAS';
                         }
-                    }else{						
+                        else if ($data->PAYMENT_STT == 2) {
+                          return 'BELUM BAYAR';
+                        }else if ($data->PAYMENT_STT == 3) {
+                          return 'INVOICE EXPIRED/Dibatalkan';
+                        }
+                    }
+                    if($val=='DOMPET_AUTODEBET'){
+                        if ($data->DOMPET_AUTODEBET == 0) {
+                          return 'tidak autodebet';
+                        }else if ($data->DOMPET_AUTODEBET == 1) {
+                          return 'autodebet';
+                        }
+                    }
+                    if($val=='PAYMENT_METHODE'){
+                        if ($data->PAYMENT_METHODE == 0) {
+                          return 'Debet Dompet';
+                        }else if ($data->PAYMENT_METHODE == 1) {
+                          return 'Kartu kredit';
+                        }else if ($data->PAYMENT_METHODE == 1) {
+                          return 'Transfer manual';
+                        }
+                    }
+                    if($val=='FAKTURE_TEMPO'){
+                          return $data->FAKTURE_TEMPO.' HARI';                       
+                    }
+                    if($val=='PAKET_ID'){
+                          return $data->PAKET_GROUP.'/'.$data->PAKET_NM;                       
+                    }
+                    if($val=='STORE_ID'){
+                          return $data->STORE_NM;                       
+                    }
+                    if($val=='KASIR_ID'){
+                          return $data->KASIR_NM;                       
+                    }
+                    else{						
                         if($data->{$val}){					
                             return  $data->{$val};			//USE ArrayData
                         }else {
@@ -175,7 +226,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            'heading'=>$pageNm,  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,

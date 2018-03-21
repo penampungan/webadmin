@@ -6,9 +6,6 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\backend\basic\models\JurnalTemplateTitle */
 
-$this->title = 'Create Jurnal Template Title';
-$this->params['breadcrumbs'][] = ['label' => 'Jurnal Template Titles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jurnal-template-title-create">
 

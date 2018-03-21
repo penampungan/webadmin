@@ -11,7 +11,7 @@ use yii\base\DynamicModel;
 	*/
 	function tombolCreate(){
 		$title= Yii::t('app','');
-		$url = Url::toRoute(['/basic/product-unit/create']);
+		$url = Url::toRoute(['/basic/jurnal-status/create']);
 		$options1 = ['value'=>$url,
 					'id'=>'productunit-button-create',
 					'data-pjax' => false,
@@ -35,7 +35,7 @@ use yii\base\DynamicModel;
 	function tombolView($url, $model){
 		$title1 = Yii::t('app',' View');
 		$options1 = [
-			'value'=>url::to(['/basic/product-unit/view','id'=>$model['STT_PAY']]),
+			'value'=>url::to(['/basic/jurnal-status/view','id'=>$model['STT_PAY']]),
 			'id'=>'productunit-button-view',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -57,7 +57,7 @@ use yii\base\DynamicModel;
 	function tombolUpdate($url, $model){
 		$title1 = Yii::t('app',' Edit');
 		$options1 = [
-			'value'=>url::to(['/basic/product-unit/update','id'=>$model['STT_PAY']]),
+			'value'=>url::to(['/basic/jurnal-status/update','id'=>$model['STT_PAY']]),
 			'id'=>'productunit-button-update',
 			'class'=>"btn btn-default btn-xs",    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
@@ -79,7 +79,7 @@ use yii\base\DynamicModel;
 	function tombolDelete($url, $model){
 		$title1 = Yii::t('app',' Hapus');
 		$options1 = [
-			'href'=>url::to(['/basic/product-unit/delete','id'=>$model['STT_PAY']]),
+			'href'=>url::to(['/basic/jurnal-status/delete','id'=>$model['STT_PAY']]),
 			'class'=>"btn btn-default btn-xs",
 			'data'=>['confirm'=>'Apakah kamu yakin ingin mengapus data ini','method'=>'post',],    
 			'style'=>['text-align'=>'left','width'=>'100%', 'height'=>'25px','border'=> 'none'],
