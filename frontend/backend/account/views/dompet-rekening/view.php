@@ -11,7 +11,7 @@ foreach ($data as $key) {
     if (!empty($key)) {
         $datas[]='<img src="'.$key.'" alt="Your Avatar" style="width:160px;align:center">';
 	} else {
-        $datas='<img src="https://www.mautic.org/media/images/default_avatar.png" alt="Your Avatar" style="width:160px;align:center">';
+        $datas='User Tidak Mengupload gambar/bukti';
 	}	
 }
 $attributes = [
