@@ -72,8 +72,9 @@ class IndustriController extends Controller
         // print_r($paramCari);die();
         if ($paramCari==''){
             $modelGrp =IndustriGroup::find()->orderBy(['INDUSTRY_GRP_ID'=>SORT_ASC])->one();
-            $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$modelGrp->INDUSTRY_GRP_ID]);
-        }else{
+            $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$modelGrp]);
+        }else{            
+            $modelGrp = IndustriGroup::find()->where(['INDUSTRY_GRP_ID'=>$paramCari])->one();
             $searchModel = new IndustriSearch(['INDUSTRY_GRP_ID'=>$paramCari]);
         }
         
@@ -85,7 +86,6 @@ class IndustriController extends Controller
             'dataProvider' => $dataProvider,
             'searchModelGroup' => $searchModelGroup,
             'dataProviderGroup' => $dataProviderGroup,
-        
         ]);
     }
 

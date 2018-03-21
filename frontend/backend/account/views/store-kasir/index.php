@@ -42,7 +42,7 @@ $this->title = 'Store Kasir';
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         <b class="fa fa-home fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Membership</b></div>';
+        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Store Kasir</b></div>';
 	
         $attDinamikField=[
             [
@@ -76,13 +76,47 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                             <span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
                               <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
-                            </span>','',['title'=>'KELUAR']);
+                            </span>','',['title'=>'Deactife']);
                         }else if ($data->STATUS == 1) {
                           return Html::a('<span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
                               <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
-                            </span>','',['title'=>'AKTIF']);
+                            </span>','',['title'=>'Active']);
                         }
+                    }
+                    else if($val=='KASIR_STT'){
+                        if ($data->KASIR_STT == 0) {
+                          return Html::a('
+                            <span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-close fa-stack-1x" style="color:#000000"></i>
+                            </span>','',['title'=>'TRIAL']);
+                        }else if ($data->KASIR_STT == 1) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                            </span>','',['title'=>'Active']);
+                        }else if ($data->KASIR_STT == 2) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-check fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'Deactive']);
+                        }else if ($data->KASIR_STT == 3) {
+                          return Html::a('<span class="fa-stack fa-xl">
+                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'Delete']);
+                        }
+                    }
+                    else if($val=='DOMPET_AUTODEBET'){
+                        if ($data->DOMPET_AUTODEBET == 0) {
+                          return 'tidak autodebet';
+                        }else if ($data->DOMPET_AUTODEBET == 1) {
+                          return 'autodebet';
+                        }
+                    }
+                    else if($val=='STORE_ID'){
+                        return $data->STORE_NM;
                     }else{						
                         if($data->{$val}){					
                             return  $data->{$val};			//USE ArrayData
@@ -175,7 +209,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            'heading'=>$pageNm,  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,

@@ -5,6 +5,14 @@ namespace frontend\backend\ppob\controllers;
 use Yii;
 use frontend\backend\ppob\models\PpobHeader;
 use frontend\backend\ppob\models\PpobHeaderSearch;
+use frontend\backend\ppob\models\PpobMasterKelompok;
+use frontend\backend\ppob\models\PpobMasterKelompokSearch;
+use frontend\backend\ppob\models\PpobProvider;
+use frontend\backend\ppob\models\PpobProviderSearch;
+use frontend\backend\ppob\models\PpobMasterKtg;
+use frontend\backend\ppob\models\PpobMasterKtgSearch;
+use frontend\backend\ppob\models\PpobMasterType;
+use frontend\backend\ppob\models\PpobMasterTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -64,12 +72,24 @@ class PpobHeaderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PpobHeaderSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelHeader = new PpobHeaderSearch();
+        $dataProviderHeader = $searchModelHeader->search(Yii::$app->request->queryParams);
+        $searchModelKelompok = new PpobMasterKelompokSearch();
+        $dataProviderKelompok = $searchModelKelompok->search(Yii::$app->request->queryParams);
+        $searchModelProvider = new PpobProviderSearch();
+        $dataProviderProvider = $searchModelProvider->search(Yii::$app->request->queryParams);
+        $searchModelMasterType = new PpobMasterTypeSearch();
+        $dataProviderMasterType = $searchModelMasterType->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModelHeader' => $searchModelHeader,
+            'dataProviderHeader' => $dataProviderHeader,
+            'searchModelKelompok' => $searchModelKelompok,
+            'dataProviderKelompok' => $dataProviderKelompok,
+            'searchModelProvider' => $searchModelProvider,
+            'dataProviderProvider' => $dataProviderProvider,
+            'searchModelMasterType' => $searchModelMasterType,
+            'dataProviderMasterType' => $dataProviderMasterType,
         ]);
     }
 
@@ -81,7 +101,7 @@ class PpobHeaderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }

@@ -5,6 +5,8 @@ namespace frontend\backend\basic\controllers;
 use Yii;
 use frontend\backend\basic\models\JurnalAkun;
 use frontend\backend\basic\models\JurnalAkunSearch;
+use frontend\backend\basic\models\JurnalKategori;
+use frontend\backend\basic\models\JurnalKategoriSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,19 +30,61 @@ class JurnalAkunController extends Controller
             ],
         ];
     }
-
+    public function beforeAction($action){
+        $modulIndentify=4; //OUTLET
+       // Check only when the user is logged in.
+       // Author piter Novian [ptr.nov@gmail.com].
+       if (!Yii::$app->user->isGuest){
+           if (Yii::$app->session['userSessionTimeout']< time() ) {
+               // timeout
+               Yii::$app->user->logout();
+               return $this->goHome(); 
+           } else {	
+               //add Session.
+               Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+               //check validation [access/url].
+               $checkAccess=Yii::$app->getUserOpt->UserMenuPermission($modulIndentify);
+               if($checkAccess['modulMenu']['MODUL_STS']==0 OR $checkAccess['ModulPermission']['STATUS']==0){				
+                   $this->redirect(array('/site/alert'));
+               }else{
+                   if($checkAccess['PageViewUrl']==true){						
+                       return true;
+                   }else{
+                       $this->redirect(array('/site/alert'));
+                   }					
+               }			 
+           }
+       }else{
+           Yii::$app->user->logout();
+           return $this->goHome(); 
+       }
+   }
     /**
      * Lists all JurnalAkun models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new JurnalAkunSearch();
+        $searchModel = new JurnalKategoriSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+       
+        $paramCari=Yii::$app->getRequest()->getQueryParam('jurnalKategori');
+        // print_r($modelGrp->KTG_CODE);die();
+        if ($paramCari==''){
+            $modelGrp =JurnalKategoriSearch::find()->orderBy(['KTG_CODE'=>SORT_ASC])->one();
+            $searchModelGrp = new JurnalAkunSearch(['KTG_CODE'=>$modelGrp->KTG_CODE]);
+        }else{
+            $searchModelGrp = new JurnalAkunSearch(['KTG_CODE'=>$paramCari]);
+        }
+        
+        // $searchModelGrp = new JurnalAkunSearch();
+        $dataProviderGrp = $searchModelGrp->search(Yii::$app->request->queryParams);
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelGrp' => $searchModelGrp,
+            'dataProviderGrp' => $dataProviderGrp,
         ]);
     }
 
@@ -52,7 +96,7 @@ class JurnalAkunController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -66,11 +110,11 @@ class JurnalAkunController extends Controller
     {
         $model = new JurnalAkun();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->AKUN_CODE]);
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +131,10 @@ class JurnalAkunController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->AKUN_CODE]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -104,8 +148,9 @@ class JurnalAkunController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->STATUS = 3;
+        $model->save();
         return $this->redirect(['index']);
     }
 

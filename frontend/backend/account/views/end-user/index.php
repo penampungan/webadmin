@@ -94,7 +94,11 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                             <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
                           </span>','',['title'=>'KELUAR']);
                           }
-                    }else{						
+                    }
+                    if($val=='STORE_ID'){
+                        return  $data->STORE_NM;
+                    }
+                    else{						
                         if($data->{$val}){					
                             return  $data->{$val};			//USE ArrayData
                         }else {

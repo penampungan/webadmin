@@ -12,11 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'STT_PAY')->textInput() ?>
+    <?= $form->field($model, 'STT_PAY_NM')->textInput(['maxlength' => true])->label('NAMA PEMBAYARAN') ?>
 
-    <?= $form->field($model, 'STT_PAY_NM')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'KETERANGAN')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'KETERANGAN')->textarea(['rows' => 6])->label('KETERANGAN') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

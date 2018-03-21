@@ -81,7 +81,7 @@ class PpobMasterKelompokController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -97,7 +97,7 @@ class PpobMasterKelompokController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                return $this->redirect(['index']);
+                return $this->redirect(['/ppob/ppob-header#w4-tab1']);
             }
         }else {
             return $this->renderAjax('create', [
@@ -119,7 +119,7 @@ class PpobMasterKelompokController extends Controller
         
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                return $this->redirect(['index']);
+                return $this->redirect(['/ppob/ppob-header#w4-tab1']);
             }
         }else {
             return $this->renderAjax('update', [
@@ -130,7 +130,7 @@ class PpobMasterKelompokController extends Controller
 
     /**
      * Deletes an existing PpobMasterKelompok model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the '/ppob/ppob-header#w4-tab1' page.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -140,7 +140,7 @@ class PpobMasterKelompokController extends Controller
         $model=$this->findModel($id);
         $model->STATUS ="3";
         $model->update();
-        return $this->redirect(['index']);
+        return $this->redirect(['/ppob/ppob-header#w4-tab1']);
     }
 
     /**

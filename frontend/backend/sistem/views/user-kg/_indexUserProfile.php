@@ -45,7 +45,7 @@ use kartik\widgets\ActiveForm;
 	$attSroreInfo=[
 		[
             'attribute' =>'Nama Lengkap',
-            'value'=>$modelUser->profile->NM_DEPAN.' '.$modelUser->profile->NM_TENGAH.' '.$modelUser->profile->NM_BELAKANG,
+            'value'=>(empty($modelUser->profile->NM_DEPAN)) ? '' : $modelUser->profile->NM_DEPAN .' '.(empty($modelUser->profile->NM_TENGAH)) ? '' : $modelUser->profile->NM_TENGAH .' '.(empty($modelUser->profile->NM_BELAKANG)) ? '' : $modelUser->profile->NM_BELAKANG,
 			'labelColOptions' => ['style' => 'text-align:right;width: 30%'],
 			'displayOnly'=>true,	
 			'format'=>'raw', 

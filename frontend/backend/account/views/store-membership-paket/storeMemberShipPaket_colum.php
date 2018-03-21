@@ -27,8 +27,8 @@ function storeMemberShipPakageAryColumn(){
 	$C_BG_COLOR1=false;
 	
 	$aryStt= [
-		['STATUS' => 0, 'STT_NM' => 'Deactife'],		  
-		['STATUS' => 1, 'STT_NM' => 'Active'],
+		['PAKET_STT' => 0, 'PAKET_STT_NM' => 'Deactive'],		  
+		['PAKET_STT' => 1, 'PAKET_STT_NM' => 'Active'],
 	  ];
 	$aryFieldColomn[]=[
 	'ID' =>0, 'ATTR' =>[
@@ -127,6 +127,32 @@ function storeMemberShipPakageAryColumn(){
 			// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
 			// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
 			// 'FILTER_OPTION'=>[],
+			]
+		];
+	$aryFieldColomn[]=[
+		'ID' =>7, 'ATTR' =>[
+			'ATR_FIELD'=>'HARGA_PAKET_HARI','ATR_LABEL'=>'Harga Paket perHARI','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+			'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+			//PENGUNAAN FILTER 
+			// 'FILTER'=>true,'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+			// 'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+			// 'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+			// 'FILTER_OPTION'=>[],
+			]
+		];
+	$aryFieldColomn[]=[
+		'ID' =>7, 'ATTR' =>[
+			'ATR_FIELD'=>'PAKET_STT','ATR_LABEL'=>'STATUS','ATR_HEADER_MERGE'=>false,'ATR_GROUP'=>false,'ATR_GROUPROW'=>false,'ATR_PAGESUMMARY'=>false,'ATR_FORMAT'=>'raw',
+			'H_WIDTH'=>'15px','H_ALIGN'=>'center','H_FONT_SIZE' =>'11px','H_FONT_COLOR'=>$H_FONT_COLOR1,'H_BG_COLOR' =>$H_BG_COLOR1,'H_VALIGN'=>'RIGHT','V_VALIGN'=>'top','H_COLSPAN'=>'0',
+			'C_FONT_SIZE' =>'12px','C_ALIGN'=>'left','C_FONT_BOLD'=>false,'C_FONT_COLOR' =>$C_FONT_COLOR1,'C_BG_COLOR' =>$C_BG_COLOR1,
+			'FILTER'=>true,'FILTER_TYPE'=>false,'FILTER_WIDGET_OPTION'=>[],'FILTER_INPUT_OPTION'=>['class'=>'form-control'],'FILTER_OPTION'=>[],
+			//PENGUNAAN FILTER 
+			'FILTER'=>ArrayHelper::map($aryStt,'PAKET_STT','PAKET_STT_NM'),'FILTER_TYPE'=>GridView::FILTER_SELECT2,
+			'FILTER_WIDGET_OPTION'=>['pluginOptions'=>['allowClear'=>true]],
+			'FILTER_INPUT_OPTION'=>['placeholder'=>'-Pilih-'],
+			'FILTER_OPTION'=>[],
 			]
 		];
 		
