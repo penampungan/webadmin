@@ -4,38 +4,33 @@ namespace frontend\backend\account\models;
 
 use Yii;
 
-use frontend\backend\account\models\DompetRekeningImage;
-use frontend\backend\account\models\DompetRekeningImageSearch;
+use frontend\backend\account\models\Corp64;
+use frontend\backend\account\models\Corp64Search;
 use frontend\backend\account\models\UserProfile;
 use frontend\backend\account\models\UserProfileSearch;
 /**
- * This is the model class for table "dompet_rekening".
+ * This is the model class for table "corp".
  *
  * @property string $ID
- * @property string $ACCESS_GROUP
- * @property string $NAMA_LENGKAP
- * @property int $ID_BANK
- * @property string $BANK
- * @property int $NO_REK
+ * @property string $ACCESS_ID user.ACCESS_UNIX=many of group( corp.ACCESS_UNIX)
+ * @property string $CORP_NM
  * @property string $ALAMAT
- * @property string $TLP
- * @property string $STATUS 0=proses;1=pending;2=success;3=gagal;
+ * @property double $MAP_LAG
+ * @property double $MAP_LAT
+ * @property int $STATUS
  * @property string $CREATE_BY
  * @property string $CREATE_AT
  * @property string $UPDATE_BY
  * @property string $UPDATE_AT
- * @property string $DCRP_DETIL
- * @property int $YEAR_AT
- * @property int $MONTH_AT
  */
-class DompetRekening extends \yii\db\ActiveRecord
+class Corp extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'dompet_rekening';
+        return 'corp';
     }
 
     /**
@@ -44,11 +39,13 @@ class DompetRekening extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ACCESS_GROUP', 'ID_BANK', 'NO_REK', 'STATUS', 'YEAR_AT', 'MONTH_AT'], 'integer'],
-            [['ALAMAT', 'DCRP_DETIL'], 'string'],
+            [['ACCESS_ID'], 'required'],
+            [['ACCESS_ID', 'ALAMAT'], 'string'],
+            [['MAP_LAG', 'MAP_LAT'], 'number'],
+            [['STATUS'], 'integer'],
             [['CREATE_AT', 'UPDATE_AT'], 'safe'],
-            [['NAMA_LENGKAP', 'BANK', 'CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 255],
-            [['TLP'], 'string', 'max' => 11],
+            [['CORP_NM'], 'string', 'max' => 255],
+            [['CREATE_BY', 'UPDATE_BY'], 'string', 'max' => 50],
         ];
     }
 
@@ -59,36 +56,34 @@ class DompetRekening extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'ACCESS_GROUP' => 'Access  Group',
-            'NAMA_LENGKAP' => 'Nama  Lengkap',
-            'ID_BANK' => 'Id  Bank',
-            'BANK' => 'Bank',
-            'NO_REK' => 'No  Rek',
+            'ACCESS_ID' => 'Access  ID',
+            'CORP_NM' => 'Corp  Nm',
             'ALAMAT' => 'Alamat',
-            'TLP' => 'Tlp',
+            'MAP_LAG' => 'Map  Lag',
+            'MAP_LAT' => 'Map  Lat',
             'STATUS' => 'Status',
             'CREATE_BY' => 'Create  By',
             'CREATE_AT' => 'Create  At',
             'UPDATE_BY' => 'Update  By',
             'UPDATE_AT' => 'Update  At',
-            'DCRP_DETIL' => 'Dcrp  Detil',
-            'YEAR_AT' => 'Year  At',
-            'MONTH_AT' => 'Month  At',
         ];
     }
     public function getImages()
     {
-        return $this->hasOne(DompetRekeningImage::className(),['ACCESS_GROUP'=>'ACCESS_GROUP']);
+        return $this->hasOne(Corp64::className(),['ACCESS_ID'=>'ACCESS_ID']);
     }
     public function getProfile()
     {
-        return $this->hasOne(UserProfile::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
+        return $this->hasOne(UserProfile::className(),['ACCESS_ID'=>'ACCESS_ID']);
+    }
+    public function getLogo(){
+        $result=$this->images;
+        return $result!=''?$result->CORP_64:'';
     }
     public function getGambar(){
         $result=$this->images;
-        return $result!=''?$result->IMAGE:'';
+        return $result!=''?$result->BERKAS_IMG:'';
     }
-
     public function getNama(){
         $result=$this->profile;
         return $result!=''?$result->NM_DEPAN.' '.$result->NM_TENGAH.' '.$result->NM_BELAKANG:'';
