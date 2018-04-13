@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\backend\sistem\models\UserKgProfile;
+use frontend\backend\sistem\models\UserKg;
 
 /**
  * UserKgProfileSearch represents the model behind the search form of `frontend\backend\sistem\models\UserKgProfile`.
@@ -42,6 +43,7 @@ class UserKgProfileSearch extends UserKgProfile
     public function search($params)
     {
         $query = UserKgProfile::find();
+        $query->joinWith(['user']);
 
         // add conditions that should always apply here
 
@@ -80,8 +82,9 @@ class UserKgProfileSearch extends UserKgProfile
             ->andFilterWhere(['like', 'EMAIL', $this->EMAIL])
             ->andFilterWhere(['like', 'CREATE_BY', $this->CREATE_BY])
             ->andFilterWhere(['like', 'UPDATE_BY', $this->UPDATE_BY])
-            ->andFilterWhere(['like', 'DCRP_DETIL', $this->DCRP_DETIL]);
-
+            ->andFilterWhere(['like', 'DCRP_DETIL', $this->DCRP_DETIL])
+            ->andFilterWhere(['<>', 'user.ACCESS_LEVEL', 'OWNER']);
         return $dataProvider;
     }
+    
 }

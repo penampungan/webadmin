@@ -37,7 +37,6 @@ $this->registerJs($this->render('userKg_script.js'),View::POS_READY);
 echo $this->render('userKg_button'); //echo difinition
 echo $this->render('userKg_modal'); //echo difinition
 echo $this->render('userKg_colum'); //echo difinition
-$this->title = 'Member User';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">

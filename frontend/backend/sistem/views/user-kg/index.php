@@ -17,6 +17,15 @@ use kartik\date\DatePicker;
 use yii\data\ArrayDataProvider;
 use yii\web\View;
 
+$this->title = 'Member User';	
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 $this->registerCss("
 	:link {
 		color: #fdfdfd;
@@ -101,6 +110,7 @@ $this->registerCss("
 ?>
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+	<?php echo $vewBreadcrumb?>
 	<div class="row">
 		<div class="col-xs-12 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 8pt;">
 			<div class="row">		

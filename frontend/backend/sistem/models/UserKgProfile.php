@@ -4,6 +4,7 @@ namespace frontend\backend\sistem\models;
 
 use Yii;
 
+use frontend\backend\sistem\models\UserKg;
 /**
  * This is the model class for table "user_profile".
  *
@@ -81,5 +82,9 @@ class UserKgProfile extends \yii\db\ActiveRecord
             'YEAR_AT' => 'Year  At',
             'MONTH_AT' => 'Month  At',
         ];
+    }
+    public function getUser()
+    {
+        return $this->hasOne(UserKg::className(),['ACCESS_ID'=>'ACCESS_ID']);
     }
 }

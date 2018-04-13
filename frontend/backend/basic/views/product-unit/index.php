@@ -15,7 +15,16 @@ use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
 use yii\web\View;
-
+$this->title = 'Produk Unit';
+$this->params['breadcrumbs'][] = ['label'=>'Product Controller', 'url' => ['/basic/container-produk']];
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 $this->registerCss("
 	:link {
 		color: #fdfdfd;
@@ -37,7 +46,6 @@ $this->registerJs($this->render('productUnit_script.js'),View::POS_READY);
 echo $this->render('productUnit_button'); //echo difinition
 echo $this->render('productUnit_modal'); //echo difinition
 echo $this->render('productUnit_colum'); //echo difinition
-$this->title = 'Produk Unit';
 
 $indexGroup=$this->render('indexGroup',[
     'searchModelGroup' => $searchModelGroup,
@@ -51,8 +59,9 @@ $indexDetail=$this->render('indexDetail',[
 ?>
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+<?=$vewBreadcrumb?>
 <div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
+		<?php//tombolKembali()?>
 	</div>
 		<div class="row">
 		<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">

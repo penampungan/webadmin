@@ -15,7 +15,16 @@ use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
 use yii\web\View;
-
+$this->title = 'PPOB-Master';
+$this->params['breadcrumbs'][] = ['label'=>'PPOB Controller', 'url' => ['/ppob/container-ppob']];
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 $this->registerCss("
     #w4 :link {
         color: black;
@@ -34,7 +43,6 @@ $this->registerJs($this->render('ppobMaster_script.js'),View::POS_READY);
 echo $this->render('ppobMaster_button'); //echo difinition
 echo $this->render('ppobMaster_modal'); //echo difinition
 echo $this->render('ppobMaster_colum'); //echo difinition
-$this->title = 'PPOB-Master';
 
 $Header=$this->render('_index_tab_hedear',[
 	'searchModelHeader' => $searchModelHeader,
@@ -86,8 +94,9 @@ $tabIndex=TabsX::widget([
 ?>
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+<?=$vewBreadcrumb?>
     <div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
+		<?php//tombolKembali()?>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
 		<div class="row">

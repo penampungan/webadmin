@@ -7,6 +7,10 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\backend\sistem\models\UserKg;
 use frontend\backend\sistem\models\UserKgProfile;
+use frontend\backend\sistem\models\Corp;
+use frontend\backend\sistem\models\Corp64;
+use frontend\backend\sistem\models\DompetRekening;
+use frontend\backend\sistem\models\DompetRekeningImage;
 use common\models\UserImage;
 /**
  * UserKgSearch represents the model behind the search form of `frontend\backend\sistem\models\UserKg`.
@@ -120,6 +124,14 @@ class UserKgSearch extends UserKg
     public function getProfile()
     {
         return $this->hasOne(UserKgProfile::className(),['ACCESS_ID'=>'ACCESS_ID']);
+    }
+    public function getPerusahaan()
+    {
+        return $this->hasOne(Corp::className(),['ACCESS_ID'=>'ACCESS_ID']);
+    }
+    public function getBank()
+    {
+        return $this->hasOne(DompetRekening::className(),['ACCESS_GROUP'=>'ACCESS_ID']);
     }
     public function getImage()
     {
