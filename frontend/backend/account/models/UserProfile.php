@@ -1,10 +1,9 @@
 <?php
 
-namespace frontend\backend\sistem\models;
+namespace frontend\backend\account\models;
 
 use Yii;
 
-use frontend\backend\sistem\models\UserKg;
 /**
  * This is the model class for table "user_profile".
  *
@@ -29,7 +28,7 @@ use frontend\backend\sistem\models\UserKg;
  * @property int $YEAR_AT partisi unix
  * @property int $MONTH_AT partisi unix
  */
-class UserKgProfile extends \yii\db\ActiveRecord
+class UserProfile extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -82,9 +81,5 @@ class UserKgProfile extends \yii\db\ActiveRecord
             'YEAR_AT' => 'Year  At',
             'MONTH_AT' => 'Month  At',
         ];
-    }
-    public function getUser()
-    {
-        return $this->hasOne(UserKg::className(),['ACCESS_ID'=>'ACCESS_ID']);
     }
 }

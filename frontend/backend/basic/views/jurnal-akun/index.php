@@ -14,14 +14,22 @@ use yii\widgets\Pjax;
 use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
-use yii\web\View;
-
+use yii\web\View;	
+$this->title = 'Jurnal';
+$this->params['breadcrumbs'][] = ['label'=>'Jurnal Controller', 'url' => ['/basic/container-jurnal']];
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 
 $this->registerJs($this->render('jurnalakun_script.js'),View::POS_READY);
 echo $this->render('jurnalakun_button'); //echo difinition
 echo $this->render('jurnalakun_modal'); //echo difinition
 echo $this->render('jurnalakun_colum'); //echo difinition
-$this->title = 'Jurnal';
 
 $indexAkun=$this->render('indexAkun',[
 	'searchModelGrp' => $searchModelGrp,
@@ -33,8 +41,9 @@ $indexkategori=$this->render('indexkategori',[
 ]);
 ?>
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+<?=$vewBreadcrumb?>
 	<div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
+		<?php//tombolKembali()?>
 	</div>
 		<div class="row">
 		<div class="col-xs-6 col-sm-4 col-lg-4" style="font-family: tahoma ;font-size: 9pt;">

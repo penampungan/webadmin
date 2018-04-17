@@ -14,8 +14,17 @@ use yii\widgets\Pjax;
 use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
-use yii\web\View;
-
+use yii\web\View;	
+$this->title = 'PPOB-Transaksi';
+$this->params['breadcrumbs'][] = ['label'=>'PPOB Controller', 'url' => ['/ppob/container-ppob']];
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 $this->registerCss("
 	:link {
 		color: #fdfdfd;
@@ -51,7 +60,6 @@ echo $this->render('ppobTransaksi_colum_baru'); //echo difinition
 echo $this->render('ppobTransaksi_colum_gagal'); //echo difinition
 echo $this->render('ppobTransaksi_colum_pending'); //echo difinition
 echo $this->render('ppobTransaksi_colum_success'); //echo difinition
-$this->title = 'PPOB-Transaksi';
 
 $cookies = Yii::$app->request->cookies;
 $storeId = $cookies->getValue('TGL');
@@ -115,9 +123,10 @@ $tabIndex=TabsX::widget([
 ]);
 
 ?>
-<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+<div class="container-fluid col-xs-12 col-md-12 col-sm-12 col-lg-12">
+<?=$vewBreadcrumb?>
 <div style="margin-top: -10px;margin-bottom:10px">
-		<?=tombolKembali()?>
+		<?php//tombolKembali()?>
     <div class="pull-right">
         <?=tombolSearchData()?>
     </div>

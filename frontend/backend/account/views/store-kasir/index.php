@@ -15,7 +15,16 @@ use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
 use yii\web\View;
-
+$this->title = 'Store Kasir';
+$this->params['breadcrumbs'][] = ['label'=>'Store Controller', 'url' => ['/account/container-store']];
+	$this->params['breadcrumbs'][] = $this->title;
+	$vewBreadcrumb=Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => Html::encode(Yii::t('yii', 'Home')),
+			'url' => Yii::$app->homeUrl,
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]);	
 $this->registerCss("
 	:link {
 		color: #fdfdfd;
@@ -37,7 +46,6 @@ $this->registerJs($this->render('storekasir_script.js'),View::POS_READY);
 echo $this->render('storekasir_button'); //echo difinition
 echo $this->render('storekasir_modal'); //echo difinition
 echo $this->render('storekasir_colum'); //echo difinition
-$this->title = 'Store Kasir';
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
@@ -221,8 +229,9 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
 ?>
 
 <div class="container-fluid" style="font-family: verdana, arial, sans-serif ;font-size: 8pt">
+<?=$vewBreadcrumb?>
 <div style="margin-top: -10px;margin-bottom: 10px;">
-		<?=tombolKembali()?>
+		<?php//tombolKembali()?>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
 		<div class="row">

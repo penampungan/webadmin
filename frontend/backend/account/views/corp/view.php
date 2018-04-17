@@ -1,4 +1,3 @@
-
 <?php
 
 use yii\helpers\Html;
@@ -16,24 +15,13 @@ foreach ($data as $key) {
 }
 $attributes = [
     [
-        'attribute'=>'NAMA_LENGKAP',
-        'label'=>'Nasabah',
+        'attribute'=>'ACCESS_ID',
         'valueColOptions'=>['style'=>'width:40%'],
     ],
     [
-        'attribute'=>'BANK',
+        'attribute'=>'CORP_NM',
         'valueColOptions'=>['style'=>'width:40%'],
-        'value'=>$model->BANK,
-    ],
-    [
-        'attribute'=>'NO_REK',
-        'valueColOptions'=>['style'=>'width:40%'],
-        'value'=>$model->NO_REK,
-    ],
-    [
-        'attribute'=>'TLP',
-        'valueColOptions'=>['style'=>'width:40%'],
-        'value'=>$model->TLP,
+        'value'=>$model->CORP_NM,
     ],
     [
         'attribute'=>'ALAMAT',
@@ -67,7 +55,7 @@ $attributesprofile = [
 <div class="item-fdiscount-form">
 <div class="row">
 <div class="col-md-6">
-<?= DetailView::widget([
+    <?= DetailView::widget([
         'id'=>'dv-data-barang-view',
         'model' => $model,
         'attributes' =>$attributesprofile,
@@ -80,6 +68,7 @@ $attributesprofile = [
 		'buttons2'=>'{view}{save}',		
     ]) ;
     ?>
+
     </div>
 <div class="col-md-6">
     <?= DetailView::widget([
@@ -95,9 +84,9 @@ $attributesprofile = [
 		'buttons2'=>'{view}{save}',		
     ]) ;
     ?>
+</div>
     </div>
-        </div>
-        <div style="margin-top:10px;margin-bottom:10px">
+    <div style="margin-top:10px;margin-bottom:10px">
     <?php
     foreach($datas as $data){
         echo $data.'&nbsp&nbsp&nbsp';
@@ -113,6 +102,7 @@ $attributesprofile = [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-            ]) ?>
-    </div>
+        ]) ?>
 </div>
+</div>
+

@@ -1,13 +1,9 @@
 <?php
 
-namespace frontend\backend\account\models;
+namespace frontend\backend\sistem\models;
 
 use Yii;
 
-use frontend\backend\account\models\DompetRekeningImage;
-use frontend\backend\account\models\DompetRekeningImageSearch;
-use frontend\backend\account\models\UserProfile;
-use frontend\backend\account\models\UserProfileSearch;
 /**
  * This is the model class for table "dompet_rekening".
  *
@@ -75,34 +71,5 @@ class DompetRekening extends \yii\db\ActiveRecord
             'YEAR_AT' => 'Year  At',
             'MONTH_AT' => 'Month  At',
         ];
-    }
-    public function getImages()
-    {
-        return $this->hasOne(DompetRekeningImage::className(),['ACCESS_GROUP'=>'ACCESS_GROUP']);
-    }
-    public function getProfile()
-    {
-        return $this->hasOne(UserProfile::className(),['ACCESS_ID'=>'ACCESS_GROUP']);
-    }
-    public function getGambar(){
-        $result=$this->images;
-        return $result!=''?$result->IMAGE:'';
-    }
-
-    public function getNama(){
-        $result=$this->profile;
-        return $result!=''?$result->NM_DEPAN.' '.$result->NM_TENGAH.' '.$result->NM_BELAKANG:'';
-    }
-    public function getAlamat(){
-        $result=$this->profile;
-        return $result!=''?$result->NM_DEPAN.' '.$result->NM_TENGAH.' '.$result->NM_BELAKANG:'';
-    }
-    public function getTtl(){
-        $result=$this->profile;
-        return $result!=''?$result->LAHIR_TEMPAT.'/'.$result->LAHIR_TGL:'';
-    }
-    public function getKontak(){
-        $result=$this->profile;
-        return $result!=''?$result->HP.'/'.$result->EMAIL:'';
     }
 }

@@ -14,8 +14,8 @@ use yii\widgets\Pjax;
 use kartik\widgets\ActiveForm;
 use kartik\tabs\TabsX;
 use kartik\date\DatePicker;
-use yii\web\View;
-$this->title = 'Permission';
+use yii\web\View;	
+$this->title = 'Data Request Perusahaan';
 	$this->params['breadcrumbs'][] = $this->title;
 	$vewBreadcrumb=Breadcrumbs::widget([
 		'homeLink' => [
@@ -36,21 +36,21 @@ $this->registerCss("
 	a:active {
 		color: blue;
 	}
-	#gv-data-industri .kv-grid-container{
+	#gv-data-corp .kv-grid-container{
 			height:400px
 		}
 ");
 
-$this->registerJs($this->render('modulPermission_script.js'),View::POS_READY);
-echo $this->render('modulPermission_button'); //echo difinition
-echo $this->render('modulPermission_modal'); //echo difinition
-echo $this->render('modulPermission_colum'); //echo difinition
+$this->registerJs($this->render('corp_script.js'),View::POS_READY);
+echo $this->render('corp_button'); //echo difinition
+echo $this->render('corp_modal'); //echo difinition
+echo $this->render('corp_colum'); //echo difinition
 
 $bColor='rgb(51, 102, 153)';
 $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
-        <b class="fa fa-cogs fa-stack-2x" style="color:#000000"></b>
-        </span> <div style="float:left;padding:10px 20px 0px 5px"><b> Data Permission</b></div>';
-	
+        <b class="fa fa-credit-card-alt fa-stack-2x" style="color:#000000"></b>
+        </span> <div style="float:left;padding:10px 20px 0px 20px"><b> Data Request Perusahaan</b></div>';
+        
         $attDinamikField=[
             [
                 'class'=>'kartik\grid\SerialColumn',
@@ -62,7 +62,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
             ],
         ];
         
-        foreach(modulPermissionAryColumn() as $key =>$value[]){			
+        foreach(ppobProviderAryColumn() as $key =>$value[]){			
             $attDinamikField[]=[
                 'attribute'=>$value[$key]['ATR_FIELD'],
                 'label'=>$value[$key]['ATR_LABEL'],
@@ -79,37 +79,29 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'format'=>$value[$key]['ATR_FORMAT'],
                 'value'=>function($data)use($value,$key){
                     $val=$value[$key]['ATR_FIELD'];	
-                    $splt=explode('_',$val);
-                    if($splt[0]=='SISA'){					
-                        return 'Kode USer Unix :  '.$data[$val];		 	 //USE ArrayData
-                    }elseif($val=='USER_UNIX'){
-                        return 'Kode USer Unix :  '.$data->{'USER_UNIX'};		 //USE ActiveData	
-                    }elseif($val=='STATUS'){
+                    if($val=='STATUS'){
                         if ($data->STATUS == 0) {
                           return Html::a('
                             <span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
-                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
-                            </span>','',['title'=>'KELUAR']);
+                              <i class="fa fa-check fa-stack-1x" style="color:#ee0b0b"></i>
+                            </span>','',['title'=>'Proses']);
                         }else if ($data->STATUS == 1) {
                           return Html::a('<span class="fa-stack fa-xl">
                               <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
                               <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
-                            </span>','',['title'=>'AKTIF']);
-                        }
-                    }elseif($val=='BTN_VIEW'){
-                        if ($data->STATUS == 0) {
-                          return Html::a('
-                            <span class="fa-stack fa-xl">
-                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
-                              <i class="fa fa-close fa-stack-1x" style="color:#ee0b0b"></i>
-                            </span>','',['title'=>'KELUAR']);
-                        }else if ($data->STATUS == 1) {
-                          return Html::a('<span class="fa-stack fa-xl">
-                              <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
-                              <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
-                            </span>','',['title'=>'AKTIF']);
-                        }
+                            </span>','',['title'=>'Pending']);
+                        }else if ($data->STATUS == 2) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-check fa-stack-1x" style="color:#0f39ab"></i>
+                              </span>','',['title'=>'Success']);
+                          }else if ($data->STATUS == 3) {
+                            return Html::a('<span class="fa-stack fa-xl">
+                                <i class="fa fa-circle-thin fa-stack-2x"  style="color:#25ca4f"></i>
+                                <i class="fa fa-close fa-stack-1x" style="color:#0f39ab"></i>
+                              </span>','',['title'=>'Gagal']);
+                          }
                     }else{						
                         if($data->{$val}){					
                             //return $data->{$val};			//USE ActiveData					
@@ -117,7 +109,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                             //return $data['NAMA_DPN'];		//USE ArrayData
                             return  $data->{$val};			//USE ArrayData
                         }else{
-                            return '';
+                            return  $data->{$val};
                         }						
                     }		
                 },
@@ -150,7 +142,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         $attDinamikField[]=[			
             //ACTION
             'class' => 'kartik\grid\ActionColumn',
-            'template' => '{view}{edit}{delete}',
+            'template' => '{view}',
             'header'=>'ACTION',
             'dropdown' => true,
             'dropdownOptions'=>[
@@ -166,21 +158,13 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
                 'view' =>function ($url, $model){
                     return  tombolView($url, $model);
                 },
-                'edit' =>function($url, $model,$key){
-                    //if($model->STATUS!=1){ //Jika sudah close tidak bisa di edit.
-                    return  tombolUpdate($url, $model);
-                    //}					
-                },
-                'delete' =>function($url, $model,$key){
-                    return  tombolDelete($url, $model);
-                }
             ],
             'headerOptions'=>Yii::$app->gv->gvContainHeader('center','10px',$bColor,'#ffffff'),
             'contentOptions'=>Yii::$app->gv->gvContainBody('center','10px',''),
         ]; 
     
-    $gvuserKgProfile=GridView::widget([
-        'id'=>'gv-data-industri',
+    $gvcorp=GridView::widget([
+        'id'=>'gv-data-corp',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns'=>$attDinamikField,				
@@ -188,7 +172,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'pjaxSettings'=>[
             'options'=>[
                 'enablePushState'=>false,
-                'id'=>'gv-data-industri',
+                'id'=>'gv-data-corp',
             ],						  
         ],
         'hover'=>true, //cursor select
@@ -203,7 +187,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
         'panel' => [
             //'heading'=>false,
             //'heading'=>tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',  
-            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px">'.tombolCreate().'</div>',  
+            'heading'=>$pageNm.'<div style="float:right;padding:0px 10px 0px 5px"></div>',  
             'type'=>'info',
             //'before'=> tombolBack().'<div style="float:right"> '.tombolCreate().' '.tombolExportExcel().'</div>',
             'before'=>false,
@@ -218,7 +202,7 @@ $pageNm='<span class="fa-stack fa-xs text-left" style="float:left">
 <?=$vewBreadcrumb?>
 	<div class="col-xs-12 col-sm-12 col-lg-12" style="font-family: tahoma ;font-size: 9pt;">
 		<div class="row">
-			<?=$gvuserKgProfile?>
+			<?=$gvcorp?>
 		</div>
 	</div>
 </div>

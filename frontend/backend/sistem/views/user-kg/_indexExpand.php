@@ -66,17 +66,18 @@ use common\models\Userlogin;
 			$paramCari=Yii::$app->getRequest()->getQueryParam('UserKg');
 			// print_r($paramCari);die();
 			$id=$model['id'];
-            $userId=$model['ACCESS_ID'];
+            $userId=$paramCari['ACCESS_ID'];
             // print_r($userId);die();
 			$user=UserKg::find()->orderBy(['ACCESS_ID'=>SORT_ASC])->One();
-			
+			// print_r($id);die();
 			if($id==1){ 
 				//== Detail Profile ==	
 				if (empty($paramCari)) {
 					$modelUser = UserKgSearch::find()->where(['ACCESS_ID'=>$user->ACCESS_ID])->one();
 				} else {
 					$modelUser = UserKgSearch::find()->where(['ACCESS_ID'=>$userId])->one();
-				}		
+				}
+				// print_r($modelUser);die();		
 				return Yii::$app->controller->renderPartial('_indexUserProfile',[
 					'modelUser'=>$modelUser
 				]);
